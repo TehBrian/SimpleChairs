@@ -1,0 +1,120 @@
+plugins {
+	id 'java'
+	id 'com.github.johnrengelman.shadow' version '7.0.0'
+	id 'maven-publish'
+}
+
+
+defaultTasks 'build'
+
+
+group 'io.github.Shevchik'
+version '7.0'
+
+
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption;
+
+
+Path projectDirectoryPath = projectDir.toPath().toAbsolutePath()
+
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src']
+		}
+		resources {
+			srcDirs = ['resources']
+		}
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		url 'https://oss.sonatype.org/content/repositories/snapshots/'
+	}
+	maven {
+		url 'https://hub.spigotmc.org/nexus/content/repositories/public/'
+	}
+	maven {
+		url 'https://jitpack.io'
+	}
+}
+
+configurations {
+	runtimeDependencies
+	compileOnly {
+		extendsFrom runtimeDependencies
+	}
+	testImplementation {
+	    extendsFrom runtimeDependencies
+	}
+}
+
+dependencies {
+	runtimeDependencies group: 'org.spigotmc', name: 'spigot-api', version: '1.14-R0.1-SNAPSHOT'
+}
+
+compileJava {
+	options.encoding = 'UTF-8'
+	options.incremental = false
+}
+
+
+processResources {
+	filesMatching('plugin.yml') {
+		expand 'version': project.version
+	}
+}
+
+shadowJar {
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+	archiveClassifier = ''
+
+	from sourceSets.main.java.srcDirs
+	from 'LICENSE'
+
+	exclude 'META-INF/**'
+	exclude 'module-info.class'
+
+	minimize()
+}
+
+
+task copyFinalJarToTarget(type: DefaultTask) {doLast{
+	Path targetJarDirectory = projectDirectoryPath.resolve('target')
+	Files.createDirectories(targetJarDirectory)
+	Files.copy(
+		shadowJar.archiveFile.get().getAsFile().toPath().toAbsolutePath(),
+		targetJarDirectory.resolve(shadowJar.archiveBaseName.get() + '.jar'),
+		StandardCopyOption.REPLACE_EXISTING
+	)
+}}
+
+
+compileJava.dependsOn(clean)
+jar.enabled = false
+jar.finalizedBy(shadowJar)
+shadowJar.finalizedBy(copyFinalJarToTarget)
+
+
+tasks.withType(GenerateModuleMetadata) {
+	enabled = false
+}
+
+publishing {
+	publications {
+		release(MavenPublication) {
+			from components.java
+
+			artifacts = [shadowJar]
+		}
+	}
+}
