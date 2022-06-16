@@ -52,17 +52,20 @@ public final class PlayerSitData {
         return this.occupiedBlocks.get(chair);
     }
 
-    public boolean sitPlayer(final Player player, final Block blockToOccupy, Location sitLocation) {
+    public boolean sitPlayer(final Player player, final Block blockToOccupy, final Location sitLocation) {
         final PlayerChairSitEvent playerSitLocation = new PlayerChairSitEvent(player, sitLocation.clone());
         Bukkit.getPluginManager().callEvent(playerSitLocation);
         if (playerSitLocation.isCancelled()) {
             return false;
         }
-        sitLocation = playerSitLocation.getSitLocation().clone();
+
+        final Location postEventSitLoc = playerSitLocation.getSitLocation().clone();
+
         if (this.plugin.getChairsConfig().msgEnabled()) {
             player.sendMessage(LegacyFormatting.on(this.plugin.getChairsConfig().msgSitEnter()));
         }
-        final Entity chairEntity = this.plugin.getSitUtils().spawnChairEntity(sitLocation);
+
+        final Entity chairEntity = this.plugin.getSitUtils().spawnChairEntity(postEventSitLoc);
         SitData sitData = null;
         switch (this.plugin.getChairsConfig().sitChairEntityType()) {
             case ARROW -> {
@@ -81,11 +84,14 @@ public final class PlayerSitData {
             }
             case ARMOR_STAND -> sitData = new SitData(chairEntity, player.getLocation(), blockToOccupy, -1);
         }
-        player.teleport(sitLocation);
+
+        player.teleport(postEventSitLoc);
         chairEntity.addPassenger(player);
+
         this.sittingPlayers.put(player, sitData);
         this.occupiedBlocks.put(blockToOccupy, player);
         sitData.sitting = true;
+
         return true;
     }
 
