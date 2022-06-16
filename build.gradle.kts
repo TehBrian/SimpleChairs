@@ -4,8 +4,8 @@ plugins {
     id("xyz.jpenilla.run-paper") version "1.0.6"
 }
 
-group = "io.github.Shevchik"
-version = "7.0"
+group = "xyz.tehbrian"
+version = "0.1.0-SNAPSHOT"
 description = "Allows players to sit on chairs, such as stairs or slabs."
 
 java {
@@ -35,7 +35,7 @@ tasks {
     }
 
     shadowJar {
-        archiveBaseName.set("Chairs")
+        archiveBaseName.set("SimpleChairs")
         archiveClassifier.set("")
     }
 
