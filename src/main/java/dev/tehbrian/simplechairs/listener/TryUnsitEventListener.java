@@ -22,12 +22,11 @@ import java.util.UUID;
 public class TryUnsitEventListener implements Listener {
 
     protected final SimpleChairs plugin;
+    protected Map<UUID, Location> dismountTeleport = new HashMap<>();
 
     public TryUnsitEventListener(final SimpleChairs plugin) {
         this.plugin = plugin;
     }
-
-    protected Map<UUID, Location> dismountTeleport = new HashMap<>();
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerTeleport(final PlayerTeleportEvent event) {

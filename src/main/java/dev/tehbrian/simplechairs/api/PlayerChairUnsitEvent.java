@@ -20,6 +20,10 @@ public class PlayerChairUnsitEvent extends PlayerEvent implements Cancellable {
         this.canbecancelled = canbecancelled;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
     public boolean canBeCancelled() {
         return this.canbecancelled;
     }
@@ -34,10 +38,6 @@ public class PlayerChairUnsitEvent extends PlayerEvent implements Cancellable {
 
     @Override
     public HandlerList getHandlers() {
-        return handlers;
-    }
-
-    public static HandlerList getHandlerList() {
         return handlers;
     }
 

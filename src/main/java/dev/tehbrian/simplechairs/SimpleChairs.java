@@ -21,34 +21,30 @@ import java.util.logging.Level;
 public class SimpleChairs extends JavaPlugin {
 
     private static SimpleChairs instance;
-
-    public static SimpleChairs getInstance() {
-        return instance;
-    }
+    private final ChairsConfig config = new ChairsConfig(this);
+    private final PlayerSitData psitdata = new PlayerSitData(this);
+    private final ChairEffects chairEffects = new ChairEffects(this);
+    private final SitUtils utils = new SitUtils(this);
 
     public SimpleChairs() {
         instance = this;
     }
 
-    private final ChairsConfig config = new ChairsConfig(this);
+    public static SimpleChairs getInstance() {
+        return instance;
+    }
 
     public ChairsConfig getChairsConfig() {
         return this.config;
     }
 
-    private final PlayerSitData psitdata = new PlayerSitData(this);
-
     public PlayerSitData getPlayerSitData() {
         return this.psitdata;
     }
 
-    private final ChairEffects chairEffects = new ChairEffects(this);
-
     public ChairEffects getChairEffects() {
         return this.chairEffects;
     }
-
-    private final SitUtils utils = new SitUtils(this);
 
     public SitUtils getSitUtils() {
         return this.utils;

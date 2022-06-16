@@ -75,7 +75,8 @@ public class PlayerSitData {
                         chairentity, player.getLocation(), blocktooccupy,
                         Bukkit
                                 .getScheduler()
-                                .scheduleSyncRepeatingTask(this.plugin,
+                                .scheduleSyncRepeatingTask(
+                                        this.plugin,
                                         () -> this.resitPlayer(player),
                                         arrowresitinterval,
                                         arrowresitinterval
