@@ -183,6 +183,7 @@ public final class ChairsConfig {
         try {
             config.save(file);
         } catch (final IOException e) {
+            this.plugin.getSLF4JLogger().warn("Failed to save config to file.");
         }
     }
 
