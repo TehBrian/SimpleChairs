@@ -27,8 +27,8 @@ public final class ChairsAPI {
         return getPlayerSitData().getPlayerOnChair(block);
     }
 
-    public static boolean sit(final Player player, final Block blocktouccupy, final Location sitlocation) {
-        return getPlayerSitData().sitPlayer(player, blocktouccupy, sitlocation);
+    public static boolean sit(final Player player, final Block blockToOccupy, final Location sitLocation) {
+        return getPlayerSitData().sitPlayer(player, blockToOccupy, sitLocation);
     }
 
     public static void unsit(final Player player) {
