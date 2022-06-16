@@ -1,15 +1,14 @@
 package dev.tehbrian.simplechairs.sitaddons;
 
+import dev.tehbrian.simplechairs.PlayerSitData;
 import dev.tehbrian.simplechairs.SimpleChairs;
+import dev.tehbrian.simplechairs.config.ChairsConfig;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-
-import dev.tehbrian.simplechairs.config.ChairsConfig;
-import dev.tehbrian.simplechairs.PlayerSitData;
 
 public class CommandRestrict implements Listener {
 
@@ -23,7 +22,7 @@ public class CommandRestrict implements Listener {
         this.sitdata = plugin.getPlayerSitData();
     }
 
-    @EventHandler(priority=EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerCommand(final PlayerCommandPreprocessEvent event) {
         final Player player = event.getPlayer();
         final String playercommand = event.getMessage().toLowerCase();

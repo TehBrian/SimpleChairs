@@ -1,9 +1,5 @@
 package dev.tehbrian.simplechairs.listener;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 import dev.tehbrian.simplechairs.SimpleChairs;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -19,16 +15,21 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.spigotmc.event.entity.EntityDismountEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class TryUnsitEventListener implements Listener {
 
     protected final SimpleChairs plugin;
+
     public TryUnsitEventListener(final SimpleChairs plugin) {
         this.plugin = plugin;
     }
 
     protected Map<UUID, Location> dismountTeleport = new HashMap<>();
 
-    @EventHandler(priority=EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerTeleport(final PlayerTeleportEvent event) {
         final Player player = event.getPlayer();
         if (this.plugin.getPlayerSitData().isSitting(player)) {
@@ -41,7 +42,7 @@ public class TryUnsitEventListener implements Listener {
         }
     }
 
-    @EventHandler(priority=EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerQuit(final PlayerQuitEvent event) {
         final Player player = event.getPlayer();
         if (this.plugin.getPlayerSitData().isSitting(player)) {
@@ -49,7 +50,7 @@ public class TryUnsitEventListener implements Listener {
         }
     }
 
-    @EventHandler(priority=EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDeath(final PlayerDeathEvent event) {
         final Player player = event.getEntity();
         if (this.plugin.getPlayerSitData().isSitting(player)) {
@@ -57,7 +58,7 @@ public class TryUnsitEventListener implements Listener {
         }
     }
 
-    @EventHandler(priority=EventPriority.HIGHEST, ignoreCancelled=true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockBreak(final BlockBreakEvent event) {
         final Block b = event.getBlock();
         if (this.plugin.getPlayerSitData().isBlockOccupied(b)) {
@@ -66,7 +67,7 @@ public class TryUnsitEventListener implements Listener {
         }
     }
 
-    @EventHandler(priority=EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onExitVehicle(final EntityDismountEvent e) {
         if (e.getEntity() instanceof Player) {
             final Player player = (Player) e.getEntity();

@@ -1,23 +1,22 @@
 package dev.tehbrian.simplechairs;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.util.logging.Level;
-
-import dev.tehbrian.simplechairs.config.ChairsConfig;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.spigotmc.event.entity.EntityDismountEvent;
-
 import dev.tehbrian.simplechairs.command.ChairsCommand;
+import dev.tehbrian.simplechairs.config.ChairsConfig;
 import dev.tehbrian.simplechairs.listener.InvalidPositionLoginListener;
 import dev.tehbrian.simplechairs.listener.TrySitEventListener;
 import dev.tehbrian.simplechairs.listener.TryUnsitEventListener;
 import dev.tehbrian.simplechairs.sitaddons.ChairEffects;
 import dev.tehbrian.simplechairs.sitaddons.CommandRestrict;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.spigotmc.event.entity.EntityDismountEvent;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.logging.Level;
 
 public class SimpleChairs extends JavaPlugin {
 
@@ -65,7 +64,11 @@ public class SimpleChairs extends JavaPlugin {
             return;
         }
         try {
-            Files.copy(this.getClass().getClassLoader().getResourceAsStream("config_help.txt"), new File(this.getDataFolder(), "config_help.txt").toPath(), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(
+                    this.getClass().getClassLoader().getResourceAsStream("config_help.txt"),
+                    new File(this.getDataFolder(), "config_help.txt").toPath(),
+                    StandardCopyOption.REPLACE_EXISTING
+            );
         } catch (final IOException e) {
         }
         this.reloadConfig();

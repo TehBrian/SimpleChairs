@@ -1,8 +1,5 @@
 package dev.tehbrian.simplechairs;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import dev.tehbrian.simplechairs.api.PlayerChairSitEvent;
 import dev.tehbrian.simplechairs.api.PlayerChairUnsitEvent;
 import org.bukkit.Bukkit;
@@ -13,6 +10,9 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerSitData {
 
@@ -37,7 +37,10 @@ public class PlayerSitData {
     }
 
     public boolean isSittingDisabled(final Player player) {
-        return player.getPersistentDataContainer().getOrDefault(this.sitDisabledKey, PersistentDataType.BYTE, Byte.valueOf((byte) 0)).byteValue() != 0;
+        return player
+                .getPersistentDataContainer()
+                .getOrDefault(this.sitDisabledKey, PersistentDataType.BYTE, Byte.valueOf((byte) 0))
+                .byteValue() != 0;
     }
 
     public boolean isSitting(final Player player) {
@@ -69,8 +72,14 @@ public class PlayerSitData {
             case ARROW: {
                 final int arrowresitinterval = this.plugin.getChairsConfig().sitArrowResitInterval;
                 sitdata = new SitData(
-                    chairentity, player.getLocation(), blocktooccupy,
-                    Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> this.resitPlayer(player), arrowresitinterval, arrowresitinterval)
+                        chairentity, player.getLocation(), blocktooccupy,
+                        Bukkit
+                                .getScheduler()
+                                .scheduleSyncRepeatingTask(this.plugin,
+                                        () -> this.resitPlayer(player),
+                                        arrowresitinterval,
+                                        arrowresitinterval
+                                )
                 );
                 break;
             }

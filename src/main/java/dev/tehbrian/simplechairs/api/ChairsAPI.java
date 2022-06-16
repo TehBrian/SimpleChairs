@@ -1,11 +1,10 @@
 package dev.tehbrian.simplechairs.api;
 
+import dev.tehbrian.simplechairs.PlayerSitData;
 import dev.tehbrian.simplechairs.SimpleChairs;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-
-import dev.tehbrian.simplechairs.PlayerSitData;
 
 public class ChairsAPI {
 
