@@ -21,15 +21,15 @@ public class PlayerChairUnsitEvent extends PlayerEvent implements Cancellable {
     }
 
     public boolean canBeCancelled() {
-        return canbecancelled;
+        return this.canbecancelled;
     }
 
     public Location getTeleportLocation() {
-        return unsitLocation.clone();
+        return this.unsitLocation.clone();
     }
 
     public void setTeleportLocation(final Location location) {
-        unsitLocation = location.clone();
+        this.unsitLocation = location.clone();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class PlayerChairUnsitEvent extends PlayerEvent implements Cancellable {
 
     @Override
     public boolean isCancelled() {
-        return cancelled;
+        return this.cancelled;
     }
 
     @Override

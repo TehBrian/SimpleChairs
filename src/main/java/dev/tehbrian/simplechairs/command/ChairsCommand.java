@@ -29,7 +29,7 @@ public class ChairsCommand implements CommandExecutor {
         }
         if (args[0].equalsIgnoreCase("reload")) {
             if (sender.hasPermission("chairs.reload")) {
-                plugin.reloadConfig();
+                this.plugin.reloadConfig();
                 sender.sendMessage(ChatColor.GREEN + "Chairs configuration reloaded.");
             } else {
                 sender.sendMessage(ChatColor.RED + "You do not have permission to do this!");
@@ -38,11 +38,11 @@ public class ChairsCommand implements CommandExecutor {
         if (sender instanceof Player) {
             final Player player = (Player) sender;
             if (args[0].equalsIgnoreCase("off")) {
-                sitdata.disableSitting(player);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.msgSitDisabled));
+                this.sitdata.disableSitting(player);
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.config.msgSitDisabled));
             } else if (args[0].equalsIgnoreCase("on")) {
-                sitdata.enableSitting(player);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.msgSitEnabled));
+                this.sitdata.enableSitting(player);
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.config.msgSitEnabled));
             }
         }
         return true;

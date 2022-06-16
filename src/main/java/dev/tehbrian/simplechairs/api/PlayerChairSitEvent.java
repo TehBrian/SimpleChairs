@@ -19,11 +19,11 @@ public class PlayerChairSitEvent extends PlayerEvent implements Cancellable {
     }
 
     public Location getSitLocation() {
-        return sitLocation.clone();
+        return this.sitLocation.clone();
     }
 
     public void setSitLocation(final Location location) {
-        sitLocation = location.clone();
+        this.sitLocation = location.clone();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class PlayerChairSitEvent extends PlayerEvent implements Cancellable {
 
     @Override
     public boolean isCancelled() {
-        return cancelled;
+        return this.cancelled;
     }
 
     @Override

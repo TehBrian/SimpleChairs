@@ -28,31 +28,31 @@ public class ChairEffects {
     }
 
     protected void startHealing() {
-        healTaskID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(
-            plugin,
+        this.healTaskID = this.plugin.getServer().getScheduler().scheduleSyncRepeatingTask(
+                this.plugin,
             () ->
                 Bukkit.getOnlinePlayers().stream()
                 .filter(p -> p.hasPermission("chairs.sit.health"))
-                .filter(plugin.getPlayerSitData()::isSitting)
+                .filter(this.plugin.getPlayerSitData()::isSitting)
                 .forEach(p -> {
                     final double health = p.getHealth();
                     final double maxHealth = p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-                    if ((((health / maxHealth) * 100d) < config.effectsHealMaxHealth) && (health < maxHealth)) {
-                        double newHealth = config.effectsHealHealthPerInterval + health;
+                    if ((((health / maxHealth) * 100d) < this.config.effectsHealMaxHealth) && (health < maxHealth)) {
+                        double newHealth = this.config.effectsHealHealthPerInterval + health;
                         if (newHealth > maxHealth) {
                             newHealth = maxHealth;
                         }
                         p.setHealth(newHealth);
                     }
                 }),
-            config.effectsHealInterval, config.effectsHealInterval
+                this.config.effectsHealInterval, this.config.effectsHealInterval
         );
     }
 
     public void cancelHealing() {
-        if (healTaskID != -1) {
-            plugin.getServer().getScheduler().cancelTask(healTaskID);
-            healTaskID = -1;
+        if (this.healTaskID != -1) {
+            this.plugin.getServer().getScheduler().cancelTask(this.healTaskID);
+            this.healTaskID = -1;
         }
     }
 
@@ -62,11 +62,11 @@ public class ChairEffects {
     }
 
     protected void startPickup() {
-        pickupTaskID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(
-            plugin,
+        this.pickupTaskID = this.plugin.getServer().getScheduler().scheduleSyncRepeatingTask(
+                this.plugin,
             () ->
                 Bukkit.getOnlinePlayers().stream()
-                .filter(plugin.getPlayerSitData()::isSitting)
+                .filter(this.plugin.getPlayerSitData()::isSitting)
                 .forEach(p -> {
                     for (final Entity entity : p.getNearbyEntities(1, 2, 1)) {
                         if (entity instanceof Item) {
@@ -114,10 +114,10 @@ public class ChairEffects {
     }
 
     public void cancelPickup() {
-        if (pickupTaskID != -1) {
-            plugin.getServer().getScheduler().cancelTask(pickupTaskID);
+        if (this.pickupTaskID != -1) {
+            this.plugin.getServer().getScheduler().cancelTask(this.pickupTaskID);
         }
-        pickupTaskID = -1;
+        this.pickupTaskID = -1;
     }
 
     public void restartPickup() {

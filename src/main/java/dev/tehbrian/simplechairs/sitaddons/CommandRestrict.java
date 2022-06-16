@@ -27,18 +27,18 @@ public class CommandRestrict implements Listener {
     public void onPlayerCommand(final PlayerCommandPreprocessEvent event) {
         final Player player = event.getPlayer();
         final String playercommand = event.getMessage().toLowerCase();
-        if (plugin.getPlayerSitData().isSitting(player)) {
-            if (config.restrictionsDisableAllCommands) {
+        if (this.plugin.getPlayerSitData().isSitting(player)) {
+            if (this.config.restrictionsDisableAllCommands) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.msgSitCommandRestricted));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.config.msgSitCommandRestricted));
                 return;
             }
-            for (final String disabledCommand : config.restrictionsDisabledCommands) {
+            for (final String disabledCommand : this.config.restrictionsDisabledCommands) {
                 if (playercommand.startsWith(disabledCommand)) {
                     final String therest = playercommand.replace(disabledCommand, "");
                     if (therest.isEmpty() || therest.startsWith(" ")) {
                         event.setCancelled(true);
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.msgSitCommandRestricted));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.config.msgSitCommandRestricted));
                         return;
                     }
                 }

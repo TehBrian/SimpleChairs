@@ -34,25 +34,25 @@ public class SimpleChairs extends JavaPlugin {
     private final ChairsConfig config = new ChairsConfig(this);
 
     public ChairsConfig getChairsConfig() {
-        return config;
+        return this.config;
     }
 
     private final PlayerSitData psitdata = new PlayerSitData(this);
 
     public PlayerSitData getPlayerSitData() {
-        return psitdata;
+        return this.psitdata;
     }
 
     private final ChairEffects chairEffects = new ChairEffects(this);
 
     public ChairEffects getChairEffects() {
-        return chairEffects;
+        return this.chairEffects;
     }
 
     private final SitUtils utils = new SitUtils(this);
 
     public SitUtils getSitUtils() {
-        return utils;
+        return this.utils;
     }
 
     @Override
@@ -79,26 +79,26 @@ public class SimpleChairs extends JavaPlugin {
     @Override
     public void onDisable() {
         for (final Player player : Bukkit.getOnlinePlayers()) {
-            if (psitdata.isSitting(player)) {
-                psitdata.unsitPlayerForce(player, true);
+            if (this.psitdata.isSitting(player)) {
+                this.psitdata.unsitPlayerForce(player, true);
             }
         }
-        chairEffects.cancelHealing();
-        chairEffects.cancelPickup();
+        this.chairEffects.cancelHealing();
+        this.chairEffects.cancelPickup();
     }
 
     @Override
     public void reloadConfig() {
-        config.reloadConfig();
-        if (config.effectsHealEnabled) {
-            chairEffects.restartHealing();
+        this.config.reloadConfig();
+        if (this.config.effectsHealEnabled) {
+            this.chairEffects.restartHealing();
         } else {
-            chairEffects.cancelHealing();
+            this.chairEffects.cancelHealing();
         }
-        if (config.effectsItemPickupEnabled) {
-            chairEffects.restartPickup();
+        if (this.config.effectsItemPickupEnabled) {
+            this.chairEffects.restartPickup();
         } else {
-            chairEffects.cancelPickup();
+            this.chairEffects.cancelPickup();
         }
     }
 
