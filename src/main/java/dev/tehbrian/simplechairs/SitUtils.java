@@ -220,10 +220,10 @@ public final class SitUtils {
             }
         }
 
-        final Location plocation = block.getLocation();
-        plocation.setYaw(yaw);
-        plocation.add(0.5D, (sitHeight - 0.5D), 0.5D);
-        return plocation;
+        final Location pLocation = block.getLocation();
+        pLocation.setYaw(yaw);
+        pLocation.add(0.5D, (sitHeight - 0.5D), 0.5D);
+        return pLocation;
     }
 
     private int calculateStairsWidth(final BlockFace expectedFace, Block block, final BlockFace searchFace, final int limit) {
