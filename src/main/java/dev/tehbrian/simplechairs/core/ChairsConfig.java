@@ -1,4 +1,4 @@
-package com.cnaude.chairs.core;
+package dev.tehbrian.simplechairs.core;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.cnaude.chairs.listeners;
+package dev.tehbrian.simplechairs.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

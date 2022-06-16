@@ -1,5 +1,6 @@
-package com.cnaude.chairs.listeners;
+package dev.tehbrian.simplechairs.listeners;
 
+import dev.tehbrian.simplechairs.core.Chairs;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -9,8 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
-
-import com.cnaude.chairs.core.Chairs;
 
 public class TrySitEventListener implements Listener {
 

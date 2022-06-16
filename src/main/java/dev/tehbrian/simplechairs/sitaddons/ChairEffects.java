@@ -1,5 +1,6 @@
-package com.cnaude.chairs.sitaddons;
+package dev.tehbrian.simplechairs.sitaddons;
 
+import dev.tehbrian.simplechairs.core.Chairs;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
@@ -9,9 +10,8 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 
-import com.cnaude.chairs.core.Chairs;
-import com.cnaude.chairs.core.ChairsConfig;
-import com.cnaude.chairs.core.PlayerSitData;
+import dev.tehbrian.simplechairs.core.ChairsConfig;
+import dev.tehbrian.simplechairs.core.PlayerSitData;
 
 public class ChairEffects {
 
