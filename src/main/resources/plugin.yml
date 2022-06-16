@@ -1,7 +1,7 @@
 name: SimpleChairs
 description: ${description}
 authors: [ spoothie, cnaude, _Shevchik_, Pugabyte, TehBrian ]
-website: http://dev.bukkit.org/bukkit-plugins/chairsreloaded/
+website: https://github.com/TehBrian/SimpleChairs
 
 version: ${version}
 main: dev.tehbrian.simplechairs.Chairs
