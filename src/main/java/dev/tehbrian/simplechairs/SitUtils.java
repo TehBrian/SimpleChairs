@@ -33,7 +33,7 @@ public class SitUtils {
     }
 
     public Entity spawnChairEntity(Location location) {
-        switch (config.sitChairEntityType) {
+        switch (this.config.sitChairEntityType) {
             case ARROW: {
                 final Arrow arrow = location.getWorld().spawnArrow(location, new Vector(0, 1, 0), 0, 0);
                 arrow.setGravity(false);
@@ -53,7 +53,7 @@ public class SitUtils {
                 );
             }
             default: {
-                throw new IllegalArgumentException("Unknown sit chair entity type " + config.sitChairEntityType);
+                throw new IllegalArgumentException("Unknown sit chair entity type " + this.config.sitChairEntityType);
             }
         }
     }
@@ -68,26 +68,26 @@ public class SitUtils {
         }
 
         final World world = player.getWorld();
-        if (config.sitDisabledWorlds.contains(world.getName())) {
+        if (this.config.sitDisabledWorlds.contains(world.getName())) {
             return false;
         }
         if (!world.equals(block.getWorld())) {
             return false;
         }
-        if ((config.sitMaxDistance > 0) && (player.getLocation().distance(block.getLocation().add(0.5, 0, 0.5)) > config.sitMaxDistance)) {
+        if ((this.config.sitMaxDistance > 0) && (player.getLocation().distance(block.getLocation().add(0.5, 0, 0.5)) > this.config.sitMaxDistance)) {
             return false;
         }
-        if (config.sitRequireEmptyHand && (player.getInventory().getItemInMainHand().getType() != Material.AIR)) {
+        if (this.config.sitRequireEmptyHand && (player.getInventory().getItemInMainHand().getType() != Material.AIR)) {
             return false;
         }
 
-        if (sitdata.isSittingDisabled(player)) {
+        if (this.sitdata.isSittingDisabled(player)) {
             return false;
         }
-        if (sitdata.isSitting(player)) {
+        if (this.sitdata.isSitting(player)) {
             return false;
         }
-        if (sitdata.isBlockOccupied(block)) {
+        if (this.sitdata.isBlockOccupied(block)) {
             return false;
         }
 
@@ -104,14 +104,14 @@ public class SitUtils {
         float yaw = player.getLocation().getYaw();
         Double sitHeight = null;
 
-        if ((blockdata instanceof Stairs) && config.stairsEnabled) {
-            sitHeight = config.stairsHeight;
+        if ((blockdata instanceof Stairs) && this.config.stairsEnabled) {
+            sitHeight = this.config.stairsHeight;
             final Stairs stairs = (Stairs) blockdata;
             if (!isStairsSittable(stairs)) {
                 return null;
             }
             final BlockFace ascendingFacing = stairs.getFacing();
-            if (config.stairsAutoRotate) {
+            if (this.config.stairsAutoRotate) {
                 switch (ascendingFacing.getOppositeFace()) {
                     case NORTH: {
                         yaw = 180;
@@ -133,27 +133,27 @@ public class SitUtils {
                     }
                 }
             }
-            if (config.stairsMaxWidth > 0) {
+            if (this.config.stairsMaxWidth > 0) {
                 final BlockFace facingLeft = rotL(ascendingFacing);
                 final BlockFace facingRight = rotR(ascendingFacing);
-                final int widthLeft = calculateStairsWidth(ascendingFacing, block, facingLeft, config.stairsMaxWidth);
-                final int widthRight = calculateStairsWidth(ascendingFacing, block, facingRight, config.stairsMaxWidth);
-                if ((widthLeft + widthRight + 1) > config.stairsMaxWidth) {
+                final int widthLeft = calculateStairsWidth(ascendingFacing, block, facingLeft, this.config.stairsMaxWidth);
+                final int widthRight = calculateStairsWidth(ascendingFacing, block, facingRight, this.config.stairsMaxWidth);
+                if ((widthLeft + widthRight + 1) > this.config.stairsMaxWidth) {
                     return null;
                 }
-                if (config.stairsSpecialEndEnabled) {
+                if (this.config.stairsSpecialEndEnabled) {
                     boolean specialEndCheckSuccess = false;
                     final Block blockLeft = block.getRelative(facingLeft, widthLeft + 1);
                     final Block blockRight = block.getRelative(facingRight, widthRight + 1);
                     if (
-                        config.stairsSpecialEndSign &&
+                            this.config.stairsSpecialEndSign &&
                         isStairsEndingSign(facingLeft, blockLeft) &&
                         isStairsEndingSign(facingRight, blockRight)
                     ) {
                         specialEndCheckSuccess = true;
                     }
                     if (
-                        config.stairsSpecialEndCornerStairs && (
+                            this.config.stairsSpecialEndCornerStairs && (
                             isStairsEndingCornerStairs(facingLeft, Stairs.Shape.INNER_RIGHT, blockLeft) ||
                             isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_LEFT, blockLeft)
                         ) && (
@@ -171,7 +171,7 @@ public class SitUtils {
         }
 
         if (sitHeight == null) {
-            sitHeight = config.additionalChairs.get(blockdata.getMaterial());
+            sitHeight = this.config.additionalChairs.get(blockdata.getMaterial());
             if (sitHeight == null) {
                 return null;
             }
