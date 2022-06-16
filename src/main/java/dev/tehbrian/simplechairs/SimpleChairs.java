@@ -69,7 +69,8 @@ public final class SimpleChairs extends JavaPlugin {
             this.getSLF4JLogger().warn("Failed to copy `config_help.txt` to your config folder. You're on your own, buddy.", e);
         }
 
-        this.reloadConfig();
+        this.config.loadFromConfig();
+        this.config.saveToConfig();
 
         this.getServer().getPluginManager().registerEvents(new InvalidPositionLoginListener(this), this);
         this.getServer().getPluginManager().registerEvents(new TrySitEventListener(this), this);
@@ -85,11 +86,13 @@ public final class SimpleChairs extends JavaPlugin {
                 this.sitData.unsitPlayerForce(player, true);
             }
         }
+
+        this.config.saveToConfig();
     }
 
     @Override
     public void reloadConfig() {
-        this.config.reloadConfig();
+        this.config.loadFromConfig();
     }
 
 }
