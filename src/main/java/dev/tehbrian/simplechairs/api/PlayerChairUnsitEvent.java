@@ -14,7 +14,7 @@ public class PlayerChairUnsitEvent extends PlayerEvent implements Cancellable {
     private boolean canbecancelled = true;
     private Location unsitLocation;
 
-    public PlayerChairUnsitEvent(Player who, Location unsitLocation, boolean canbecancelled) {
+    public PlayerChairUnsitEvent(final Player who, final Location unsitLocation, final boolean canbecancelled) {
         super(who);
         this.unsitLocation = unsitLocation;
         this.canbecancelled = canbecancelled;
@@ -28,7 +28,7 @@ public class PlayerChairUnsitEvent extends PlayerEvent implements Cancellable {
         return unsitLocation.clone();
     }
 
-    public void setTeleportLocation(Location location) {
+    public void setTeleportLocation(final Location location) {
         unsitLocation = location.clone();
     }
 
@@ -47,7 +47,7 @@ public class PlayerChairUnsitEvent extends PlayerEvent implements Cancellable {
     }
 
     @Override
-    public void setCancelled(boolean cancelled) {
+    public void setCancelled(final boolean cancelled) {
         this.cancelled = cancelled;
     }
 

@@ -26,7 +26,7 @@ public class SitUtils {
     protected final ChairsConfig config;
     protected final PlayerSitData sitdata;
 
-    public SitUtils(SimpleChairs plugin) {
+    public SitUtils(final SimpleChairs plugin) {
         this.plugin = plugin;
         this.config = plugin.getChairsConfig();
         this.sitdata = plugin.getPlayerSitData();
@@ -35,7 +35,7 @@ public class SitUtils {
     public Entity spawnChairEntity(Location location) {
         switch (config.sitChairEntityType) {
             case ARROW: {
-                Arrow arrow = location.getWorld().spawnArrow(location, new Vector(0, 1, 0), 0, 0);
+                final Arrow arrow = location.getWorld().spawnArrow(location, new Vector(0, 1, 0), 0, 0);
                 arrow.setGravity(false);
                 arrow.setInvulnerable(true);
                 arrow.setPickupStatus(PickupStatus.DISALLOWED);
@@ -58,7 +58,7 @@ public class SitUtils {
         }
     }
 
-    protected boolean canSitGeneric(Player player, Block block) {
+    protected boolean canSitGeneric(final Player player, final Block block) {
 
         if (player.isSneaking()) {
             return false;
@@ -67,7 +67,7 @@ public class SitUtils {
             return false;
         }
 
-        World world = player.getWorld();
+        final World world = player.getWorld();
         if (config.sitDisabledWorlds.contains(world.getName())) {
             return false;
         }
@@ -94,23 +94,23 @@ public class SitUtils {
         return true;
     }
 
-    public Location calculateSitLocation(Player player, Block block) {
+    public Location calculateSitLocation(final Player player, final Block block) {
 
         if (!canSitGeneric(player, block)) {
             return null;
         }
 
-        BlockData blockdata = block.getBlockData();
+        final BlockData blockdata = block.getBlockData();
         float yaw = player.getLocation().getYaw();
         Double sitHeight = null;
 
         if ((blockdata instanceof Stairs) && config.stairsEnabled) {
             sitHeight = config.stairsHeight;
-            Stairs stairs = (Stairs) blockdata;
+            final Stairs stairs = (Stairs) blockdata;
             if (!isStairsSittable(stairs)) {
                 return null;
             }
-            BlockFace ascendingFacing = stairs.getFacing();
+            final BlockFace ascendingFacing = stairs.getFacing();
             if (config.stairsAutoRotate) {
                 switch (ascendingFacing.getOppositeFace()) {
                     case NORTH: {
@@ -134,17 +134,17 @@ public class SitUtils {
                 }
             }
             if (config.stairsMaxWidth > 0) {
-                BlockFace facingLeft = rotL(ascendingFacing);
-                BlockFace facingRight = rotR(ascendingFacing);
-                int widthLeft = calculateStairsWidth(ascendingFacing, block, facingLeft, config.stairsMaxWidth);
-                int widthRight = calculateStairsWidth(ascendingFacing, block, facingRight, config.stairsMaxWidth);
+                final BlockFace facingLeft = rotL(ascendingFacing);
+                final BlockFace facingRight = rotR(ascendingFacing);
+                final int widthLeft = calculateStairsWidth(ascendingFacing, block, facingLeft, config.stairsMaxWidth);
+                final int widthRight = calculateStairsWidth(ascendingFacing, block, facingRight, config.stairsMaxWidth);
                 if ((widthLeft + widthRight + 1) > config.stairsMaxWidth) {
                     return null;
                 }
                 if (config.stairsSpecialEndEnabled) {
                     boolean specialEndCheckSuccess = false;
-                    Block blockLeft = block.getRelative(facingLeft, widthLeft + 1);
-                    Block blockRight = block.getRelative(facingRight, widthRight + 1);
+                    final Block blockLeft = block.getRelative(facingLeft, widthLeft + 1);
+                    final Block blockRight = block.getRelative(facingRight, widthRight + 1);
                     if (
                         config.stairsSpecialEndSign &&
                         isStairsEndingSign(facingLeft, blockLeft) &&
@@ -177,41 +177,41 @@ public class SitUtils {
             }
         }
 
-        Location plocation = block.getLocation();
+        final Location plocation = block.getLocation();
         plocation.setYaw(yaw);
         plocation.add(0.5D, (sitHeight - 0.5D), 0.5D);
         return plocation;
     }
 
-    protected static final boolean isStairsSittable(Stairs stairs) {
+    protected static final boolean isStairsSittable(final Stairs stairs) {
         return (stairs.getHalf() == Half.BOTTOM) && (stairs.getShape() == Shape.STRAIGHT);
     }
 
-    protected static boolean isStairsEndingSign(BlockFace expectedFacing, Block block) {
-        BlockData blockdata = block.getBlockData();
+    protected static boolean isStairsEndingSign(final BlockFace expectedFacing, final Block block) {
+        final BlockData blockdata = block.getBlockData();
         if (blockdata instanceof WallSign) {
             return expectedFacing == ((WallSign) blockdata).getFacing();
         }
         return false;
     }
 
-    protected static boolean isStairsEndingCornerStairs(BlockFace expectedFacing, Stairs.Shape expectedShape, Block block) {
-        BlockData blockdata = block.getBlockData();
+    protected static boolean isStairsEndingCornerStairs(final BlockFace expectedFacing, final Stairs.Shape expectedShape, final Block block) {
+        final BlockData blockdata = block.getBlockData();
         if (blockdata instanceof Stairs) {
-            Stairs stairs = (Stairs) blockdata;
+            final Stairs stairs = (Stairs) blockdata;
             return (stairs.getHalf() == Half.BOTTOM) && (stairs.getFacing() == expectedFacing) && (stairs.getShape() == expectedShape);
         }
         return false;
     }
 
-    protected int calculateStairsWidth(BlockFace expectedFace, Block block, BlockFace searchFace, int limit) {
+    protected int calculateStairsWidth(final BlockFace expectedFace, Block block, final BlockFace searchFace, final int limit) {
         for (int i = 0; i < limit; i++) {
             block = block.getRelative(searchFace);
-            BlockData blockdata = block.getBlockData();
+            final BlockData blockdata = block.getBlockData();
             if (!(blockdata instanceof Stairs)) {
                 return i;
             }
-            Stairs stairs = (Stairs) blockdata;
+            final Stairs stairs = (Stairs) blockdata;
             if (!isStairsSittable(stairs) || (stairs.getFacing() != expectedFace)) {
                 return i;
             }
@@ -219,7 +219,7 @@ public class SitUtils {
         return limit;
     }
 
-    protected static BlockFace rotL(BlockFace face) {
+    protected static BlockFace rotL(final BlockFace face) {
         switch (face) {
             case NORTH: {
                 return BlockFace.WEST;
@@ -239,7 +239,7 @@ public class SitUtils {
         }
     }
 
-    protected static BlockFace rotR(BlockFace face) {
+    protected static BlockFace rotR(final BlockFace face) {
         switch (face) {
             case NORTH: {
                 return BlockFace.EAST;

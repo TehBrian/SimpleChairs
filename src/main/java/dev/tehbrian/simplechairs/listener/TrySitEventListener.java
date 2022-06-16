@@ -15,16 +15,16 @@ public class TrySitEventListener implements Listener {
 
     protected final SimpleChairs plugin;
 
-    public TrySitEventListener(SimpleChairs plugin) {
+    public TrySitEventListener(final SimpleChairs plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onPlayerInteract(PlayerInteractEvent event) {
+    public void onPlayerInteract(final PlayerInteractEvent event) {
         if ((event.getAction() == Action.RIGHT_CLICK_BLOCK) && (event.getHand() == EquipmentSlot.HAND)) {
-            Player player = event.getPlayer();
-            Block block = event.getClickedBlock();
-            Location sitLocation = plugin.getSitUtils().calculateSitLocation(player, block);
+            final Player player = event.getPlayer();
+            final Block block = event.getClickedBlock();
+            final Location sitLocation = plugin.getSitUtils().calculateSitLocation(player, block);
             if ((sitLocation != null) && plugin.getPlayerSitData().sitPlayer(player, block, sitLocation)) {
                 event.setCancelled(true);
             }

@@ -13,35 +13,35 @@ public class ChairsAPI {
         return SimpleChairs.getInstance().getPlayerSitData();
     }
 
-    public static boolean isSitting(Player player) {
+    public static boolean isSitting(final Player player) {
         return getPlayerSitData().isSitting(player);
     }
 
-    public static boolean isBlockOccupied(Block block) {
+    public static boolean isBlockOccupied(final Block block) {
         return getPlayerSitData().isBlockOccupied(block);
     }
 
-    public static Player getBlockOccupiedBy(Block block) {
+    public static Player getBlockOccupiedBy(final Block block) {
         return getPlayerSitData().getPlayerOnChair(block);
     }
 
-    public static boolean sit(Player player, Block blocktouccupy, Location sitlocation) {
+    public static boolean sit(final Player player, final Block blocktouccupy, final Location sitlocation) {
         return getPlayerSitData().sitPlayer(player, blocktouccupy, sitlocation);
     }
 
-    public static void unsit(Player player) {
+    public static void unsit(final Player player) {
         getPlayerSitData().unsitPlayerForce(player, true);
     }
 
-    public static void disableSitting(Player player) {
+    public static void disableSitting(final Player player) {
         getPlayerSitData().disableSitting(player);
     }
 
-    public static void enableSitting(Player player) {
+    public static void enableSitting(final Player player) {
         getPlayerSitData().enableSitting(player);
     }
 
-    public static boolean isSittingDisabled(Player player) {
+    public static boolean isSittingDisabled(final Player player) {
         return getPlayerSitData().isSittingDisabled(player);
     }
 
