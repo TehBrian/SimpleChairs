@@ -21,85 +21,85 @@ import dev.tehbrian.simplechairs.sitaddons.CommandRestrict;
 
 public class SimpleChairs extends JavaPlugin {
 
-	private static SimpleChairs instance;
+    private static SimpleChairs instance;
 
-	public static SimpleChairs getInstance() {
-		return instance;
-	}
+    public static SimpleChairs getInstance() {
+        return instance;
+    }
 
-	public SimpleChairs() {
-		instance = this;
-	}
+    public SimpleChairs() {
+        instance = this;
+    }
 
-	private final ChairsConfig config = new ChairsConfig(this);
+    private final ChairsConfig config = new ChairsConfig(this);
 
-	public ChairsConfig getChairsConfig() {
-		return config;
-	}
+    public ChairsConfig getChairsConfig() {
+        return config;
+    }
 
-	private final PlayerSitData psitdata = new PlayerSitData(this);
+    private final PlayerSitData psitdata = new PlayerSitData(this);
 
-	public PlayerSitData getPlayerSitData() {
-		return psitdata;
-	}
+    public PlayerSitData getPlayerSitData() {
+        return psitdata;
+    }
 
-	private final ChairEffects chairEffects = new ChairEffects(this);
+    private final ChairEffects chairEffects = new ChairEffects(this);
 
-	public ChairEffects getChairEffects() {
-		return chairEffects;
-	}
+    public ChairEffects getChairEffects() {
+        return chairEffects;
+    }
 
-	private final SitUtils utils = new SitUtils(this);
+    private final SitUtils utils = new SitUtils(this);
 
-	public SitUtils getSitUtils() {
-		return utils;
-	}
+    public SitUtils getSitUtils() {
+        return utils;
+    }
 
-	@Override
-	public void onEnable() {
-		try {
-			getClass().getClassLoader().loadClass(EntityDismountEvent.class.getName());
-		} catch (Throwable t) {
-			getLogger().log(Level.SEVERE, "Missing EntityDismountEvent", t);
-			setEnabled(false);
-			return;
-		}
-		try {
-			Files.copy(getClass().getClassLoader().getResourceAsStream("config_help.txt"), new File(getDataFolder(), "config_help.txt").toPath(), StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-		}
-		reloadConfig();
-		getServer().getPluginManager().registerEvents(new InvalidPositionLoginListener(), this);
-		getServer().getPluginManager().registerEvents(new TrySitEventListener(this), this);
-		getServer().getPluginManager().registerEvents(new TryUnsitEventListener(this), this);
-		getServer().getPluginManager().registerEvents(new CommandRestrict(this), this);
-		getCommand("chairs").setExecutor(new ChairsCommand(this));
-	}
+    @Override
+    public void onEnable() {
+        try {
+            getClass().getClassLoader().loadClass(EntityDismountEvent.class.getName());
+        } catch (Throwable t) {
+            getLogger().log(Level.SEVERE, "Missing EntityDismountEvent", t);
+            setEnabled(false);
+            return;
+        }
+        try {
+            Files.copy(getClass().getClassLoader().getResourceAsStream("config_help.txt"), new File(getDataFolder(), "config_help.txt").toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+        }
+        reloadConfig();
+        getServer().getPluginManager().registerEvents(new InvalidPositionLoginListener(), this);
+        getServer().getPluginManager().registerEvents(new TrySitEventListener(this), this);
+        getServer().getPluginManager().registerEvents(new TryUnsitEventListener(this), this);
+        getServer().getPluginManager().registerEvents(new CommandRestrict(this), this);
+        getCommand("chairs").setExecutor(new ChairsCommand(this));
+    }
 
-	@Override
-	public void onDisable() {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (psitdata.isSitting(player)) {
-				psitdata.unsitPlayerForce(player, true);
-			}
-		}
-		chairEffects.cancelHealing();
-		chairEffects.cancelPickup();
-	}
+    @Override
+    public void onDisable() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (psitdata.isSitting(player)) {
+                psitdata.unsitPlayerForce(player, true);
+            }
+        }
+        chairEffects.cancelHealing();
+        chairEffects.cancelPickup();
+    }
 
-	@Override
-	public void reloadConfig() {
-		config.reloadConfig();
-		if (config.effectsHealEnabled) {
-			chairEffects.restartHealing();
-		} else {
-			chairEffects.cancelHealing();
-		}
-		if (config.effectsItemPickupEnabled) {
-			chairEffects.restartPickup();
-		} else {
-			chairEffects.cancelPickup();
-		}
-	}
+    @Override
+    public void reloadConfig() {
+        config.reloadConfig();
+        if (config.effectsHealEnabled) {
+            chairEffects.restartHealing();
+        } else {
+            chairEffects.cancelHealing();
+        }
+        if (config.effectsItemPickupEnabled) {
+            chairEffects.restartPickup();
+        } else {
+            chairEffects.cancelPickup();
+        }
+    }
 
 }
