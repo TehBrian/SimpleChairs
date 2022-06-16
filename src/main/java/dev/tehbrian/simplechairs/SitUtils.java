@@ -213,7 +213,7 @@ public final class SitUtils {
         }
 
         if (sitHeight == null) {
-            sitHeight = this.config.additionalChairs().get(blockdata.getMaterial());
+            sitHeight = this.config.sitAdditionalBlocks().get(blockdata.getMaterial());
             if (sitHeight == null) {
                 return null;
             }
