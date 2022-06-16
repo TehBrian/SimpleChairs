@@ -19,6 +19,7 @@ import java.util.logging.Level;
 public final class SimpleChairs extends JavaPlugin {
 
     private static SimpleChairs instance;
+
     private final ChairsConfig config = new ChairsConfig(this);
     private final PlayerSitData sitData = new PlayerSitData(this);
     private final SitUtils utils = new SitUtils(this);
@@ -47,11 +48,12 @@ public final class SimpleChairs extends JavaPlugin {
     public void onEnable() {
         try {
             this.getClass().getClassLoader().loadClass(EntityDismountEvent.class.getName());
-        } catch (final Throwable t) {
-            this.getLogger().log(Level.SEVERE, "Missing EntityDismountEvent", t);
+        } catch (final ClassNotFoundException e) {
+            this.getSLF4JLogger().error("Missing EntityDismountEvent. Update your server to a newer version.", e);
             this.setEnabled(false);
             return;
         }
+
         try {
             Files.copy(
                     this.getClass().getClassLoader().getResourceAsStream("config_help.txt"),
