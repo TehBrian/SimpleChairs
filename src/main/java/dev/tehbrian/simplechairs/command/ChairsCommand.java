@@ -45,13 +45,17 @@ public final class ChairsCommand implements CommandExecutor {
                 sender.sendMessage(LegacyFormatting.on("&cYou do not have permission to do this!"));
             }
         }
+
         if (sender instanceof final Player player) {
-            if (lowercaseArg.equals("off")) {
-                this.sitData.setSittingDisabled(player, true);
-                player.sendMessage(LegacyFormatting.on(this.config.msgSitDisabled()));
-            } else if (lowercaseArg.equals("on")) {
-                this.sitData.setSittingDisabled(player, false);
-                player.sendMessage(LegacyFormatting.on(this.config.msgSitEnabled()));
+            switch (lowercaseArg) {
+                case "off" -> {
+                    this.sitData.setSittingDisabled(player, true);
+                    player.sendMessage(LegacyFormatting.on(this.config.msgSitDisabled()));
+                }
+                case "on" -> {
+                    this.sitData.setSittingDisabled(player, false);
+                    player.sendMessage(LegacyFormatting.on(this.config.msgSitEnabled()));
+                }
             }
         }
 
