@@ -2,24 +2,24 @@
 # A list of all material names: https://jd.papermc.io/paper/1.18/org/bukkit/Material.html
 # ------
 # sit-config:
-#   disabled-worlds:      List of worlds in which sitting is disabled
-#   require-empty-hand:   Set this true to disable sitting if player is holding an item in hand.
-#   max-distance:         The maximum distance between the chair (the center of the block) and the player to be able to sit down (to prevent glitching through walls, etc.)
-#   chair-entity-type:    Entity type used as chair, allowed values are ARROW, ARMOR_STAND
-#   arrow-resit-interval: How often plugin will resit player in ticks, not allowed more than 1000 due to clientside prediction arrow removal delay
-#   stairs:
-#     enabled:            enables all stairs as sit on blocks with special handling
-#     rotate-player:      set to true to auto rotate player to face the descending side of the stairs
-#     max-width:          max width of stairs line (set 0 to disable the check)
-#     special-end:        set any sub options to true to require special block (one of them) at the end of the stairs line (only works if max-width is enabled)
+#   disabled-worlds:      list of worlds in which sitting is disabled
+#   require-empty-hand:   whether to require that players have an empty hand to sit
+#   max-distance:         the maximum distance between the chair (center of the block) and the player for them to be able to sit; can prevent glitching through walls
+#   chair-entity-type:    entity type to sit players on; allowed values are ARROW or ARMOR_STAND
+#   arrow-resit-interval: how often to resit player in ticks; value cannot be more than 1000 due to client-side prediction arrow removal delay
+#   stairs:               configuration specific to stairs
+#     enabled:            enables all stairs to function as chairs
+#     rotate-player:      whether to rotate player to face the descending side of the stairs when they sit
+#     max-width:          max width of the stair line (set 0 to disable the check)
+#     special-end:        set any sub options to true to require special block at the end of the stair line (only works if max-width is enabled)
 #       sign:             require sign
 #       corner-stairs:    require corner stairs
-#     height:             Set sitting height on stairs
-#   additional-blocks:    Set additional blocks you want to be able to sit down on and sitting height.
+#     height:             sitting height on stairs
+#   additional-blocks:    additional blocks to allow sitting on; set material name followed by sitting height
 #     COBBLESTONE_SLAB: 0.7
 #
 # messages:
-#  enabled: enables user messages
+#  enabled: whether to send user messages
 #  sit:
 #    enter:    "&7You are now sitting."
 #    leave:    "&7You are no longer sitting."
