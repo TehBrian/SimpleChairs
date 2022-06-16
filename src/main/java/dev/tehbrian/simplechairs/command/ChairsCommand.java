@@ -10,6 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.util.Locale;
+
 public final class ChairsCommand implements CommandExecutor {
 
     private final SimpleChairs plugin;
@@ -32,7 +34,10 @@ public final class ChairsCommand implements CommandExecutor {
         if (args.length == 0) {
             return false;
         }
-        if (args[0].equalsIgnoreCase("reload")) {
+
+        final var lowercaseArg = args[0].toLowerCase(Locale.ROOT);
+
+        if (lowercaseArg.equals("reload")) {
             if (sender.hasPermission("chairs.reload")) {
                 this.plugin.reloadConfig();
                 sender.sendMessage(LegacyFormatting.on("&cChairs configuration reloaded."));
@@ -41,14 +46,15 @@ public final class ChairsCommand implements CommandExecutor {
             }
         }
         if (sender instanceof final Player player) {
-            if (args[0].equalsIgnoreCase("off")) {
+            if (lowercaseArg.equals("off")) {
                 this.sitData.setSittingDisabled(player, true);
                 player.sendMessage(LegacyFormatting.on(this.config.msgSitDisabled()));
-            } else if (args[0].equalsIgnoreCase("on")) {
+            } else if (lowercaseArg.equals("on")) {
                 this.sitData.setSittingDisabled(player, false);
                 player.sendMessage(LegacyFormatting.on(this.config.msgSitEnabled()));
             }
         }
+
         return true;
     }
 
