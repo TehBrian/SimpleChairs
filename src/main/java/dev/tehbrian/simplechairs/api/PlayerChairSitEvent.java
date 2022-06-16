@@ -5,12 +5,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public final class PlayerChairSitEvent extends PlayerEvent implements Cancellable {
 
-    private static final HandlerList handlers = new HandlerList();
-    private boolean cancelled = false;
+    private static final HandlerList HANDLERS = new HandlerList();
 
+    private boolean cancelled = false;
     private Location sitLocation;
 
     public PlayerChairSitEvent(final Player who, final Location sitLocation) {
@@ -19,7 +20,7 @@ public final class PlayerChairSitEvent extends PlayerEvent implements Cancellabl
     }
 
     public static HandlerList getHandlerList() {
-        return handlers;
+        return HANDLERS;
     }
 
     public Location getSitLocation() {
@@ -31,8 +32,8 @@ public final class PlayerChairSitEvent extends PlayerEvent implements Cancellabl
     }
 
     @Override
-    public HandlerList getHandlers() {
-        return handlers;
+    public @NonNull HandlerList getHandlers() {
+        return HANDLERS;
     }
 
     @Override

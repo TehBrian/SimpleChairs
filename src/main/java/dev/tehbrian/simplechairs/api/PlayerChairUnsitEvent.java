@@ -5,27 +5,28 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public final class PlayerChairUnsitEvent extends PlayerEvent implements Cancellable {
 
-    private static final HandlerList handlers = new HandlerList();
-    private boolean cancelled = false;
+    private static final HandlerList HANDLERS = new HandlerList();
 
-    private boolean canbecancelled = true;
+    private final boolean canBeCancelled;
+    private boolean cancelled = false;
     private Location unsitLocation;
 
-    public PlayerChairUnsitEvent(final Player who, final Location unsitLocation, final boolean canbecancelled) {
+    public PlayerChairUnsitEvent(final Player who, final Location unsitLocation, final boolean canBeCancelled) {
         super(who);
         this.unsitLocation = unsitLocation;
-        this.canbecancelled = canbecancelled;
+        this.canBeCancelled = canBeCancelled;
     }
 
     public static HandlerList getHandlerList() {
-        return handlers;
+        return HANDLERS;
     }
 
     public boolean canBeCancelled() {
-        return this.canbecancelled;
+        return this.canBeCancelled;
     }
 
     public Location getTeleportLocation() {
@@ -37,8 +38,8 @@ public final class PlayerChairUnsitEvent extends PlayerEvent implements Cancella
     }
 
     @Override
-    public HandlerList getHandlers() {
-        return handlers;
+    public @NonNull HandlerList getHandlers() {
+        return HANDLERS;
     }
 
     @Override
