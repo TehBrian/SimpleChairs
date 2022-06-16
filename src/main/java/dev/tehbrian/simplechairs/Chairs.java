@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.spigotmc.event.entity.EntityDismountEvent;
 
 import dev.tehbrian.simplechairs.command.ChairsCommand;
-import dev.tehbrian.simplechairs.listener.NANLoginListener;
+import dev.tehbrian.simplechairs.listener.InvalidPositionLoginListener;
 import dev.tehbrian.simplechairs.listener.TrySitEventListener;
 import dev.tehbrian.simplechairs.listener.TryUnsitEventListener;
 import dev.tehbrian.simplechairs.sitaddons.ChairEffects;
@@ -69,7 +69,7 @@ public class Chairs extends JavaPlugin {
 		} catch (IOException e) {
 		}
 		reloadConfig();
-		getServer().getPluginManager().registerEvents(new NANLoginListener(), this);
+		getServer().getPluginManager().registerEvents(new InvalidPositionLoginListener(), this);
 		getServer().getPluginManager().registerEvents(new TrySitEventListener(this), this);
 		getServer().getPluginManager().registerEvents(new TryUnsitEventListener(this), this);
 		getServer().getPluginManager().registerEvents(new CommandRestrict(this), this);
