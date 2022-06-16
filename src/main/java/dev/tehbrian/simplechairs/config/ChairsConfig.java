@@ -60,8 +60,8 @@ public final class ChairsConfig {
     private boolean msgEnabled = true;
     private String msgSitEnter = "&7You are now sitting.";
     private String msgSitLeave = "&7You are no longer sitting.";
-    private String msgSitDisabled = "&7You have disabled chairs for yourself!";
-    private String msgSitEnabled = "&7You have enabled chairs for yourself!";
+    private String msgSitDisabled = "&7You have disabled chairs for yourself.";
+    private String msgSitEnabled = "&7You have enabled chairs for yourself.";
 
     public ChairsConfig(final SimpleChairs plugin) {
         this.plugin = plugin;
