@@ -1,5 +1,5 @@
 # ------
-# A list of all compatible material names: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html.
+# A list of all material names: https://jd.papermc.io/paper/1.18/org/bukkit/Material.html
 # ------
 # sit-config:
 #   disabled-worlds: List of worlds in which sitting is disabled
