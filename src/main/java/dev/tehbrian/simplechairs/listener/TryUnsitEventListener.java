@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import dev.tehbrian.simplechairs.Chairs;
+import dev.tehbrian.simplechairs.SimpleChairs;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -21,8 +21,8 @@ import org.spigotmc.event.entity.EntityDismountEvent;
 
 public class TryUnsitEventListener implements Listener {
 
-	protected final Chairs plugin;
-	public TryUnsitEventListener(Chairs plugin) {
+	protected final SimpleChairs plugin;
+	public TryUnsitEventListener(SimpleChairs plugin) {
 		this.plugin = plugin;
 	}
 

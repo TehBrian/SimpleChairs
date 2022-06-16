@@ -1,6 +1,6 @@
 package dev.tehbrian.simplechairs.sitaddons;
 
-import dev.tehbrian.simplechairs.Chairs;
+import dev.tehbrian.simplechairs.SimpleChairs;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,11 +13,11 @@ import dev.tehbrian.simplechairs.PlayerSitData;
 
 public class CommandRestrict implements Listener {
 
-	protected final Chairs plugin;
+	protected final SimpleChairs plugin;
 	protected final ChairsConfig config;
 	protected final PlayerSitData sitdata;
 
-	public CommandRestrict(Chairs plugin) {
+	public CommandRestrict(SimpleChairs plugin) {
 		this.plugin = plugin;
 		this.config = plugin.getChairsConfig();
 		this.sitdata = plugin.getPlayerSitData();

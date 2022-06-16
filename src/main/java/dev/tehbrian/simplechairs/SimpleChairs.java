@@ -19,15 +19,15 @@ import dev.tehbrian.simplechairs.listener.TryUnsitEventListener;
 import dev.tehbrian.simplechairs.sitaddons.ChairEffects;
 import dev.tehbrian.simplechairs.sitaddons.CommandRestrict;
 
-public class Chairs extends JavaPlugin {
+public class SimpleChairs extends JavaPlugin {
 
-	private static Chairs instance;
+	private static SimpleChairs instance;
 
-	public static Chairs getInstance() {
+	public static SimpleChairs getInstance() {
 		return instance;
 	}
 
-	public Chairs() {
+	public SimpleChairs() {
 		instance = this;
 	}
 

@@ -1,6 +1,6 @@
 package dev.tehbrian.simplechairs.api;
 
-import dev.tehbrian.simplechairs.Chairs;
+import dev.tehbrian.simplechairs.SimpleChairs;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -10,7 +10,7 @@ import dev.tehbrian.simplechairs.PlayerSitData;
 public class ChairsAPI {
 
 	private static PlayerSitData getPlayerSitData() {
-		return Chairs.getInstance().getPlayerSitData();
+		return SimpleChairs.getInstance().getPlayerSitData();
 	}
 
 	public static boolean isSitting(Player player) {
