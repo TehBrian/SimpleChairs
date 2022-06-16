@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.logging.Level;
+import java.util.Objects;
 
 public final class SimpleChairs extends JavaPlugin {
 
@@ -56,16 +56,20 @@ public final class SimpleChairs extends JavaPlugin {
 
         try {
             Files.copy(
-                    this.getClass().getClassLoader().getResourceAsStream("config_help.txt"),
+                    Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("config_help.txt")),
                     new File(this.getDataFolder(), "config_help.txt").toPath(),
                     StandardCopyOption.REPLACE_EXISTING
             );
-        } catch (final IOException e) {
+        } catch (final IOException | NullPointerException e) {
+            this.getSLF4JLogger().warn("Failed to copy `config_help.txt` to your config folder. You're on your own, buddy.", e);
         }
+
         this.reloadConfig();
+
         this.getServer().getPluginManager().registerEvents(new InvalidPositionLoginListener(), this);
         this.getServer().getPluginManager().registerEvents(new TrySitEventListener(this), this);
         this.getServer().getPluginManager().registerEvents(new TryUnsitEventListener(this), this);
+
         this.getCommand("chairs").setExecutor(new ChairsCommand(this));
     }
 
