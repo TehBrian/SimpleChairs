@@ -36,10 +36,10 @@ public final class ChairsCommand implements CommandExecutor {
         }
         if (sender instanceof final Player player) {
             if (args[0].equalsIgnoreCase("off")) {
-                this.sitData.disableSitting(player);
+                this.sitData.setSittingDisabled(player, true);
                 player.sendMessage(LegacyFormatting.on(this.config.msgSitDisabled()));
             } else if (args[0].equalsIgnoreCase("on")) {
-                this.sitData.enableSitting(player);
+                this.sitData.setSittingDisabled(player, false);
                 player.sendMessage(LegacyFormatting.on(this.config.msgSitEnabled()));
             }
         }

@@ -27,18 +27,16 @@ public final class PlayerSitData {
         this.sitDisabledKey = new NamespacedKey(plugin, "SitDisabled");
     }
 
-    public void disableSitting(final Player player) {
-        player.getPersistentDataContainer().set(this.sitDisabledKey, PersistentDataType.BYTE, (byte) 1);
-    }
-
-    public void enableSitting(final Player player) {
-        player.getPersistentDataContainer().remove(this.sitDisabledKey);
-    }
-
     public boolean isSittingDisabled(final Player player) {
-        return player
-                .getPersistentDataContainer()
-                .getOrDefault(this.sitDisabledKey, PersistentDataType.BYTE, (byte) 0) != 0;
+        return player.getPersistentDataContainer().getOrDefault(this.sitDisabledKey, PersistentDataType.BYTE, (byte) 0) != 0;
+    }
+
+    public void setSittingDisabled(final Player player, final boolean bool) {
+        if (bool) {
+            player.getPersistentDataContainer().set(this.sitDisabledKey, PersistentDataType.BYTE, (byte) 1);
+        } else {
+            player.getPersistentDataContainer().remove(this.sitDisabledKey);
+        }
     }
 
     public boolean isSitting(final Player player) {

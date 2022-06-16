@@ -36,11 +36,11 @@ public final class ChairsAPI {
     }
 
     public static void disableSitting(final Player player) {
-        getPlayerSitData().disableSitting(player);
+        getPlayerSitData().setSittingDisabled(player, true);
     }
 
     public static void enableSitting(final Player player) {
-        getPlayerSitData().enableSitting(player);
+        getPlayerSitData().setSittingDisabled(player, false);
     }
 
     public static boolean isSittingDisabled(final Player player) {
