@@ -72,14 +72,12 @@ public final class PlayerSitData {
                 final int arrowResitInterval = this.plugin.getChairsConfig().sitArrowResitInterval();
                 sitData = new SitData(
                         chairEntity, player.getLocation(), blockToOccupy,
-                        Bukkit
-                                .getScheduler()
-                                .scheduleSyncRepeatingTask(
-                                        this.plugin,
-                                        () -> this.resitPlayer(player),
-                                        arrowResitInterval,
-                                        arrowResitInterval
-                                )
+                        Bukkit.getScheduler().scheduleSyncRepeatingTask(
+                                this.plugin,
+                                () -> this.resitPlayer(player),
+                                arrowResitInterval,
+                                arrowResitInterval
+                        )
                 );
             }
             case ARMOR_STAND -> sitData = new SitData(chairEntity, player.getLocation(), blockToOccupy, -1);
@@ -87,11 +85,9 @@ public final class PlayerSitData {
 
         player.teleport(postEventSitLoc);
         chairEntity.addPassenger(player);
-
         this.sittingPlayers.put(player, sitData);
         this.occupiedBlocks.put(blockToOccupy, player);
         sitData.sitting = true;
-
         return true;
     }
 
