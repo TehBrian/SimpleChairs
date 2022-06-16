@@ -14,6 +14,7 @@ commands:
       /<command> reload - reload plugin configuration
       /<command> on - enable chairs for self
       /<command> off - disable chairs for self
+      /<command> toggle - toggle chairs for self
 
 permissions:
   chairs.reload:
