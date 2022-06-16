@@ -16,14 +16,14 @@ public class ChairEffects {
 
     protected final SimpleChairs plugin;
     protected final ChairsConfig config;
-    protected final PlayerSitData sitdata;
+    protected final PlayerSitData sitData;
     protected int healTaskID = -1;
     protected int pickupTaskID = -1;
 
     public ChairEffects(final SimpleChairs plugin) {
         this.plugin = plugin;
         this.config = plugin.getChairsConfig();
-        this.sitdata = plugin.getPlayerSitData();
+        this.sitData = plugin.getPlayerSitData();
     }
 
     protected void startHealing() {

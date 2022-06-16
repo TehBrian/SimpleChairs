@@ -14,12 +14,12 @@ public class CommandRestrict implements Listener {
 
     protected final SimpleChairs plugin;
     protected final ChairsConfig config;
-    protected final PlayerSitData sitdata;
+    protected final PlayerSitData sitData;
 
     public CommandRestrict(final SimpleChairs plugin) {
         this.plugin = plugin;
         this.config = plugin.getChairsConfig();
-        this.sitdata = plugin.getPlayerSitData();
+        this.sitData = plugin.getPlayerSitData();
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
