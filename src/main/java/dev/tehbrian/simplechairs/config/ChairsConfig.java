@@ -78,68 +78,65 @@ public final class ChairsConfig {
 
     public void loadFromConfig() {
         final File file = this.getConfigFile();
+        final FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
-        {
-            final FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+        final ConfigurationSection sitConfigSection = config.getConfigurationSection(SIT_SECTION_PATH);
+        if (sitConfigSection != null) {
+            this.sitDisabledWorlds().clear();
+            this.sitDisabledWorlds().addAll(sitConfigSection.getStringList(SIT_DISABLED_WORLDS_PATH));
+            this.sitRequireEmptyHand = sitConfigSection.getBoolean(SIT_REQUIRE_EMPTY_HAND_PATH, this.sitRequireEmptyHand());
+            this.sitMaxDistance = sitConfigSection.getDouble(SIT_MAX_DISTANCE_PATH, this.sitMaxDistance());
+            this.sitChairEntityType = ChairEntityType.fromString(sitConfigSection.getString(
+                    SIT_CHAIR_ENTITY_TYPE_PATH,
+                    this.sitChairEntityType().name()
+            ));
+            this.sitArrowResitInterval = sitConfigSection.getInt(SIT_ARROW_RESIT_INTERVAL_PATH, this.sitArrowResitInterval());
+            if (this.sitArrowResitInterval() > 1000) {
+                this.sitArrowResitInterval = 1000;
+            }
 
-            final ConfigurationSection sitConfigSection = config.getConfigurationSection(SIT_SECTION_PATH);
-            if (sitConfigSection != null) {
-                this.sitDisabledWorlds().clear();
-                this.sitDisabledWorlds().addAll(sitConfigSection.getStringList(SIT_DISABLED_WORLDS_PATH));
-                this.sitRequireEmptyHand = sitConfigSection.getBoolean(SIT_REQUIRE_EMPTY_HAND_PATH, this.sitRequireEmptyHand());
-                this.sitMaxDistance = sitConfigSection.getDouble(SIT_MAX_DISTANCE_PATH, this.sitMaxDistance());
-                this.sitChairEntityType = ChairEntityType.fromString(sitConfigSection.getString(
-                        SIT_CHAIR_ENTITY_TYPE_PATH,
-                        this.sitChairEntityType().name()
-                ));
-                this.sitArrowResitInterval = sitConfigSection.getInt(SIT_ARROW_RESIT_INTERVAL_PATH, this.sitArrowResitInterval());
-                if (this.sitArrowResitInterval() > 1000) {
-                    this.sitArrowResitInterval = 1000;
+            final ConfigurationSection sitConfigStairsSection = sitConfigSection.getConfigurationSection(SIT_STAIRS_SECTION_PATH);
+            if (sitConfigStairsSection != null) {
+                this.sitStairsEnabled = sitConfigStairsSection.getBoolean(SIT_STAIRS_ENABLED_PATH, this.sitStairsEnabled());
+                this.sitStairsAutoRotate = sitConfigStairsSection.getBoolean(SIT_STAIRS_ROTATE_PATH, this.sitStairsAutoRotate());
+                this.sitStairsMaxWidth = sitConfigStairsSection.getInt(SIT_STAIRS_MAX_WIDTH_PATH, this.sitStairsMaxWidth());
+                final ConfigurationSection sitConfigStairsSpecialEndSection = sitConfigStairsSection.getConfigurationSection(
+                        SIT_STAIRS_SPECIAL_END_PATH);
+                if (sitConfigStairsSpecialEndSection != null) {
+                    this.sitStairsSpecialEndSign = sitConfigStairsSpecialEndSection.getBoolean(
+                            SIT_STAIRS_SPECIAL_END_SIGN_PATH,
+                            this.sitStairsSpecialEndSign()
+                    );
+                    this.sitStairsSpecialEndCornerStairs = sitConfigStairsSpecialEndSection.getBoolean(
+                            SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH,
+                            this.sitStairsSpecialEndCornerStairs()
+                    );
+                    this.sitStairsSpecialEndEnabled = this.sitStairsSpecialEndSign() || this.sitStairsSpecialEndCornerStairs();
                 }
+                this.sitStairsHeight = sitConfigStairsSection.getDouble(SIT_STAIRS_HEIGHT, this.sitStairsHeight());
+            }
 
-                final ConfigurationSection sitConfigStairsSection = sitConfigSection.getConfigurationSection(SIT_STAIRS_SECTION_PATH);
-                if (sitConfigStairsSection != null) {
-                    this.sitStairsEnabled = sitConfigStairsSection.getBoolean(SIT_STAIRS_ENABLED_PATH, this.sitStairsEnabled());
-                    this.sitStairsAutoRotate = sitConfigStairsSection.getBoolean(SIT_STAIRS_ROTATE_PATH, this.sitStairsAutoRotate());
-                    this.sitStairsMaxWidth = sitConfigStairsSection.getInt(SIT_STAIRS_MAX_WIDTH_PATH, this.sitStairsMaxWidth());
-                    final ConfigurationSection sitConfigStairsSpecialEndSection = sitConfigStairsSection.getConfigurationSection(
-                            SIT_STAIRS_SPECIAL_END_PATH);
-                    if (sitConfigStairsSpecialEndSection != null) {
-                        this.sitStairsSpecialEndSign = sitConfigStairsSpecialEndSection.getBoolean(
-                                SIT_STAIRS_SPECIAL_END_SIGN_PATH,
-                                this.sitStairsSpecialEndSign()
-                        );
-                        this.sitStairsSpecialEndCornerStairs = sitConfigStairsSpecialEndSection.getBoolean(
-                                SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH,
-                                this.sitStairsSpecialEndCornerStairs()
-                        );
-                        this.sitStairsSpecialEndEnabled = this.sitStairsSpecialEndSign() || this.sitStairsSpecialEndCornerStairs();
-                    }
-                    this.sitStairsHeight = sitConfigStairsSection.getDouble(SIT_STAIRS_HEIGHT, this.sitStairsHeight());
-                }
-
-                final ConfigurationSection sitConfigAdditionalBlocksSection = sitConfigSection.getConfigurationSection(
-                        SIT_ADDITIONAL_BLOCKS_PATH);
-                if (sitConfigAdditionalBlocksSection != null) {
-                    for (final String materialName : sitConfigAdditionalBlocksSection.getKeys(false)) {
-                        final Material material = Material.getMaterial(materialName);
-                        if (material != null) {
-                            this.sitAdditionalBlocks().put(material, sitConfigAdditionalBlocksSection.getDouble(materialName));
-                        }
+            final ConfigurationSection sitConfigAdditionalBlocksSection = sitConfigSection.getConfigurationSection(
+                    SIT_ADDITIONAL_BLOCKS_PATH);
+            if (sitConfigAdditionalBlocksSection != null) {
+                for (final String materialName : sitConfigAdditionalBlocksSection.getKeys(false)) {
+                    final Material material = Material.getMaterial(materialName);
+                    if (material != null) {
+                        this.sitAdditionalBlocks().put(material, sitConfigAdditionalBlocksSection.getDouble(materialName));
                     }
                 }
             }
+        }
 
-            final ConfigurationSection msgSection = config.getConfigurationSection(MSG_SECTION_PATH);
-            if (msgSection != null) {
-                this.msgEnabled = msgSection.getBoolean(MSG_ENABLED_PATH, this.msgEnabled());
-                final ConfigurationSection msgSitSection = msgSection.getConfigurationSection(MSG_SIT_SECTION_PATH);
-                if (msgSitSection != null) {
-                    this.msgSitEnter = msgSitSection.getString(MSG_SIT_ENTER_PATH, this.msgSitEnter());
-                    this.msgSitLeave = msgSitSection.getString(MSG_SIT_LEAVE_PATH, this.msgSitLeave());
-                    this.msgSitEnabled = msgSitSection.getString(MSG_SIT_ENABLED_PATH, this.msgSitEnabled());
-                    this.msgSitDisabled = msgSitSection.getString(MSG_SIT_DISABLED_PATH, this.msgSitDisabled());
-                }
+        final ConfigurationSection msgSection = config.getConfigurationSection(MSG_SECTION_PATH);
+        if (msgSection != null) {
+            this.msgEnabled = msgSection.getBoolean(MSG_ENABLED_PATH, this.msgEnabled());
+            final ConfigurationSection msgSitSection = msgSection.getConfigurationSection(MSG_SIT_SECTION_PATH);
+            if (msgSitSection != null) {
+                this.msgSitEnter = msgSitSection.getString(MSG_SIT_ENTER_PATH, this.msgSitEnter());
+                this.msgSitLeave = msgSitSection.getString(MSG_SIT_LEAVE_PATH, this.msgSitLeave());
+                this.msgSitEnabled = msgSitSection.getString(MSG_SIT_ENABLED_PATH, this.msgSitEnabled());
+                this.msgSitDisabled = msgSitSection.getString(MSG_SIT_DISABLED_PATH, this.msgSitDisabled());
             }
         }
     }
