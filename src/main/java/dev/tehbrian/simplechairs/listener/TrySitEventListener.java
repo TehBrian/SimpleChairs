@@ -11,6 +11,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
+@SuppressWarnings("ClassCanBeRecord")
 public final class TrySitEventListener implements Listener {
 
     private final SimpleChairs plugin;
@@ -24,6 +25,7 @@ public final class TrySitEventListener implements Listener {
         if ((event.getAction() == Action.RIGHT_CLICK_BLOCK) && (event.getHand() == EquipmentSlot.HAND)) {
             final Player player = event.getPlayer();
             final Block block = event.getClickedBlock();
+
             final Location sitLocation = this.plugin.getSitUtils().calculateSitLocation(player, block);
             if ((sitLocation != null) && this.plugin.getPlayerSitData().sitPlayer(player, block, sitLocation)) {
                 event.setCancelled(true);

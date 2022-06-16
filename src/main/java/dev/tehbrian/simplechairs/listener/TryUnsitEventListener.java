@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class TryUnsitEventListener implements Listener {
 
     private final SimpleChairs plugin;
-    private Map<UUID, Location> dismountTeleport = new HashMap<>();
+    private final Map<UUID, Location> dismountTeleport = new HashMap<>();
 
     public TryUnsitEventListener(final SimpleChairs plugin) {
         this.plugin = plugin;
@@ -31,6 +31,7 @@ public final class TryUnsitEventListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerTeleport(final PlayerTeleportEvent event) {
         final Player player = event.getPlayer();
+
         if (this.plugin.getPlayerSitData().isSitting(player)) {
             this.plugin.getPlayerSitData().unsitPlayerForce(player, false);
         } else if (event.getCause() == TeleportCause.UNKNOWN) {
