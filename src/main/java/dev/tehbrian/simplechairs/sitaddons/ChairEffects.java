@@ -68,8 +68,7 @@ public class ChairEffects {
                                 .filter(this.plugin.getPlayerSitData()::isSitting)
                                 .forEach(p -> {
                                     for (final Entity entity : p.getNearbyEntities(1, 2, 1)) {
-                                        if (entity instanceof Item) {
-                                            final Item item = (Item) entity;
+                                        if (entity instanceof final Item item) {
                                             if (item.getPickupDelay() == 0) {
                                                 if (p.getInventory().firstEmpty() != -1) {
                                                     final EntityPickupItemEvent pickupevent = new EntityPickupItemEvent(p, item, 0);
@@ -80,8 +79,7 @@ public class ChairEffects {
                                                     }
                                                 }
                                             }
-                                        } else if (entity instanceof ExperienceOrb) {
-                                            final ExperienceOrb eorb = (ExperienceOrb) entity;
+                                        } else if (entity instanceof final ExperienceOrb eorb) {
                                             int exptoadd = eorb.getExperience();
                                             while (exptoadd > 0) {
                                                 int localexptoadd = 0;

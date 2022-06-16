@@ -32,7 +32,7 @@ public class SitUtils {
         this.sitData = plugin.getPlayerSitData();
     }
 
-    protected static final boolean isStairsSittable(final Stairs stairs) {
+    protected static boolean isStairsSittable(final Stairs stairs) {
         return (stairs.getHalf() == Half.BOTTOM) && (stairs.getShape() == Shape.STRAIGHT);
     }
 
@@ -50,8 +50,7 @@ public class SitUtils {
             final Block block
     ) {
         final BlockData blockdata = block.getBlockData();
-        if (blockdata instanceof Stairs) {
-            final Stairs stairs = (Stairs) blockdata;
+        if (blockdata instanceof final Stairs stairs) {
             return (stairs.getHalf() == Half.BOTTOM) && (stairs.getFacing() == expectedFacing) && (stairs.getShape() == expectedShape);
         }
         return false;
@@ -167,9 +166,8 @@ public class SitUtils {
         float yaw = player.getLocation().getYaw();
         Double sitHeight = null;
 
-        if ((blockdata instanceof Stairs) && this.config.stairsEnabled) {
+        if ((blockdata instanceof final Stairs stairs) && this.config.stairsEnabled) {
             sitHeight = this.config.stairsHeight;
-            final Stairs stairs = (Stairs) blockdata;
             if (!isStairsSittable(stairs)) {
                 return null;
             }
@@ -250,10 +248,9 @@ public class SitUtils {
         for (int i = 0; i < limit; i++) {
             block = block.getRelative(searchFace);
             final BlockData blockdata = block.getBlockData();
-            if (!(blockdata instanceof Stairs)) {
+            if (!(blockdata instanceof final Stairs stairs)) {
                 return i;
             }
-            final Stairs stairs = (Stairs) blockdata;
             if (!isStairsSittable(stairs) || (stairs.getFacing() != expectedFace)) {
                 return i;
             }
