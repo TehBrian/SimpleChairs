@@ -3,8 +3,8 @@
 # ------
 # sit-config:
 #   disabled-worlds: List of worlds in which sitting is disabled
-#   max-distance: The maximum distance between the chair (the center of the block) and the player to be able to sit down (to prevent glitching through walls, etc.)
 #   require-empty-hand: Set this true to disable sitting if player is holding an item in hand.
+#   max-distance: The maximum distance between the chair (the center of the block) and the player to be able to sit down (to prevent glitching through walls, etc.)
 #   chair-entity-type: Entity type used as chair, allowed values are ARROW, ARMOR_STAND
 #   arrow-resit-interval: How often plugin will resit player in ticks, not allowed more than 1000 due to clientside prediction arrow removal delay
 #   stairs:
