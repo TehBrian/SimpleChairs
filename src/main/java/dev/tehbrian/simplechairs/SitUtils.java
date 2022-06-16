@@ -193,13 +193,12 @@ public final class SitUtils {
                             && isStairsEndingSign(facingRight, blockRight)) {
                         specialEndCheckSuccess = true;
                     }
-                    if (
-                            this.config.sitStairsSpecialEndCornerStairs()
-                                    && (isStairsEndingCornerStairs(facingLeft, Stairs.Shape.INNER_RIGHT, blockLeft)
-                                    || isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_LEFT, blockLeft))
-                                    && (isStairsEndingCornerStairs(facingRight, Stairs.Shape.INNER_LEFT, blockRight)
-                                    || isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_RIGHT, blockRight))
-                    ) {
+
+                    if (this.config.sitStairsSpecialEndCornerStairs()
+                            && (isStairsEndingCornerStairs(facingLeft, Stairs.Shape.INNER_RIGHT, blockLeft)
+                            || isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_LEFT, blockLeft))
+                            && (isStairsEndingCornerStairs(facingRight, Stairs.Shape.INNER_LEFT, blockRight)
+                            || isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_RIGHT, blockRight))) {
                         specialEndCheckSuccess = true;
                     }
 
