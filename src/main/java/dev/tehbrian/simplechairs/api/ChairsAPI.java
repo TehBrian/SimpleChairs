@@ -1,11 +1,11 @@
-package com.cnaude.chairs.api;
+package dev.tehbrian.simplechairs.api;
 
+import dev.tehbrian.simplechairs.core.Chairs;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-import com.cnaude.chairs.core.Chairs;
-import com.cnaude.chairs.core.PlayerSitData;
+import dev.tehbrian.simplechairs.core.PlayerSitData;
 
 public class ChairsAPI {
 

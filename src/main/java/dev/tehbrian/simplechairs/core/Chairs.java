@@ -1,4 +1,4 @@
-package com.cnaude.chairs.core;
+package dev.tehbrian.simplechairs.core;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,12 +11,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.spigotmc.event.entity.EntityDismountEvent;
 
-import com.cnaude.chairs.commands.ChairsCommand;
-import com.cnaude.chairs.listeners.NANLoginListener;
-import com.cnaude.chairs.listeners.TrySitEventListener;
-import com.cnaude.chairs.listeners.TryUnsitEventListener;
-import com.cnaude.chairs.sitaddons.ChairEffects;
-import com.cnaude.chairs.sitaddons.CommandRestrict;
+import dev.tehbrian.simplechairs.commands.ChairsCommand;
+import dev.tehbrian.simplechairs.listeners.NANLoginListener;
+import dev.tehbrian.simplechairs.listeners.TrySitEventListener;
+import dev.tehbrian.simplechairs.listeners.TryUnsitEventListener;
+import dev.tehbrian.simplechairs.sitaddons.ChairEffects;
+import dev.tehbrian.simplechairs.sitaddons.CommandRestrict;
 
 public class Chairs extends JavaPlugin {
 

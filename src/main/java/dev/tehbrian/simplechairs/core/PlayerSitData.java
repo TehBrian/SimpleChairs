@@ -1,8 +1,10 @@
-package com.cnaude.chairs.core;
+package dev.tehbrian.simplechairs.core;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import dev.tehbrian.simplechairs.api.PlayerChairSitEvent;
+import dev.tehbrian.simplechairs.api.PlayerChairUnsitEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -11,9 +13,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
-
-import com.cnaude.chairs.api.PlayerChairSitEvent;
-import com.cnaude.chairs.api.PlayerChairUnsitEvent;
 
 public class PlayerSitData {
 

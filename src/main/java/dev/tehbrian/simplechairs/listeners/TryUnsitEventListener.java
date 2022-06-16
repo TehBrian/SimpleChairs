@@ -1,9 +1,10 @@
-package com.cnaude.chairs.listeners;
+package dev.tehbrian.simplechairs.listeners;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import dev.tehbrian.simplechairs.core.Chairs;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -17,8 +18,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.spigotmc.event.entity.EntityDismountEvent;
-
-import com.cnaude.chairs.core.Chairs;
 
 public class TryUnsitEventListener implements Listener {
 
