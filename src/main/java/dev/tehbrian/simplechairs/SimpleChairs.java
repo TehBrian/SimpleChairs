@@ -58,22 +58,22 @@ public class SimpleChairs extends JavaPlugin {
     @Override
     public void onEnable() {
         try {
-            getClass().getClassLoader().loadClass(EntityDismountEvent.class.getName());
+            this.getClass().getClassLoader().loadClass(EntityDismountEvent.class.getName());
         } catch (final Throwable t) {
-            getLogger().log(Level.SEVERE, "Missing EntityDismountEvent", t);
-            setEnabled(false);
+            this.getLogger().log(Level.SEVERE, "Missing EntityDismountEvent", t);
+            this.setEnabled(false);
             return;
         }
         try {
-            Files.copy(getClass().getClassLoader().getResourceAsStream("config_help.txt"), new File(getDataFolder(), "config_help.txt").toPath(), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(this.getClass().getClassLoader().getResourceAsStream("config_help.txt"), new File(this.getDataFolder(), "config_help.txt").toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (final IOException e) {
         }
-        reloadConfig();
-        getServer().getPluginManager().registerEvents(new InvalidPositionLoginListener(), this);
-        getServer().getPluginManager().registerEvents(new TrySitEventListener(this), this);
-        getServer().getPluginManager().registerEvents(new TryUnsitEventListener(this), this);
-        getServer().getPluginManager().registerEvents(new CommandRestrict(this), this);
-        getCommand("chairs").setExecutor(new ChairsCommand(this));
+        this.reloadConfig();
+        this.getServer().getPluginManager().registerEvents(new InvalidPositionLoginListener(), this);
+        this.getServer().getPluginManager().registerEvents(new TrySitEventListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new TryUnsitEventListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new CommandRestrict(this), this);
+        this.getCommand("chairs").setExecutor(new ChairsCommand(this));
     }
 
     @Override

@@ -57,8 +57,8 @@ public class ChairEffects {
     }
 
     public void restartHealing() {
-        cancelHealing();
-        startHealing();
+        this.cancelHealing();
+        this.startHealing();
     }
 
     protected void startPickup() {
@@ -121,8 +121,8 @@ public class ChairEffects {
     }
 
     public void restartPickup() {
-        cancelPickup();
-        startPickup();
+        this.cancelPickup();
+        this.startPickup();
     }
 
 }

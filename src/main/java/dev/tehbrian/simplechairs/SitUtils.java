@@ -96,7 +96,7 @@ public class SitUtils {
 
     public Location calculateSitLocation(final Player player, final Block block) {
 
-        if (!canSitGeneric(player, block)) {
+        if (!this.canSitGeneric(player, block)) {
             return null;
         }
 
@@ -136,8 +136,8 @@ public class SitUtils {
             if (this.config.stairsMaxWidth > 0) {
                 final BlockFace facingLeft = rotL(ascendingFacing);
                 final BlockFace facingRight = rotR(ascendingFacing);
-                final int widthLeft = calculateStairsWidth(ascendingFacing, block, facingLeft, this.config.stairsMaxWidth);
-                final int widthRight = calculateStairsWidth(ascendingFacing, block, facingRight, this.config.stairsMaxWidth);
+                final int widthLeft = this.calculateStairsWidth(ascendingFacing, block, facingLeft, this.config.stairsMaxWidth);
+                final int widthRight = this.calculateStairsWidth(ascendingFacing, block, facingRight, this.config.stairsMaxWidth);
                 if ((widthLeft + widthRight + 1) > this.config.stairsMaxWidth) {
                     return null;
                 }

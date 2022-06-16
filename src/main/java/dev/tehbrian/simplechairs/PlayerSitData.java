@@ -70,7 +70,7 @@ public class PlayerSitData {
                 final int arrowresitinterval = this.plugin.getChairsConfig().sitArrowResitInterval;
                 sitdata = new SitData(
                     chairentity, player.getLocation(), blocktooccupy,
-                    Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> resitPlayer(player), arrowresitinterval, arrowresitinterval)
+                    Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, () -> this.resitPlayer(player), arrowresitinterval, arrowresitinterval)
                 );
                 break;
             }
@@ -99,11 +99,11 @@ public class PlayerSitData {
     }
 
     public boolean unsitPlayer(final Player player) {
-        return unsitPlayer(player, true, true);
+        return this.unsitPlayer(player, true, true);
     }
 
     public void unsitPlayerForce(final Player player, final boolean teleport) {
-        unsitPlayer(player, false, teleport);
+        this.unsitPlayer(player, false, teleport);
     }
 
     private boolean unsitPlayer(final Player player, final boolean canCancel, final boolean teleport) {
