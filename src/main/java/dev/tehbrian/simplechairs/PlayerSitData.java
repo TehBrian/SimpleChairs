@@ -75,11 +75,10 @@ public final class PlayerSitData {
         }
 
         final Entity chairEntity = this.plugin.getSitUtils().spawnChairEntity(postEventSitLoc);
-        SitData sitData = null;
-        switch (this.plugin.getChairsConfig().sitChairEntityType()) {
+        final SitData sitData = switch (this.plugin.getChairsConfig().sitChairEntityType()) {
             case ARROW -> {
                 final int arrowResitInterval = this.plugin.getChairsConfig().sitArrowResitInterval();
-                sitData = new SitData(
+                yield new SitData(
                         chairEntity, player.getLocation(), blockToOccupy,
                         Bukkit.getScheduler().scheduleSyncRepeatingTask(
                                 this.plugin,
@@ -89,8 +88,8 @@ public final class PlayerSitData {
                         )
                 );
             }
-            case ARMOR_STAND -> sitData = new SitData(chairEntity, player.getLocation(), blockToOccupy, -1);
-        }
+            case ARMOR_STAND -> new SitData(chairEntity, player.getLocation(), blockToOccupy, -1);
+        };
 
         player.teleport(postEventSitLoc);
         chairEntity.addPassenger(player);
