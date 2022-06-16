@@ -28,7 +28,7 @@ permissions:
     description: Allows regenerating health while sitting (if enabled)
     default: true
 
-description: Let players sit on blocks
+description: ${description}
 website: http://dev.bukkit.org/bukkit-plugins/chairsreloaded/
 authors: 
  - spoothie
