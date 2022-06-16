@@ -11,9 +11,9 @@ import org.bukkit.entity.Player;
 
 public final class ChairsCommand implements CommandExecutor {
 
-    protected final SimpleChairs plugin;
-    protected final ChairsConfig config;
-    protected final PlayerSitData sitData;
+    private final SimpleChairs plugin;
+    private final ChairsConfig config;
+    private final PlayerSitData sitData;
 
     public ChairsCommand(final SimpleChairs plugin) {
         this.plugin = plugin;

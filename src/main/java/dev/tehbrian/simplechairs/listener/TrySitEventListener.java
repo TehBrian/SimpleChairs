@@ -13,7 +13,7 @@ import org.bukkit.inventory.EquipmentSlot;
 
 public final class TrySitEventListener implements Listener {
 
-    protected final SimpleChairs plugin;
+    private final SimpleChairs plugin;
 
     public TrySitEventListener(final SimpleChairs plugin) {
         this.plugin = plugin;

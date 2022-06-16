@@ -16,12 +16,12 @@ import java.util.Map;
 
 public final class PlayerSitData {
 
-    protected final SimpleChairs plugin;
+    private final SimpleChairs plugin;
 
-    protected final NamespacedKey sitDisabledKey;
+    private final NamespacedKey sitDisabledKey;
 
-    protected final Map<Player, SitData> sittingPlayers = new HashMap<>();
-    protected final Map<Block, Player> occupiedBlocks = new HashMap<>();
+    private final Map<Player, SitData> sittingPlayers = new HashMap<>();
+    private final Map<Block, Player> occupiedBlocks = new HashMap<>();
 
     public PlayerSitData(final SimpleChairs plugin) {
         this.plugin = plugin;

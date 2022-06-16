@@ -12,9 +12,9 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public final class CommandRestrict implements Listener {
 
-    protected final SimpleChairs plugin;
-    protected final ChairsConfig config;
-    protected final PlayerSitData sitData;
+    private final SimpleChairs plugin;
+    private final ChairsConfig config;
+    private final PlayerSitData sitData;
 
     public CommandRestrict(final SimpleChairs plugin) {
         this.plugin = plugin;
