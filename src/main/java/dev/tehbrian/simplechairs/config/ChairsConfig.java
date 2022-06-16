@@ -31,7 +31,7 @@ public final class ChairsConfig {
     private static final String SIT_STAIRS_SPECIAL_END_SIGN_PATH = "sign";
     private static final String SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH = "corner-stairs";
     private static final String SIT_STAIRS_HEIGHT = "height";
-    private static final String SIT_ADDITIONAL_CHAIRS_PATH = "additional-blocks";
+    private static final String SIT_ADDITIONAL_BLOCKS_PATH = "additional-blocks";
 
     private static final String MSG_SECTION_PATH = "messages";
     private static final String MSG_ENABLED_PATH = "enabled";
@@ -44,7 +44,7 @@ public final class ChairsConfig {
     private final SimpleChairs plugin;
 
     private final Set<String> sitDisabledWorlds = new HashSet<>();
-    private final Map<Material, Double> additionalChairs = new EnumMap<>(Material.class);
+    private final Map<Material, Double> sitAdditionalBlocks = new EnumMap<>(Material.class);
     private boolean sitRequireEmptyHand = false;
     private double sitMaxDistance = 2;
     private ChairEntityType sitChairEntityType = ChairEntityType.ARROW;
@@ -110,12 +110,12 @@ public final class ChairsConfig {
                 }
 
                 final ConfigurationSection sitConfigAdditionalBlocksSection = sitConfigSection.getConfigurationSection(
-                        SIT_ADDITIONAL_CHAIRS_PATH);
+                        SIT_ADDITIONAL_BLOCKS_PATH);
                 if (sitConfigAdditionalBlocksSection != null) {
                     for (final String materialName : sitConfigAdditionalBlocksSection.getKeys(false)) {
                         final Material material = Material.getMaterial(materialName);
                         if (material != null) {
-                            this.additionalChairs().put(material, sitConfigAdditionalBlocksSection.getDouble(materialName));
+                            this.sitAdditionalBlocks().put(material, sitConfigAdditionalBlocksSection.getDouble(materialName));
                         }
                     }
                 }
@@ -159,9 +159,9 @@ public final class ChairsConfig {
                     sitConfigStairsSection.set(SIT_STAIRS_HEIGHT, this.stairsHeight());
                 }
 
-                final ConfigurationSection sitConfigAdditionalBlocksSection = sitConfigSection.createSection(SIT_ADDITIONAL_CHAIRS_PATH);
+                final ConfigurationSection sitConfigAdditionalBlocksSection = sitConfigSection.createSection(SIT_ADDITIONAL_BLOCKS_PATH);
                 {
-                    for (final Entry<Material, Double> entry : this.additionalChairs().entrySet()) {
+                    for (final Entry<Material, Double> entry : this.sitAdditionalBlocks().entrySet()) {
                         sitConfigAdditionalBlocksSection.set(entry.getKey().toString(), entry.getValue());
                     }
                 }
@@ -190,8 +190,8 @@ public final class ChairsConfig {
         return this.sitDisabledWorlds;
     }
 
-    public Map<Material, Double> additionalChairs() {
-        return this.additionalChairs;
+    public Map<Material, Double> sitAdditionalBlocks() {
+        return this.sitAdditionalBlocks;
     }
 
     public boolean sitRequireEmptyHand() {
