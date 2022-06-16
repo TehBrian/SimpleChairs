@@ -146,56 +146,43 @@ public final class ChairsConfig {
 
     public void saveToConfig() {
         final File file = this.getConfigFile();
+        final FileConfiguration config = new YamlConfiguration();
 
-        {
-            final FileConfiguration config = new YamlConfiguration();
+        final ConfigurationSection sitSection = config.createSection(SIT_SECTION_PATH);
+        sitSection.set(SIT_DISABLED_WORLDS_PATH, new ArrayList<>(this.sitDisabledWorlds()));
+        sitSection.set(SIT_REQUIRE_EMPTY_HAND_PATH, this.sitRequireEmptyHand());
+        sitSection.set(SIT_MAX_DISTANCE_PATH, this.sitMaxDistance());
+        sitSection.set(SIT_CHAIR_ENTITY_TYPE_PATH, this.sitChairEntityType().name());
+        sitSection.set(SIT_ARROW_RESIT_INTERVAL_PATH, this.sitArrowResitInterval());
 
-            final ConfigurationSection sitConfigSection = config.createSection(SIT_SECTION_PATH);
-            {
-                sitConfigSection.set(SIT_DISABLED_WORLDS_PATH, new ArrayList<>(this.sitDisabledWorlds()));
-                sitConfigSection.set(SIT_REQUIRE_EMPTY_HAND_PATH, this.sitRequireEmptyHand());
-                sitConfigSection.set(SIT_MAX_DISTANCE_PATH, this.sitMaxDistance());
-                sitConfigSection.set(SIT_CHAIR_ENTITY_TYPE_PATH, this.sitChairEntityType().name());
-                sitConfigSection.set(SIT_ARROW_RESIT_INTERVAL_PATH, this.sitArrowResitInterval());
+        final ConfigurationSection sitStairsSection = sitSection.createSection(SIT_STAIRS_SECTION_PATH);
+        sitStairsSection.set(SIT_STAIRS_ENABLED_PATH, this.sitStairsEnabled());
+        sitStairsSection.set(SIT_STAIRS_ROTATE_PATH, this.sitStairsAutoRotate());
+        sitStairsSection.set(SIT_STAIRS_MAX_WIDTH_PATH, this.sitStairsMaxWidth());
 
-                final ConfigurationSection sitConfigStairsSection = sitConfigSection.createSection(SIT_STAIRS_SECTION_PATH);
-                {
-                    sitConfigStairsSection.set(SIT_STAIRS_ENABLED_PATH, this.sitStairsEnabled());
-                    sitConfigStairsSection.set(SIT_STAIRS_ROTATE_PATH, this.sitStairsAutoRotate());
-                    sitConfigStairsSection.set(SIT_STAIRS_MAX_WIDTH_PATH, this.sitStairsMaxWidth());
-                    final ConfigurationSection sitConfigStairsSpecialEndSection = sitConfigStairsSection.createSection(
-                            SIT_STAIRS_SPECIAL_END_PATH);
-                    {
-                        sitConfigStairsSpecialEndSection.set(SIT_STAIRS_SPECIAL_END_SIGN_PATH, this.sitStairsSpecialEndSign());
-                        sitConfigStairsSpecialEndSection.set(SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH, this.sitStairsSpecialEndCornerStairs());
-                    }
-                    sitConfigStairsSection.set(SIT_STAIRS_HEIGHT, this.sitStairsHeight());
-                }
+        final ConfigurationSection sitStairsSpecialEndSection = sitStairsSection.createSection(SIT_STAIRS_SPECIAL_END_PATH);
+        sitStairsSpecialEndSection.set(SIT_STAIRS_SPECIAL_END_SIGN_PATH, this.sitStairsSpecialEndSign());
+        sitStairsSpecialEndSection.set(SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH, this.sitStairsSpecialEndCornerStairs());
 
-                final ConfigurationSection sitConfigAdditionalBlocksSection = sitConfigSection.createSection(SIT_ADDITIONAL_BLOCKS_PATH);
-                {
-                    for (final Entry<Material, Double> entry : this.sitAdditionalBlocks().entrySet()) {
-                        sitConfigAdditionalBlocksSection.set(entry.getKey().toString(), entry.getValue());
-                    }
-                }
-            }
+        sitStairsSection.set(SIT_STAIRS_HEIGHT, this.sitStairsHeight());
 
-            final ConfigurationSection msgSection = config.createSection(MSG_SECTION_PATH);
-            {
-                msgSection.set(MSG_ENABLED_PATH, this.msgEnabled());
-                final ConfigurationSection msgSitSection = msgSection.createSection(MSG_SIT_SECTION_PATH);
-                {
-                    msgSitSection.set(MSG_SIT_ENTER_PATH, this.msgSitEnter());
-                    msgSitSection.set(MSG_SIT_LEAVE_PATH, this.msgSitLeave());
-                    msgSitSection.set(MSG_SIT_ENABLED_PATH, this.msgSitEnabled());
-                    msgSitSection.set(MSG_SIT_DISABLED_PATH, this.msgSitDisabled());
-                }
-            }
+        final ConfigurationSection sitAdditionalBlocksSection = sitSection.createSection(SIT_ADDITIONAL_BLOCKS_PATH);
+        for (final Entry<Material, Double> entry : this.sitAdditionalBlocks().entrySet()) {
+            sitAdditionalBlocksSection.set(entry.getKey().toString(), entry.getValue());
+        }
 
-            try {
-                config.save(file);
-            } catch (final IOException e) {
-            }
+        final ConfigurationSection msgSection = config.createSection(MSG_SECTION_PATH);
+        msgSection.set(MSG_ENABLED_PATH, this.msgEnabled());
+
+        final ConfigurationSection msgSitSection = msgSection.createSection(MSG_SIT_SECTION_PATH);
+        msgSitSection.set(MSG_SIT_ENTER_PATH, this.msgSitEnter());
+        msgSitSection.set(MSG_SIT_LEAVE_PATH, this.msgSitLeave());
+        msgSitSection.set(MSG_SIT_ENABLED_PATH, this.msgSitEnabled());
+        msgSitSection.set(MSG_SIT_DISABLED_PATH, this.msgSitDisabled());
+
+        try {
+            config.save(file);
+        } catch (final IOException e) {
         }
     }
 
