@@ -5,8 +5,6 @@ import dev.tehbrian.simplechairs.config.ChairsConfig;
 import dev.tehbrian.simplechairs.listener.InvalidPositionLoginListener;
 import dev.tehbrian.simplechairs.listener.TrySitEventListener;
 import dev.tehbrian.simplechairs.listener.TryUnsitEventListener;
-import dev.tehbrian.simplechairs.sitaddons.ChairEffects;
-import dev.tehbrian.simplechairs.sitaddons.CommandRestrict;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,7 +21,6 @@ public final class SimpleChairs extends JavaPlugin {
     private static SimpleChairs instance;
     private final ChairsConfig config = new ChairsConfig(this);
     private final PlayerSitData sitData = new PlayerSitData(this);
-    private final ChairEffects chairEffects = new ChairEffects(this);
     private final SitUtils utils = new SitUtils(this);
 
     public SimpleChairs() {
@@ -40,10 +37,6 @@ public final class SimpleChairs extends JavaPlugin {
 
     public PlayerSitData getPlayerSitData() {
         return this.sitData;
-    }
-
-    public ChairEffects getChairEffects() {
-        return this.chairEffects;
     }
 
     public SitUtils getSitUtils() {
@@ -71,7 +64,6 @@ public final class SimpleChairs extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new InvalidPositionLoginListener(), this);
         this.getServer().getPluginManager().registerEvents(new TrySitEventListener(this), this);
         this.getServer().getPluginManager().registerEvents(new TryUnsitEventListener(this), this);
-        this.getServer().getPluginManager().registerEvents(new CommandRestrict(this), this);
         this.getCommand("chairs").setExecutor(new ChairsCommand(this));
     }
 
@@ -82,23 +74,11 @@ public final class SimpleChairs extends JavaPlugin {
                 this.sitData.unsitPlayerForce(player, true);
             }
         }
-        this.chairEffects.cancelHealing();
-        this.chairEffects.cancelPickup();
     }
 
     @Override
     public void reloadConfig() {
         this.config.reloadConfig();
-        if (this.config.effectsHealEnabled) {
-            this.chairEffects.restartHealing();
-        } else {
-            this.chairEffects.cancelHealing();
-        }
-        if (this.config.effectsItemPickupEnabled) {
-            this.chairEffects.restartPickup();
-        } else {
-            this.chairEffects.cancelPickup();
-        }
     }
 
 }
