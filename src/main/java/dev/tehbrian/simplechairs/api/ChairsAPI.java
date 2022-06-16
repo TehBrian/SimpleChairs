@@ -8,6 +8,9 @@ import org.bukkit.entity.Player;
 
 public final class ChairsAPI {
 
+    private ChairsAPI() {
+    }
+
     private static PlayerSitData getPlayerSitData() {
         return SimpleChairs.getInstance().getPlayerSitData();
     }
