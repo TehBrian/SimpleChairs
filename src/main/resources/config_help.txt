@@ -9,7 +9,7 @@
 #   arrow-resit-interval: How often plugin will resit player in ticks, not allowed more than 1000 due to clientside prediction arrow removal delay
 #   stairs:
 #     enabled: enables all stairs as sit on blocks with special handling
-#     rotate: set to true to auto rotate player to face the descending side of the stairs
+#     rotate-player: set to true to auto rotate player to face the descending side of the stairs
 #     max-width: max width of stairs line (set 0 to disable the check)
 #     special-end: set any sub options to true to require special block (one of them) at the end of the stairs line (only works if max-width is enabled)
 #       sign: require sign

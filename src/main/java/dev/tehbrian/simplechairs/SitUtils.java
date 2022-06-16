@@ -164,7 +164,7 @@ public final class SitUtils {
             }
             final BlockFace ascendingFacing = stairs.getFacing();
 
-            if (this.config.sitStairsAutoRotate()) {
+            if (this.config.sitStairsRotatePlayer()) {
                 yaw = switch (ascendingFacing.getOppositeFace()) {
                     case NORTH -> 180;
                     case EAST -> -90;
