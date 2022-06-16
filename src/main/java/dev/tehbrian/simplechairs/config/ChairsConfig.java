@@ -86,7 +86,10 @@ public final class ChairsConfig {
             this.sitDisabledWorlds.addAll(sitSection.getStringList(SIT_DISABLED_WORLDS_PATH));
             this.sitRequireEmptyHand = sitSection.getBoolean(SIT_REQUIRE_EMPTY_HAND_PATH, this.sitRequireEmptyHand());
             this.sitMaxDistance = sitSection.getDouble(SIT_MAX_DISTANCE_PATH, this.sitMaxDistance());
-            this.sitChairEntityType = ChairEntityType.fromString(sitSection.getString(SIT_CHAIR_ENTITY_TYPE_PATH, this.sitChairEntityType().name()));
+            this.sitChairEntityType = ChairEntityType.fromString(sitSection.getString(
+                    SIT_CHAIR_ENTITY_TYPE_PATH,
+                    this.sitChairEntityType().name()
+            ));
             this.sitArrowResitInterval = sitSection.getInt(SIT_ARROW_RESIT_INTERVAL_PATH, this.sitArrowResitInterval());
             if (this.sitArrowResitInterval() > 1000) {
                 this.sitArrowResitInterval = 1000;
@@ -100,8 +103,14 @@ public final class ChairsConfig {
 
                 final var sitStairsSpecialEndSection = sitStairsSection.getConfigurationSection(SIT_STAIRS_SPECIAL_END_PATH);
                 if (sitStairsSpecialEndSection != null) {
-                    this.sitStairsSpecialEndSign = sitStairsSpecialEndSection.getBoolean(SIT_STAIRS_SPECIAL_END_SIGN_PATH, this.sitStairsSpecialEndSign());
-                    this.sitStairsSpecialEndCornerStairs = sitStairsSpecialEndSection.getBoolean(SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH, this.sitStairsSpecialEndCornerStairs());
+                    this.sitStairsSpecialEndSign = sitStairsSpecialEndSection.getBoolean(
+                            SIT_STAIRS_SPECIAL_END_SIGN_PATH,
+                            this.sitStairsSpecialEndSign()
+                    );
+                    this.sitStairsSpecialEndCornerStairs = sitStairsSpecialEndSection.getBoolean(
+                            SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH,
+                            this.sitStairsSpecialEndCornerStairs()
+                    );
                     this.sitStairsSpecialEndEnabled = this.sitStairsSpecialEndSign() || this.sitStairsSpecialEndCornerStairs();
                 }
 
