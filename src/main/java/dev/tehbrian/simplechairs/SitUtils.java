@@ -32,6 +32,71 @@ public class SitUtils {
         this.sitdata = plugin.getPlayerSitData();
     }
 
+    protected static final boolean isStairsSittable(final Stairs stairs) {
+        return (stairs.getHalf() == Half.BOTTOM) && (stairs.getShape() == Shape.STRAIGHT);
+    }
+
+    protected static boolean isStairsEndingSign(final BlockFace expectedFacing, final Block block) {
+        final BlockData blockdata = block.getBlockData();
+        if (blockdata instanceof WallSign) {
+            return expectedFacing == ((WallSign) blockdata).getFacing();
+        }
+        return false;
+    }
+
+    protected static boolean isStairsEndingCornerStairs(
+            final BlockFace expectedFacing,
+            final Stairs.Shape expectedShape,
+            final Block block
+    ) {
+        final BlockData blockdata = block.getBlockData();
+        if (blockdata instanceof Stairs) {
+            final Stairs stairs = (Stairs) blockdata;
+            return (stairs.getHalf() == Half.BOTTOM) && (stairs.getFacing() == expectedFacing) && (stairs.getShape() == expectedShape);
+        }
+        return false;
+    }
+
+    protected static BlockFace rotL(final BlockFace face) {
+        switch (face) {
+            case NORTH: {
+                return BlockFace.WEST;
+            }
+            case WEST: {
+                return BlockFace.SOUTH;
+            }
+            case SOUTH: {
+                return BlockFace.EAST;
+            }
+            case EAST: {
+                return BlockFace.NORTH;
+            }
+            default: {
+                throw new IllegalArgumentException(MessageFormat.format("Cant rotate blockface {0}", face));
+            }
+        }
+    }
+
+    protected static BlockFace rotR(final BlockFace face) {
+        switch (face) {
+            case NORTH: {
+                return BlockFace.EAST;
+            }
+            case EAST: {
+                return BlockFace.SOUTH;
+            }
+            case SOUTH: {
+                return BlockFace.WEST;
+            }
+            case WEST: {
+                return BlockFace.NORTH;
+            }
+            default: {
+                throw new IllegalArgumentException(MessageFormat.format("Cant rotate blockface {0}", face));
+            }
+        }
+    }
+
     public Entity spawnChairEntity(Location location) {
         switch (this.config.sitChairEntityType) {
             case ARROW: {
@@ -89,11 +154,7 @@ public class SitUtils {
         if (this.sitdata.isSitting(player)) {
             return false;
         }
-        if (this.sitdata.isBlockOccupied(block)) {
-            return false;
-        }
-
-        return true;
+        return !this.sitdata.isBlockOccupied(block);
     }
 
     public Location calculateSitLocation(final Player player, final Block block) {
@@ -185,31 +246,6 @@ public class SitUtils {
         return plocation;
     }
 
-    protected static final boolean isStairsSittable(final Stairs stairs) {
-        return (stairs.getHalf() == Half.BOTTOM) && (stairs.getShape() == Shape.STRAIGHT);
-    }
-
-    protected static boolean isStairsEndingSign(final BlockFace expectedFacing, final Block block) {
-        final BlockData blockdata = block.getBlockData();
-        if (blockdata instanceof WallSign) {
-            return expectedFacing == ((WallSign) blockdata).getFacing();
-        }
-        return false;
-    }
-
-    protected static boolean isStairsEndingCornerStairs(
-            final BlockFace expectedFacing,
-            final Stairs.Shape expectedShape,
-            final Block block
-    ) {
-        final BlockData blockdata = block.getBlockData();
-        if (blockdata instanceof Stairs) {
-            final Stairs stairs = (Stairs) blockdata;
-            return (stairs.getHalf() == Half.BOTTOM) && (stairs.getFacing() == expectedFacing) && (stairs.getShape() == expectedShape);
-        }
-        return false;
-    }
-
     protected int calculateStairsWidth(final BlockFace expectedFace, Block block, final BlockFace searchFace, final int limit) {
         for (int i = 0; i < limit; i++) {
             block = block.getRelative(searchFace);
@@ -223,46 +259,6 @@ public class SitUtils {
             }
         }
         return limit;
-    }
-
-    protected static BlockFace rotL(final BlockFace face) {
-        switch (face) {
-            case NORTH: {
-                return BlockFace.WEST;
-            }
-            case WEST: {
-                return BlockFace.SOUTH;
-            }
-            case SOUTH: {
-                return BlockFace.EAST;
-            }
-            case EAST: {
-                return BlockFace.NORTH;
-            }
-            default: {
-                throw new IllegalArgumentException(MessageFormat.format("Cant rotate blockface {0}", face));
-            }
-        }
-    }
-
-    protected static BlockFace rotR(final BlockFace face) {
-        switch (face) {
-            case NORTH: {
-                return BlockFace.EAST;
-            }
-            case EAST: {
-                return BlockFace.SOUTH;
-            }
-            case SOUTH: {
-                return BlockFace.WEST;
-            }
-            case WEST: {
-                return BlockFace.NORTH;
-            }
-            default: {
-                throw new IllegalArgumentException(MessageFormat.format("Cant rotate blockface {0}", face));
-            }
-        }
     }
 
 //    private boolean checkFrame(Block block, BlockFace face, Player player) {

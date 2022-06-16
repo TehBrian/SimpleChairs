@@ -17,19 +17,12 @@ import java.util.Set;
 
 public class ChairsConfig {
 
-    protected final SimpleChairs plugin;
-
-    public ChairsConfig(final SimpleChairs plugin) {
-        this.plugin = plugin;
-    }
-
     protected static final String sitConfigSectionPath = "sit-config";
     protected static final String sitConfigDisabledWorldsPath = "disabled-worlds";
     protected static final String sitConfigMaxDistancePath = "max-distance";
     protected static final String sitConfigRequireEmptyHandPath = "require-empty-hand";
     protected static final String sitConfigChairEntityType = "chair-entity-type";
     protected static final String sitConfigArrowResitInterval = "arrow-resit-interval";
-
     protected static final String sitConfigStairsSectionPath = "stairs";
     protected static final String sitConfigStairsEnabledPath = "enabled";
     protected static final String sitConfigStairsRotatePath = "rotate";
@@ -38,25 +31,19 @@ public class ChairsConfig {
     protected static final String sitConfigStairsSpecialEndSignPath = "sign";
     protected static final String sitConfigStairsSpecialEndCornerStairsPath = "corner-stairs";
     protected static final String sitConfigStairsHeight = "height";
-
     protected static final String sitConfigAdditionalChairsPath = "additional-blocks";
-
     protected static final String sitEffectsSectionPath = "sit-effects";
-
     protected static final String sitEffectsHealingSectionPath = "healing";
     protected static final String sitEffectsHealingEnabledPath = "enabled";
     protected static final String sitEffectsHealingMaxPercentPath = "max-percent";
     protected static final String sitEffectsHealingIntervalPath = "interval";
     protected static final String sitEffectsHealingAmountPath = "amount";
-
     protected static final String sitEffectsItempickupPath = "itempickup";
     protected static final String sitEffectsItempickupEnabledPath = "enabled";
-
     protected static final String sitRestrictionsSectionPath = "sit-restrictions";
     protected static final String sitRestricitonsCommandsSectionPath = "commands";
     protected static final String sitRestrictionsCommandsBlockAllPath = "all";
     protected static final String sitRestrictionsCommandsBlockListPath = "list";
-
     protected static final String msgSectionPath = "messages";
     protected static final String msgEnabledPath = "enabled";
     protected static final String msgSitSectionPath = "sit";
@@ -65,14 +52,14 @@ public class ChairsConfig {
     protected static final String msgSitEnabledPath = "enabled";
     protected static final String msgSitDisabledPath = "disabled";
     protected static final String msgSitCommandRestrictedPath = "commandrestricted";
-
-
     public final Set<String> sitDisabledWorlds = new HashSet<>();
+    public final Map<Material, Double> additionalChairs = new EnumMap<>(Material.class);
+    public final Set<String> restrictionsDisabledCommands = new HashSet<>();
+    protected final SimpleChairs plugin;
     public boolean sitRequireEmptyHand = false;
     public double sitMaxDistance = 2;
     public ChairEntityType sitChairEntityType = ChairEntityType.ARROW;
     public int sitArrowResitInterval = 1000;
-
     public boolean stairsEnabled = true;
     public boolean stairsAutoRotate = true;
     public int stairsMaxWidth = 16;
@@ -80,9 +67,6 @@ public class ChairsConfig {
     public boolean stairsSpecialEndSign = true;
     public boolean stairsSpecialEndCornerStairs = true;
     public double stairsHeight = 0.5D;
-
-    public final Map<Material, Double> additionalChairs = new EnumMap<>(Material.class);
-
     public boolean effectsHealEnabled = false;
     public int effectsHealMaxHealth = 100;
     public int effectsHealInterval = 20;
@@ -90,14 +74,15 @@ public class ChairsConfig {
     public boolean effectsItemPickupEnabled = false;
 
     public boolean restrictionsDisableAllCommands = false;
-    public final Set<String> restrictionsDisabledCommands = new HashSet<>();
-
     public boolean msgEnabled = true;
     public String msgSitEnter = "&7You are now sitting.";
     public String msgSitLeave = "&7You are no longer sitting.";
     public String msgSitDisabled = "&7You have disabled chairs for yourself!";
     public String msgSitEnabled = "&7You have enabled chairs for yourself!";
     public String msgSitCommandRestricted = "&7You can't issue this command while sitting";
+    public ChairsConfig(final SimpleChairs plugin) {
+        this.plugin = plugin;
+    }
 
     public void reloadConfig() {
         final File file = new File(this.plugin.getDataFolder(), "config.yml");
@@ -286,7 +271,7 @@ public class ChairsConfig {
         }
     }
 
-    public static enum ChairEntityType {
+    public enum ChairEntityType {
         ARROW,
         ARMOR_STAND;
 

@@ -18,6 +18,10 @@ public class PlayerChairSitEvent extends PlayerEvent implements Cancellable {
         this.sitLocation = sitLocation;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
     public Location getSitLocation() {
         return this.sitLocation.clone();
     }
@@ -28,10 +32,6 @@ public class PlayerChairSitEvent extends PlayerEvent implements Cancellable {
 
     @Override
     public HandlerList getHandlers() {
-        return handlers;
-    }
-
-    public static HandlerList getHandlerList() {
         return handlers;
     }
 
