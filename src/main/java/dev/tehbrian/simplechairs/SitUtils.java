@@ -225,11 +225,12 @@ public final class SitUtils {
         return pLocation;
     }
 
-    private int calculateStairsWidth(final BlockFace expectedFace, Block block, final BlockFace searchFace, final int limit) {
+    private int calculateStairsWidth(final BlockFace expectedFace, final Block startBlock, final BlockFace searchFace, final int limit) {
+        Block currentBlock = startBlock;
         for (int i = 0; i < limit; i++) {
-            block = block.getRelative(searchFace);
-            final BlockData blockdata = block.getBlockData();
-            if (!(blockdata instanceof final Stairs stairs)) {
+            currentBlock = currentBlock.getRelative(searchFace);
+            final BlockData blockData = currentBlock.getBlockData();
+            if (!(blockData instanceof final Stairs stairs)) {
                 return i;
             }
             if (!isStairsSittable(stairs) || (stairs.getFacing() != expectedFace)) {
