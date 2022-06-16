@@ -71,7 +71,7 @@ public final class SimpleChairs extends JavaPlugin {
 
         this.reloadConfig();
 
-        this.getServer().getPluginManager().registerEvents(new InvalidPositionLoginListener(), this);
+        this.getServer().getPluginManager().registerEvents(new InvalidPositionLoginListener(this), this);
         this.getServer().getPluginManager().registerEvents(new TrySitEventListener(this), this);
         this.getServer().getPluginManager().registerEvents(new TryUnsitEventListener(this), this);
 
