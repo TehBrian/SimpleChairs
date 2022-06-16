@@ -62,13 +62,13 @@ public final class PlayerSitData {
     }
 
     public boolean sitPlayer(final Player player, final Block blockToOccupy, final Location sitLocation) {
-        final PlayerChairSitEvent playerSitLocation = new PlayerChairSitEvent(player, sitLocation.clone());
-        Bukkit.getPluginManager().callEvent(playerSitLocation);
-        if (playerSitLocation.isCancelled()) {
+        final PlayerChairSitEvent playerSitEvent = new PlayerChairSitEvent(player, sitLocation.clone());
+        Bukkit.getPluginManager().callEvent(playerSitEvent);
+        if (playerSitEvent.isCancelled()) {
             return false;
         }
 
-        final Location postEventSitLoc = playerSitLocation.getSitLocation().clone();
+        final Location postEventSitLoc = playerSitEvent.getSitLocation().clone();
 
         if (this.plugin.getChairsConfig().msgEnabled()) {
             player.sendMessage(LegacyFormatting.on(this.plugin.getChairsConfig().msgSitEnter()));
