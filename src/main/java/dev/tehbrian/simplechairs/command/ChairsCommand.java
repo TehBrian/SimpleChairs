@@ -40,9 +40,9 @@ public final class ChairsCommand implements CommandExecutor {
         if (lowercaseArg.equals("reload")) {
             if (sender.hasPermission("chairs.reload")) {
                 this.plugin.reloadConfig();
-                sender.sendMessage(LegacyFormatting.on("&cChairs configuration reloaded."));
+                sender.sendMessage(LegacyFormatting.on("&aChairs configuration reloaded."));
             } else {
-                sender.sendMessage(LegacyFormatting.on("&cYou do not have permission to do this!"));
+                sender.sendMessage(LegacyFormatting.on("&cYou don't have permission to do this."));
             }
             return true;
         }
