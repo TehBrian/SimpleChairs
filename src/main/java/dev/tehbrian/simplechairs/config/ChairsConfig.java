@@ -25,7 +25,7 @@ public final class ChairsConfig {
     private static final String SIT_ARROW_RESIT_INTERVAL_PATH = "arrow-resit-interval";
     private static final String SIT_STAIRS_SECTION_PATH = "stairs";
     private static final String SIT_STAIRS_ENABLED_PATH = "enabled";
-    private static final String SIT_STAIRS_ROTATE_PATH = "rotate";
+    private static final String SIT_STAIRS_ROTATE_PLAYER_PATH = "rotate-player";
     private static final String SIT_STAIRS_MAX_WIDTH_PATH = "max-width";
     private static final String SIT_STAIRS_SPECIAL_END_PATH = "special-end";
     private static final String SIT_STAIRS_SPECIAL_END_SIGN_PATH = "sign";
@@ -50,7 +50,7 @@ public final class ChairsConfig {
     private ChairEntityType sitChairEntityType = ChairEntityType.ARROW;
     private int sitArrowResitInterval = 1000;
     private boolean sitStairsEnabled = true;
-    private boolean sitStairsAutoRotate = true;
+    private boolean sitStairsRotatePlayer = true;
     private int sitStairsMaxWidth = 16;
     private boolean sitStairsSpecialEndEnabled = false;
     private boolean sitStairsSpecialEndSign = false;
@@ -98,7 +98,7 @@ public final class ChairsConfig {
             final var sitStairsSection = sitSection.getConfigurationSection(SIT_STAIRS_SECTION_PATH);
             if (sitStairsSection != null) {
                 this.sitStairsEnabled = sitStairsSection.getBoolean(SIT_STAIRS_ENABLED_PATH, this.sitStairsEnabled());
-                this.sitStairsAutoRotate = sitStairsSection.getBoolean(SIT_STAIRS_ROTATE_PATH, this.sitStairsAutoRotate());
+                this.sitStairsRotatePlayer = sitStairsSection.getBoolean(SIT_STAIRS_ROTATE_PLAYER_PATH, this.sitStairsRotatePlayer());
                 this.sitStairsMaxWidth = sitStairsSection.getInt(SIT_STAIRS_MAX_WIDTH_PATH, this.sitStairsMaxWidth());
 
                 final var sitStairsSpecialEndSection = sitStairsSection.getConfigurationSection(SIT_STAIRS_SPECIAL_END_PATH);
@@ -156,7 +156,7 @@ public final class ChairsConfig {
 
         final ConfigurationSection sitStairsSection = sitSection.createSection(SIT_STAIRS_SECTION_PATH);
         sitStairsSection.set(SIT_STAIRS_ENABLED_PATH, this.sitStairsEnabled());
-        sitStairsSection.set(SIT_STAIRS_ROTATE_PATH, this.sitStairsAutoRotate());
+        sitStairsSection.set(SIT_STAIRS_ROTATE_PLAYER_PATH, this.sitStairsRotatePlayer());
         sitStairsSection.set(SIT_STAIRS_MAX_WIDTH_PATH, this.sitStairsMaxWidth());
 
         final ConfigurationSection sitStairsSpecialEndSection = sitStairsSection.createSection(SIT_STAIRS_SPECIAL_END_PATH);
@@ -214,8 +214,8 @@ public final class ChairsConfig {
         return this.sitStairsEnabled;
     }
 
-    public boolean sitStairsAutoRotate() {
-        return this.sitStairsAutoRotate;
+    public boolean sitStairsRotatePlayer() {
+        return this.sitStairsRotatePlayer;
     }
 
     public int sitStairsMaxWidth() {
