@@ -17,18 +17,6 @@
 #     height: Set sitting height on stairs
 #   additional-blocks: Set additional blocks you want to be able to sit down on and sitting height.
 #     COBBLESTONE_SLAB: 0.7
-# sit-effects:
-#   healing:
-#     enabled: If set to true heals player while sitting
-#     max-percent: Max percent to which health can be recovered
-#     interval: Healing interval in ticks
-#     amount: Amount of health recovered
-#   itempickup:
-#     enabled: If set to true, items will be picked up while sitting
-# sit-restrictions:
-#   commands:
-#     all: If set to true, restricts using all commands while sitting
-#     list: List of commands which player can't use while sitting
 #
 # messages:
 #  enabled: true #enables user messages
@@ -37,4 +25,3 @@
 #    leave: "&7You are no longer sitting."
 #    enabled: "&7You have enabled chairs for yourself!"
 #    disabled: "&7You have disabled chairs for yourself!"
-#    commandrestricted: "&7You can''t issue this command while sitting"
