@@ -1,14 +1,14 @@
-package dev.tehbrian.simplechairs.commands;
+package dev.tehbrian.simplechairs.command;
 
-import dev.tehbrian.simplechairs.core.Chairs;
+import dev.tehbrian.simplechairs.Chairs;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import dev.tehbrian.simplechairs.core.ChairsConfig;
-import dev.tehbrian.simplechairs.core.PlayerSitData;
+import dev.tehbrian.simplechairs.config.ChairsConfig;
+import dev.tehbrian.simplechairs.PlayerSitData;
 
 public class ChairsCommand implements CommandExecutor {
 

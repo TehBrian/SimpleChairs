@@ -1,4 +1,4 @@
-package dev.tehbrian.simplechairs.core;
+package dev.tehbrian.simplechairs.config;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import dev.tehbrian.simplechairs.Chairs;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,7 +19,7 @@ public class ChairsConfig {
 
 	protected final Chairs plugin;
 
-	protected ChairsConfig(Chairs plugin) {
+	public ChairsConfig(Chairs plugin) {
 		this.plugin = plugin;
 	}
 
