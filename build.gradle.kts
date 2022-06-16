@@ -5,6 +5,7 @@ plugins {
 
 group = "io.github.Shevchik"
 version = "7.0"
+description = "Allows players to sit on chairs, such as stairs or slabs."
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -29,7 +30,7 @@ dependencies {
 
 tasks {
     processResources {
-        expand("version" to project.version)
+        expand("version" to project.version, "description" to project.description)
     }
 
     shadowJar {
