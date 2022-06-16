@@ -1,4 +1,4 @@
-package dev.tehbrian.simplechairs.listeners;
+package dev.tehbrian.simplechairs.listener;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -1,5 +1,5 @@
 name: Chairs
-main: dev.tehbrian.simplechairs.core.Chairs
+main: dev.tehbrian.simplechairs.Chairs
 api-version: 1.18
 version: ${version}
 

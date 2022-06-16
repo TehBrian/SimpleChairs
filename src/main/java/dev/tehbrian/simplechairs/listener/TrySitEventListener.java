@@ -1,6 +1,6 @@
-package dev.tehbrian.simplechairs.listeners;
+package dev.tehbrian.simplechairs.listener;
 
-import dev.tehbrian.simplechairs.core.Chairs;
+import dev.tehbrian.simplechairs.Chairs;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;

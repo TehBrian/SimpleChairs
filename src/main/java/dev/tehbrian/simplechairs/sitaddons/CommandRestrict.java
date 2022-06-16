@@ -1,6 +1,6 @@
 package dev.tehbrian.simplechairs.sitaddons;
 
-import dev.tehbrian.simplechairs.core.Chairs;
+import dev.tehbrian.simplechairs.Chairs;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,8 +8,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
-import dev.tehbrian.simplechairs.core.ChairsConfig;
-import dev.tehbrian.simplechairs.core.PlayerSitData;
+import dev.tehbrian.simplechairs.config.ChairsConfig;
+import dev.tehbrian.simplechairs.PlayerSitData;
 
 public class CommandRestrict implements Listener {
 

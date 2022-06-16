@@ -1,4 +1,4 @@
-package dev.tehbrian.simplechairs.core;
+package dev.tehbrian.simplechairs;
 
 import java.util.HashMap;
 import java.util.Map;

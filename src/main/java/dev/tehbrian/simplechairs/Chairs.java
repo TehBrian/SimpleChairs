@@ -1,4 +1,4 @@
-package dev.tehbrian.simplechairs.core;
+package dev.tehbrian.simplechairs;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,15 +6,16 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 
+import dev.tehbrian.simplechairs.config.ChairsConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.spigotmc.event.entity.EntityDismountEvent;
 
-import dev.tehbrian.simplechairs.commands.ChairsCommand;
-import dev.tehbrian.simplechairs.listeners.NANLoginListener;
-import dev.tehbrian.simplechairs.listeners.TrySitEventListener;
-import dev.tehbrian.simplechairs.listeners.TryUnsitEventListener;
+import dev.tehbrian.simplechairs.command.ChairsCommand;
+import dev.tehbrian.simplechairs.listener.NANLoginListener;
+import dev.tehbrian.simplechairs.listener.TrySitEventListener;
+import dev.tehbrian.simplechairs.listener.TryUnsitEventListener;
 import dev.tehbrian.simplechairs.sitaddons.ChairEffects;
 import dev.tehbrian.simplechairs.sitaddons.CommandRestrict;
 

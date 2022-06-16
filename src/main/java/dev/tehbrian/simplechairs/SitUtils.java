@@ -1,7 +1,8 @@
-package dev.tehbrian.simplechairs.core;
+package dev.tehbrian.simplechairs;
 
 import java.text.MessageFormat;
 
+import dev.tehbrian.simplechairs.config.ChairsConfig;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
