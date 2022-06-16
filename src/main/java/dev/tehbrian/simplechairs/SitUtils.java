@@ -1,7 +1,5 @@
 package dev.tehbrian.simplechairs;
 
-import java.text.MessageFormat;
-
 import dev.tehbrian.simplechairs.config.ChairsConfig;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,6 +17,8 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+
+import java.text.MessageFormat;
 
 public class SitUtils {
 
@@ -44,12 +44,12 @@ public class SitUtils {
             case ARMOR_STAND: {
                 location = location.clone().add(0, 0.4, 0);
                 return location.getWorld().spawn(
-                    location, ArmorStand.class, armorstand -> {
-                        armorstand.setGravity(false);
-                        armorstand.setInvulnerable(true);
-                        armorstand.setMarker(true);
-                        armorstand.setVisible(false);
-                    }
+                        location, ArmorStand.class, armorstand -> {
+                            armorstand.setGravity(false);
+                            armorstand.setInvulnerable(true);
+                            armorstand.setMarker(true);
+                            armorstand.setVisible(false);
+                        }
                 );
             }
             default: {
@@ -74,7 +74,9 @@ public class SitUtils {
         if (!world.equals(block.getWorld())) {
             return false;
         }
-        if ((this.config.sitMaxDistance > 0) && (player.getLocation().distance(block.getLocation().add(0.5, 0, 0.5)) > this.config.sitMaxDistance)) {
+        if ((this.config.sitMaxDistance > 0) && (player.getLocation().distance(block
+                .getLocation()
+                .add(0.5, 0, 0.5)) > this.config.sitMaxDistance)) {
             return false;
         }
         if (this.config.sitRequireEmptyHand && (player.getInventory().getItemInMainHand().getType() != Material.AIR)) {
@@ -147,19 +149,19 @@ public class SitUtils {
                     final Block blockRight = block.getRelative(facingRight, widthRight + 1);
                     if (
                             this.config.stairsSpecialEndSign &&
-                        isStairsEndingSign(facingLeft, blockLeft) &&
-                        isStairsEndingSign(facingRight, blockRight)
+                                    isStairsEndingSign(facingLeft, blockLeft) &&
+                                    isStairsEndingSign(facingRight, blockRight)
                     ) {
                         specialEndCheckSuccess = true;
                     }
                     if (
                             this.config.stairsSpecialEndCornerStairs && (
-                            isStairsEndingCornerStairs(facingLeft, Stairs.Shape.INNER_RIGHT, blockLeft) ||
-                            isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_LEFT, blockLeft)
-                        ) && (
-                            isStairsEndingCornerStairs(facingRight, Stairs.Shape.INNER_LEFT, blockRight) ||
-                            isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_RIGHT, blockRight)
-                        )
+                                    isStairsEndingCornerStairs(facingLeft, Stairs.Shape.INNER_RIGHT, blockLeft) ||
+                                            isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_LEFT, blockLeft)
+                            ) && (
+                                    isStairsEndingCornerStairs(facingRight, Stairs.Shape.INNER_LEFT, blockRight) ||
+                                            isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_RIGHT, blockRight)
+                            )
                     ) {
                         specialEndCheckSuccess = true;
                     }
@@ -195,7 +197,11 @@ public class SitUtils {
         return false;
     }
 
-    protected static boolean isStairsEndingCornerStairs(final BlockFace expectedFacing, final Stairs.Shape expectedShape, final Block block) {
+    protected static boolean isStairsEndingCornerStairs(
+            final BlockFace expectedFacing,
+            final Stairs.Shape expectedShape,
+            final Block block
+    ) {
         final BlockData blockdata = block.getBlockData();
         if (blockdata instanceof Stairs) {
             final Stairs stairs = (Stairs) blockdata;
