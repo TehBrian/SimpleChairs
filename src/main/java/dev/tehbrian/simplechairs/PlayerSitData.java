@@ -3,7 +3,6 @@ package dev.tehbrian.simplechairs;
 import dev.tehbrian.simplechairs.api.PlayerChairSitEvent;
 import dev.tehbrian.simplechairs.api.PlayerChairUnsitEvent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -29,7 +28,7 @@ public final class PlayerSitData {
     }
 
     public void disableSitting(final Player player) {
-        player.getPersistentDataContainer().set(this.sitDisabledKey, PersistentDataType.BYTE, Byte.valueOf((byte) 1));
+        player.getPersistentDataContainer().set(this.sitDisabledKey, PersistentDataType.BYTE, (byte) 1);
     }
 
     public void enableSitting(final Player player) {
@@ -39,8 +38,7 @@ public final class PlayerSitData {
     public boolean isSittingDisabled(final Player player) {
         return player
                 .getPersistentDataContainer()
-                .getOrDefault(this.sitDisabledKey, PersistentDataType.BYTE, Byte.valueOf((byte) 0))
-                .byteValue() != 0;
+                .getOrDefault(this.sitDisabledKey, PersistentDataType.BYTE, (byte) 0) != 0;
     }
 
     public boolean isSitting(final Player player) {
@@ -57,36 +55,36 @@ public final class PlayerSitData {
     }
 
     public boolean sitPlayer(final Player player, final Block blocktooccupy, Location sitlocation) {
-        final PlayerChairSitEvent playersitevent = new PlayerChairSitEvent(player, sitlocation.clone());
-        Bukkit.getPluginManager().callEvent(playersitevent);
-        if (playersitevent.isCancelled()) {
+        final PlayerChairSitEvent playerSitLocation = new PlayerChairSitEvent(player, sitlocation.clone());
+        Bukkit.getPluginManager().callEvent(playerSitLocation);
+        if (playerSitLocation.isCancelled()) {
             return false;
         }
-        sitlocation = playersitevent.getSitLocation().clone();
+        sitlocation = playerSitLocation.getSitLocation().clone();
         if (this.plugin.getChairsConfig().msgEnabled()) {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.getChairsConfig().msgSitEnter()));
+            player.sendMessage(LegacyFormatting.on(this.plugin.getChairsConfig().msgSitEnter()));
         }
-        final Entity chairentity = this.plugin.getSitUtils().spawnChairEntity(sitlocation);
+        final Entity chairEntity = this.plugin.getSitUtils().spawnChairEntity(sitlocation);
         SitData sitData = null;
         switch (this.plugin.getChairsConfig().sitChairEntityType()) {
             case ARROW -> {
-                final int arrowresitinterval = this.plugin.getChairsConfig().sitArrowResitInterval();
+                final int arrowResitInterval = this.plugin.getChairsConfig().sitArrowResitInterval();
                 sitData = new SitData(
-                        chairentity, player.getLocation(), blocktooccupy,
+                        chairEntity, player.getLocation(), blocktooccupy,
                         Bukkit
                                 .getScheduler()
                                 .scheduleSyncRepeatingTask(
                                         this.plugin,
                                         () -> this.resitPlayer(player),
-                                        arrowresitinterval,
-                                        arrowresitinterval
+                                        arrowResitInterval,
+                                        arrowResitInterval
                                 )
                 );
             }
-            case ARMOR_STAND -> sitData = new SitData(chairentity, player.getLocation(), blocktooccupy, -1);
+            case ARMOR_STAND -> sitData = new SitData(chairEntity, player.getLocation(), blocktooccupy, -1);
         }
         player.teleport(sitlocation);
-        chairentity.addPassenger(player);
+        chairEntity.addPassenger(player);
         this.sittingPlayers.put(player, sitData);
         this.occupiedBlocks.put(blocktooccupy, player);
         sitData.sitting = true;
@@ -96,11 +94,11 @@ public final class PlayerSitData {
     public void resitPlayer(final Player player) {
         final SitData sitData = this.sittingPlayers.get(player);
         sitData.sitting = false;
-        final Entity oldentity = sitData.entity;
-        final Entity chairentity = this.plugin.getSitUtils().spawnChairEntity(oldentity.getLocation());
-        chairentity.addPassenger(player);
-        sitData.entity = chairentity;
-        oldentity.remove();
+        final Entity oldEntity = sitData.entity;
+        final Entity chairEntity = this.plugin.getSitUtils().spawnChairEntity(oldEntity.getLocation());
+        chairEntity.addPassenger(player);
+        sitData.entity = chairEntity;
+        oldEntity.remove();
         sitData.sitting = true;
     }
 
@@ -114,9 +112,9 @@ public final class PlayerSitData {
 
     private boolean unsitPlayer(final Player player, final boolean canCancel, final boolean teleport) {
         final SitData sitData = this.sittingPlayers.get(player);
-        final PlayerChairUnsitEvent playerunsitevent = new PlayerChairUnsitEvent(player, sitData.teleportBackLocation.clone(), canCancel);
-        Bukkit.getPluginManager().callEvent(playerunsitevent);
-        if (playerunsitevent.isCancelled() && playerunsitevent.canBeCancelled()) {
+        final PlayerChairUnsitEvent playerUnsitEvent = new PlayerChairUnsitEvent(player, sitData.teleportBackLocation.clone(), canCancel);
+        Bukkit.getPluginManager().callEvent(playerUnsitEvent);
+        if (playerUnsitEvent.isCancelled() && playerUnsitEvent.canBeCancelled()) {
             return false;
         }
         sitData.sitting = false;
@@ -129,10 +127,10 @@ public final class PlayerSitData {
         }
         this.sittingPlayers.remove(player);
         if (teleport) {
-            player.teleport(playerunsitevent.getTeleportLocation().clone());
+            player.teleport(playerUnsitEvent.getTeleportLocation().clone());
         }
         if (this.plugin.getChairsConfig().msgEnabled()) {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.getChairsConfig().msgSitLeave()));
+            player.sendMessage(LegacyFormatting.on(this.plugin.getChairsConfig().msgSitLeave()));
         }
         return true;
     }
