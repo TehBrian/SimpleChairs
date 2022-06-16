@@ -92,7 +92,7 @@ public final class SitUtils {
         }
     }
 
-    public Entity spawnChairEntity(Location location) {
+    public Entity spawnChairEntity(final Location location) {
         switch (this.config.sitChairEntityType()) {
             case ARROW -> {
                 final Arrow arrow = location.getWorld().spawnArrow(location, new Vector(0, 1, 0), 0, 0);
@@ -102,13 +102,13 @@ public final class SitUtils {
                 return arrow;
             }
             case ARMOR_STAND -> {
-                location = location.clone().add(0, 0.4, 0);
-                return location.getWorld().spawn(
-                        location, ArmorStand.class, armorstand -> {
-                            armorstand.setGravity(false);
-                            armorstand.setInvulnerable(true);
-                            armorstand.setMarker(true);
-                            armorstand.setVisible(false);
+                final Location adjustedLoc = location.clone().add(0, 0.4, 0);
+                return adjustedLoc.getWorld().spawn(
+                        adjustedLoc, ArmorStand.class, armorStand -> {
+                            armorStand.setGravity(false);
+                            armorStand.setInvulnerable(true);
+                            armorStand.setMarker(true);
+                            armorStand.setVisible(false);
                         }
                 );
             }
