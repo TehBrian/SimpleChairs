@@ -35,12 +35,8 @@ public final class ChairsAPI {
         getPlayerSitData().unsitPlayerForce(player, true);
     }
 
-    public static void disableSitting(final Player player) {
-        getPlayerSitData().setSittingDisabled(player, true);
-    }
-
-    public static void enableSitting(final Player player) {
-        getPlayerSitData().setSittingDisabled(player, false);
+    public static void setSittingDisabled(final Player player, final boolean bool) {
+        getPlayerSitData().setSittingDisabled(player, bool);
     }
 
     public static boolean isSittingDisabled(final Player player) {
