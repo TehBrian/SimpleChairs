@@ -46,15 +46,15 @@ public final class ChairsConfig {
     private final Set<String> sitDisabledWorlds = new HashSet<>();
     private final Map<Material, Double> sitAdditionalBlocks = new EnumMap<>(Material.class);
     private boolean sitRequireEmptyHand = false;
-    private double sitMaxDistance = 2;
+    private double sitMaxDistance = 3;
     private ChairEntityType sitChairEntityType = ChairEntityType.ARROW;
     private int sitArrowResitInterval = 1000;
     private boolean sitStairsEnabled = true;
     private boolean sitStairsAutoRotate = true;
     private int sitStairsMaxWidth = 16;
     private boolean sitStairsSpecialEndEnabled = false;
-    private boolean sitStairsSpecialEndSign = true;
-    private boolean sitStairsSpecialEndCornerStairs = true;
+    private boolean sitStairsSpecialEndSign = false;
+    private boolean sitStairsSpecialEndCornerStairs = false;
     private double sitStairsHeight = 0.5D;
 
     private boolean msgEnabled = true;
