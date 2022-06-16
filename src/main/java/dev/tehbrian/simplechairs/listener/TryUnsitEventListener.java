@@ -68,8 +68,7 @@ public class TryUnsitEventListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onExitVehicle(final EntityDismountEvent e) {
-        if (e.getEntity() instanceof Player) {
-            final Player player = (Player) e.getEntity();
+        if (e.getEntity() instanceof final Player player) {
             if (this.plugin.getPlayerSitData().isSitting(player)) {
                 final Location preDismountLocation = player.getLocation();
                 if (!this.plugin.getPlayerSitData().unsitPlayer(player)) {

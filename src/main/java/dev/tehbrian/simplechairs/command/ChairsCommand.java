@@ -34,8 +34,7 @@ public class ChairsCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.RED + "You do not have permission to do this!");
             }
         }
-        if (sender instanceof Player) {
-            final Player player = (Player) sender;
+        if (sender instanceof final Player player) {
             if (args[0].equalsIgnoreCase("off")) {
                 this.sitData.disableSitting(player);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.config.msgSitDisabled));
