@@ -57,6 +57,8 @@ public final class ChairsCommand implements CommandExecutor {
                     this.sitData.setSittingDisabled(player, true);
                     player.sendMessage(LegacyFormatting.on(this.config.msgSitDisabled()));
                 }
+                default -> {
+                }
             }
         }
 
