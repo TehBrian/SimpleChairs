@@ -158,13 +158,13 @@ public final class SitUtils {
         float yaw = player.getLocation().getYaw();
         Double sitHeight = null;
 
-        if ((blockdata instanceof final Stairs stairs) && this.config.stairsEnabled()) {
-            sitHeight = this.config.stairsHeight();
+        if ((blockdata instanceof final Stairs stairs) && this.config.sitStairsEnabled()) {
+            sitHeight = this.config.sitStairsHeight();
             if (!isStairsSittable(stairs)) {
                 return null;
             }
             final BlockFace ascendingFacing = stairs.getFacing();
-            if (this.config.stairsAutoRotate()) {
+            if (this.config.sitStairsAutoRotate()) {
                 switch (ascendingFacing.getOppositeFace()) {
                     case NORTH -> yaw = 180;
                     case EAST -> yaw = -90;
@@ -174,27 +174,27 @@ public final class SitUtils {
                     }
                 }
             }
-            if (this.config.stairsMaxWidth() > 0) {
+            if (this.config.sitStairsMaxWidth() > 0) {
                 final BlockFace facingLeft = rotL(ascendingFacing);
                 final BlockFace facingRight = rotR(ascendingFacing);
-                final int widthLeft = this.calculateStairsWidth(ascendingFacing, block, facingLeft, this.config.stairsMaxWidth());
-                final int widthRight = this.calculateStairsWidth(ascendingFacing, block, facingRight, this.config.stairsMaxWidth());
-                if ((widthLeft + widthRight + 1) > this.config.stairsMaxWidth()) {
+                final int widthLeft = this.calculateStairsWidth(ascendingFacing, block, facingLeft, this.config.sitStairsMaxWidth());
+                final int widthRight = this.calculateStairsWidth(ascendingFacing, block, facingRight, this.config.sitStairsMaxWidth());
+                if ((widthLeft + widthRight + 1) > this.config.sitStairsMaxWidth()) {
                     return null;
                 }
-                if (this.config.stairsSpecialEndEnabled()) {
+                if (this.config.sitStairsSpecialEndEnabled()) {
                     boolean specialEndCheckSuccess = false;
                     final Block blockLeft = block.getRelative(facingLeft, widthLeft + 1);
                     final Block blockRight = block.getRelative(facingRight, widthRight + 1);
                     if (
-                            this.config.stairsSpecialEndSign() &&
+                            this.config.sitStairsSpecialEndSign() &&
                                     isStairsEndingSign(facingLeft, blockLeft) &&
                                     isStairsEndingSign(facingRight, blockRight)
                     ) {
                         specialEndCheckSuccess = true;
                     }
                     if (
-                            this.config.stairsSpecialEndCornerStairs() && (
+                            this.config.sitStairsSpecialEndCornerStairs() && (
                                     isStairsEndingCornerStairs(facingLeft, Stairs.Shape.INNER_RIGHT, blockLeft) ||
                                             isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_LEFT, blockLeft)
                             ) && (

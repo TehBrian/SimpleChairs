@@ -49,13 +49,13 @@ public final class ChairsConfig {
     private double sitMaxDistance = 2;
     private ChairEntityType sitChairEntityType = ChairEntityType.ARROW;
     private int sitArrowResitInterval = 1000;
-    private boolean stairsEnabled = true;
-    private boolean stairsAutoRotate = true;
-    private int stairsMaxWidth = 16;
-    private boolean stairsSpecialEndEnabled = false;
-    private boolean stairsSpecialEndSign = true;
-    private boolean stairsSpecialEndCornerStairs = true;
-    private double stairsHeight = 0.5D;
+    private boolean sitStairsEnabled = true;
+    private boolean sitStairsAutoRotate = true;
+    private int sitStairsMaxWidth = 16;
+    private boolean sitStairsSpecialEndEnabled = false;
+    private boolean sitStairsSpecialEndSign = true;
+    private boolean sitStairsSpecialEndCornerStairs = true;
+    private double sitStairsHeight = 0.5D;
 
     private boolean msgEnabled = true;
     private String msgSitEnter = "&7You are now sitting.";
@@ -90,23 +90,23 @@ public final class ChairsConfig {
 
                 final ConfigurationSection sitConfigStairsSection = sitConfigSection.getConfigurationSection(SIT_STAIRS_SECTION_PATH);
                 if (sitConfigStairsSection != null) {
-                    this.stairsEnabled = sitConfigStairsSection.getBoolean(SIT_STAIRS_ENABLED_PATH, this.stairsEnabled());
-                    this.stairsAutoRotate = sitConfigStairsSection.getBoolean(SIT_STAIRS_ROTATE_PATH, this.stairsAutoRotate());
-                    this.stairsMaxWidth = sitConfigStairsSection.getInt(SIT_STAIRS_MAX_WIDTH_PATH, this.stairsMaxWidth());
+                    this.sitStairsEnabled = sitConfigStairsSection.getBoolean(SIT_STAIRS_ENABLED_PATH, this.sitStairsEnabled());
+                    this.sitStairsAutoRotate = sitConfigStairsSection.getBoolean(SIT_STAIRS_ROTATE_PATH, this.sitStairsAutoRotate());
+                    this.sitStairsMaxWidth = sitConfigStairsSection.getInt(SIT_STAIRS_MAX_WIDTH_PATH, this.sitStairsMaxWidth());
                     final ConfigurationSection sitConfigStairsSpecialEndSection = sitConfigStairsSection.getConfigurationSection(
                             SIT_STAIRS_SPECIAL_END_PATH);
                     if (sitConfigStairsSpecialEndSection != null) {
-                        this.stairsSpecialEndSign = sitConfigStairsSpecialEndSection.getBoolean(
+                        this.sitStairsSpecialEndSign = sitConfigStairsSpecialEndSection.getBoolean(
                                 SIT_STAIRS_SPECIAL_END_SIGN_PATH,
-                                this.stairsSpecialEndSign()
+                                this.sitStairsSpecialEndSign()
                         );
-                        this.stairsSpecialEndCornerStairs = sitConfigStairsSpecialEndSection.getBoolean(
+                        this.sitStairsSpecialEndCornerStairs = sitConfigStairsSpecialEndSection.getBoolean(
                                 SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH,
-                                this.stairsSpecialEndCornerStairs()
+                                this.sitStairsSpecialEndCornerStairs()
                         );
-                        this.stairsSpecialEndEnabled = this.stairsSpecialEndSign() || this.stairsSpecialEndCornerStairs();
+                        this.sitStairsSpecialEndEnabled = this.sitStairsSpecialEndSign() || this.sitStairsSpecialEndCornerStairs();
                     }
-                    this.stairsHeight = sitConfigStairsSection.getDouble(SIT_STAIRS_HEIGHT, this.stairsHeight());
+                    this.sitStairsHeight = sitConfigStairsSection.getDouble(SIT_STAIRS_HEIGHT, this.sitStairsHeight());
                 }
 
                 final ConfigurationSection sitConfigAdditionalBlocksSection = sitConfigSection.getConfigurationSection(
@@ -147,16 +147,16 @@ public final class ChairsConfig {
 
                 final ConfigurationSection sitConfigStairsSection = sitConfigSection.createSection(SIT_STAIRS_SECTION_PATH);
                 {
-                    sitConfigStairsSection.set(SIT_STAIRS_ENABLED_PATH, this.stairsEnabled());
-                    sitConfigStairsSection.set(SIT_STAIRS_ROTATE_PATH, this.stairsAutoRotate());
-                    sitConfigStairsSection.set(SIT_STAIRS_MAX_WIDTH_PATH, this.stairsMaxWidth());
+                    sitConfigStairsSection.set(SIT_STAIRS_ENABLED_PATH, this.sitStairsEnabled());
+                    sitConfigStairsSection.set(SIT_STAIRS_ROTATE_PATH, this.sitStairsAutoRotate());
+                    sitConfigStairsSection.set(SIT_STAIRS_MAX_WIDTH_PATH, this.sitStairsMaxWidth());
                     final ConfigurationSection sitConfigStairsSpecialEndSection = sitConfigStairsSection.createSection(
                             SIT_STAIRS_SPECIAL_END_PATH);
                     {
-                        sitConfigStairsSpecialEndSection.set(SIT_STAIRS_SPECIAL_END_SIGN_PATH, this.stairsSpecialEndSign());
-                        sitConfigStairsSpecialEndSection.set(SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH, this.stairsSpecialEndCornerStairs());
+                        sitConfigStairsSpecialEndSection.set(SIT_STAIRS_SPECIAL_END_SIGN_PATH, this.sitStairsSpecialEndSign());
+                        sitConfigStairsSpecialEndSection.set(SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH, this.sitStairsSpecialEndCornerStairs());
                     }
-                    sitConfigStairsSection.set(SIT_STAIRS_HEIGHT, this.stairsHeight());
+                    sitConfigStairsSection.set(SIT_STAIRS_HEIGHT, this.sitStairsHeight());
                 }
 
                 final ConfigurationSection sitConfigAdditionalBlocksSection = sitConfigSection.createSection(SIT_ADDITIONAL_BLOCKS_PATH);
@@ -210,32 +210,32 @@ public final class ChairsConfig {
         return this.sitArrowResitInterval;
     }
 
-    public boolean stairsEnabled() {
-        return this.stairsEnabled;
+    public boolean sitStairsEnabled() {
+        return this.sitStairsEnabled;
     }
 
-    public boolean stairsAutoRotate() {
-        return this.stairsAutoRotate;
+    public boolean sitStairsAutoRotate() {
+        return this.sitStairsAutoRotate;
     }
 
-    public int stairsMaxWidth() {
-        return this.stairsMaxWidth;
+    public int sitStairsMaxWidth() {
+        return this.sitStairsMaxWidth;
     }
 
-    public boolean stairsSpecialEndEnabled() {
-        return this.stairsSpecialEndEnabled;
+    public boolean sitStairsSpecialEndEnabled() {
+        return this.sitStairsSpecialEndEnabled;
     }
 
-    public boolean stairsSpecialEndSign() {
-        return this.stairsSpecialEndSign;
+    public boolean sitStairsSpecialEndSign() {
+        return this.sitStairsSpecialEndSign;
     }
 
-    public boolean stairsSpecialEndCornerStairs() {
-        return this.stairsSpecialEndCornerStairs;
+    public boolean sitStairsSpecialEndCornerStairs() {
+        return this.sitStairsSpecialEndCornerStairs;
     }
 
-    public double stairsHeight() {
-        return this.stairsHeight;
+    public double sitStairsHeight() {
+        return this.sitStairsHeight;
     }
 
     public boolean msgEnabled() {
