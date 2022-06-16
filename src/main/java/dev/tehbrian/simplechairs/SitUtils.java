@@ -22,12 +22,10 @@ import java.text.MessageFormat;
 
 public final class SitUtils {
 
-    private final SimpleChairs plugin;
     private final ChairsConfig config;
     private final PlayerSitData sitData;
 
     public SitUtils(final SimpleChairs plugin) {
-        this.plugin = plugin;
         this.config = plugin.getChairsConfig();
         this.sitData = plugin.getPlayerSitData();
     }
