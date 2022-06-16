@@ -22,7 +22,7 @@ public class SimpleChairs extends JavaPlugin {
 
     private static SimpleChairs instance;
     private final ChairsConfig config = new ChairsConfig(this);
-    private final PlayerSitData psitdata = new PlayerSitData(this);
+    private final PlayerSitData sitData = new PlayerSitData(this);
     private final ChairEffects chairEffects = new ChairEffects(this);
     private final SitUtils utils = new SitUtils(this);
 
@@ -39,7 +39,7 @@ public class SimpleChairs extends JavaPlugin {
     }
 
     public PlayerSitData getPlayerSitData() {
-        return this.psitdata;
+        return this.sitData;
     }
 
     public ChairEffects getChairEffects() {
@@ -78,8 +78,8 @@ public class SimpleChairs extends JavaPlugin {
     @Override
     public void onDisable() {
         for (final Player player : Bukkit.getOnlinePlayers()) {
-            if (this.psitdata.isSitting(player)) {
-                this.psitdata.unsitPlayerForce(player, true);
+            if (this.sitData.isSitting(player)) {
+                this.sitData.unsitPlayerForce(player, true);
             }
         }
         this.chairEffects.cancelHealing();

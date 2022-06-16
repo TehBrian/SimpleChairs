@@ -44,8 +44,8 @@ public class PlayerSitData {
     }
 
     public boolean isSitting(final Player player) {
-        final SitData sitdata = this.sittingPlayers.get(player);
-        return (sitdata != null) && sitdata.sitting;
+        final SitData sitData = this.sittingPlayers.get(player);
+        return (sitData != null) && sitData.sitting;
     }
 
     public boolean isBlockOccupied(final Block block) {
@@ -67,11 +67,11 @@ public class PlayerSitData {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.getChairsConfig().msgSitEnter));
         }
         final Entity chairentity = this.plugin.getSitUtils().spawnChairEntity(sitlocation);
-        SitData sitdata = null;
+        SitData sitData = null;
         switch (this.plugin.getChairsConfig().sitChairEntityType) {
             case ARROW: {
                 final int arrowresitinterval = this.plugin.getChairsConfig().sitArrowResitInterval;
-                sitdata = new SitData(
+                sitData = new SitData(
                         chairentity, player.getLocation(), blocktooccupy,
                         Bukkit
                                 .getScheduler()
@@ -85,27 +85,27 @@ public class PlayerSitData {
                 break;
             }
             case ARMOR_STAND: {
-                sitdata = new SitData(chairentity, player.getLocation(), blocktooccupy, -1);
+                sitData = new SitData(chairentity, player.getLocation(), blocktooccupy, -1);
                 break;
             }
         }
         player.teleport(sitlocation);
         chairentity.addPassenger(player);
-        this.sittingPlayers.put(player, sitdata);
+        this.sittingPlayers.put(player, sitData);
         this.occupiedBlocks.put(blocktooccupy, player);
-        sitdata.sitting = true;
+        sitData.sitting = true;
         return true;
     }
 
     public void resitPlayer(final Player player) {
-        final SitData sitdata = this.sittingPlayers.get(player);
-        sitdata.sitting = false;
-        final Entity oldentity = sitdata.entity;
+        final SitData sitData = this.sittingPlayers.get(player);
+        sitData.sitting = false;
+        final Entity oldentity = sitData.entity;
         final Entity chairentity = this.plugin.getSitUtils().spawnChairEntity(oldentity.getLocation());
         chairentity.addPassenger(player);
-        sitdata.entity = chairentity;
+        sitData.entity = chairentity;
         oldentity.remove();
-        sitdata.sitting = true;
+        sitData.sitting = true;
     }
 
     public boolean unsitPlayer(final Player player) {
@@ -117,19 +117,19 @@ public class PlayerSitData {
     }
 
     private boolean unsitPlayer(final Player player, final boolean canCancel, final boolean teleport) {
-        final SitData sitdata = this.sittingPlayers.get(player);
-        final PlayerChairUnsitEvent playerunsitevent = new PlayerChairUnsitEvent(player, sitdata.teleportBackLocation.clone(), canCancel);
+        final SitData sitData = this.sittingPlayers.get(player);
+        final PlayerChairUnsitEvent playerunsitevent = new PlayerChairUnsitEvent(player, sitData.teleportBackLocation.clone(), canCancel);
         Bukkit.getPluginManager().callEvent(playerunsitevent);
         if (playerunsitevent.isCancelled() && playerunsitevent.canBeCancelled()) {
             return false;
         }
-        sitdata.sitting = false;
+        sitData.sitting = false;
         player.leaveVehicle();
-        sitdata.entity.remove();
+        sitData.entity.remove();
         player.setSneaking(false);
-        this.occupiedBlocks.remove(sitdata.occupiedBlock);
-        if (sitdata.resitTaskId != -1) {
-            Bukkit.getScheduler().cancelTask(sitdata.resitTaskId);
+        this.occupiedBlocks.remove(sitData.occupiedBlock);
+        if (sitData.resitTaskId != -1) {
+            Bukkit.getScheduler().cancelTask(sitData.resitTaskId);
         }
         this.sittingPlayers.remove(player);
         if (teleport) {

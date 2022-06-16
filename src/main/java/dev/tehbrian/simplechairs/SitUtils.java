@@ -24,12 +24,12 @@ public class SitUtils {
 
     protected final SimpleChairs plugin;
     protected final ChairsConfig config;
-    protected final PlayerSitData sitdata;
+    protected final PlayerSitData sitData;
 
     public SitUtils(final SimpleChairs plugin) {
         this.plugin = plugin;
         this.config = plugin.getChairsConfig();
-        this.sitdata = plugin.getPlayerSitData();
+        this.sitData = plugin.getPlayerSitData();
     }
 
     protected static final boolean isStairsSittable(final Stairs stairs) {
@@ -148,13 +148,13 @@ public class SitUtils {
             return false;
         }
 
-        if (this.sitdata.isSittingDisabled(player)) {
+        if (this.sitData.isSittingDisabled(player)) {
             return false;
         }
-        if (this.sitdata.isSitting(player)) {
+        if (this.sitData.isSitting(player)) {
             return false;
         }
-        return !this.sitdata.isBlockOccupied(block);
+        return !this.sitData.isBlockOccupied(block);
     }
 
     public Location calculateSitLocation(final Player player, final Block block) {
