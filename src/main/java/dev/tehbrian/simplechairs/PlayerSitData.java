@@ -54,23 +54,23 @@ public final class PlayerSitData {
         return this.occupiedBlocks.get(chair);
     }
 
-    public boolean sitPlayer(final Player player, final Block blocktooccupy, Location sitlocation) {
-        final PlayerChairSitEvent playerSitLocation = new PlayerChairSitEvent(player, sitlocation.clone());
+    public boolean sitPlayer(final Player player, final Block blockToOccupy, Location sitLocation) {
+        final PlayerChairSitEvent playerSitLocation = new PlayerChairSitEvent(player, sitLocation.clone());
         Bukkit.getPluginManager().callEvent(playerSitLocation);
         if (playerSitLocation.isCancelled()) {
             return false;
         }
-        sitlocation = playerSitLocation.getSitLocation().clone();
+        sitLocation = playerSitLocation.getSitLocation().clone();
         if (this.plugin.getChairsConfig().msgEnabled()) {
             player.sendMessage(LegacyFormatting.on(this.plugin.getChairsConfig().msgSitEnter()));
         }
-        final Entity chairEntity = this.plugin.getSitUtils().spawnChairEntity(sitlocation);
+        final Entity chairEntity = this.plugin.getSitUtils().spawnChairEntity(sitLocation);
         SitData sitData = null;
         switch (this.plugin.getChairsConfig().sitChairEntityType()) {
             case ARROW -> {
                 final int arrowResitInterval = this.plugin.getChairsConfig().sitArrowResitInterval();
                 sitData = new SitData(
-                        chairEntity, player.getLocation(), blocktooccupy,
+                        chairEntity, player.getLocation(), blockToOccupy,
                         Bukkit
                                 .getScheduler()
                                 .scheduleSyncRepeatingTask(
@@ -81,12 +81,12 @@ public final class PlayerSitData {
                                 )
                 );
             }
-            case ARMOR_STAND -> sitData = new SitData(chairEntity, player.getLocation(), blocktooccupy, -1);
+            case ARMOR_STAND -> sitData = new SitData(chairEntity, player.getLocation(), blockToOccupy, -1);
         }
-        player.teleport(sitlocation);
+        player.teleport(sitLocation);
         chairEntity.addPassenger(player);
         this.sittingPlayers.put(player, sitData);
-        this.occupiedBlocks.put(blocktooccupy, player);
+        this.occupiedBlocks.put(blockToOccupy, player);
         sitData.sitting = true;
         return true;
     }
