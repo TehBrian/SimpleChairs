@@ -49,7 +49,9 @@ public final class SitUtils {
     ) {
         final BlockData blockdata = block.getBlockData();
         if (blockdata instanceof final Stairs stairs) {
-            return (stairs.getHalf() == Half.BOTTOM) && (stairs.getFacing() == expectedFacing) && (stairs.getShape() == expectedShape);
+            return (stairs.getHalf() == Half.BOTTOM)
+                    && (stairs.getFacing() == expectedFacing)
+                    && (stairs.getShape() == expectedShape);
         }
         return false;
     }
@@ -68,9 +70,7 @@ public final class SitUtils {
             case EAST -> {
                 return BlockFace.NORTH;
             }
-            default -> {
-                throw new IllegalArgumentException(MessageFormat.format("Cant rotate blockface {0}", face));
-            }
+            default -> throw new IllegalArgumentException(MessageFormat.format("Cant rotate block face {0}", face));
         }
     }
 
@@ -88,7 +88,7 @@ public final class SitUtils {
             case WEST -> {
                 return BlockFace.NORTH;
             }
-            default -> throw new IllegalArgumentException(MessageFormat.format("Cant rotate blockface {0}", face));
+            default -> throw new IllegalArgumentException(MessageFormat.format("Cant rotate block face {0}", face));
         }
     }
 
@@ -117,7 +117,6 @@ public final class SitUtils {
     }
 
     private boolean canSitGeneric(final Player player, final Block block) {
-
         if (player.isSneaking()) {
             return false;
         }
@@ -151,7 +150,6 @@ public final class SitUtils {
     }
 
     public Location calculateSitLocation(final Player player, final Block block) {
-
         if (!this.canSitGeneric(player, block)) {
             return null;
         }
@@ -206,6 +204,7 @@ public final class SitUtils {
                     ) {
                         specialEndCheckSuccess = true;
                     }
+
                     if (!specialEndCheckSuccess) {
                         return null;
                     }
