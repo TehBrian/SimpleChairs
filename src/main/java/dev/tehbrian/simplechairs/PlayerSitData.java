@@ -39,6 +39,15 @@ public final class PlayerSitData {
         }
     }
 
+    /**
+     * @param player the player
+     * @return whether sitting is disabled after toggle
+     */
+    public boolean toggleSittingDisabled(final Player player) {
+        this.setSittingDisabled(player, !this.isSittingDisabled(player));
+        return this.isSittingDisabled(player);
+    }
+
     public boolean isSitting(final Player player) {
         final SitData sitData = this.sittingPlayers.get(player);
         return (sitData != null) && sitData.sitting;
