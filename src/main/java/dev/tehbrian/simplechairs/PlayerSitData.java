@@ -23,38 +23,38 @@ public class PlayerSitData {
     protected final Map<Player, SitData> sittingPlayers = new HashMap<>();
     protected final Map<Block, Player> occupiedBlocks = new HashMap<>();
 
-    public PlayerSitData(SimpleChairs plugin) {
+    public PlayerSitData(final SimpleChairs plugin) {
         this.plugin = plugin;
         this.sitDisabledKey = new NamespacedKey(plugin, "SitDisabled");
     }
 
-    public void disableSitting(Player player) {
+    public void disableSitting(final Player player) {
         player.getPersistentDataContainer().set(sitDisabledKey, PersistentDataType.BYTE, Byte.valueOf((byte) 1));
     }
 
-    public void enableSitting(Player player) {
+    public void enableSitting(final Player player) {
         player.getPersistentDataContainer().remove(sitDisabledKey);
     }
 
-    public boolean isSittingDisabled(Player player) {
+    public boolean isSittingDisabled(final Player player) {
         return player.getPersistentDataContainer().getOrDefault(sitDisabledKey, PersistentDataType.BYTE, Byte.valueOf((byte) 0)).byteValue() != 0;
     }
 
-    public boolean isSitting(Player player) {
-        SitData sitdata = sittingPlayers.get(player);
+    public boolean isSitting(final Player player) {
+        final SitData sitdata = sittingPlayers.get(player);
         return (sitdata != null) && sitdata.sitting;
     }
 
-    public boolean isBlockOccupied(Block block) {
+    public boolean isBlockOccupied(final Block block) {
         return occupiedBlocks.containsKey(block);
     }
 
-    public Player getPlayerOnChair(Block chair) {
+    public Player getPlayerOnChair(final Block chair) {
         return occupiedBlocks.get(chair);
     }
 
-    public boolean sitPlayer(final Player player,  Block blocktooccupy, Location sitlocation) {
-        PlayerChairSitEvent playersitevent = new PlayerChairSitEvent(player, sitlocation.clone());
+    public boolean sitPlayer(final Player player, final Block blocktooccupy, Location sitlocation) {
+        final PlayerChairSitEvent playersitevent = new PlayerChairSitEvent(player, sitlocation.clone());
         Bukkit.getPluginManager().callEvent(playersitevent);
         if (playersitevent.isCancelled()) {
             return false;
@@ -63,11 +63,11 @@ public class PlayerSitData {
         if (plugin.getChairsConfig().msgEnabled) {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getChairsConfig().msgSitEnter));
         }
-        Entity chairentity = plugin.getSitUtils().spawnChairEntity(sitlocation);
+        final Entity chairentity = plugin.getSitUtils().spawnChairEntity(sitlocation);
         SitData sitdata = null;
         switch (plugin.getChairsConfig().sitChairEntityType) {
             case ARROW: {
-                int arrowresitinterval = plugin.getChairsConfig().sitArrowResitInterval;
+                final int arrowresitinterval = plugin.getChairsConfig().sitArrowResitInterval;
                 sitdata = new SitData(
                     chairentity, player.getLocation(), blocktooccupy,
                     Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> resitPlayer(player), arrowresitinterval, arrowresitinterval)
@@ -88,26 +88,26 @@ public class PlayerSitData {
     }
 
     public void resitPlayer(final Player player) {
-        SitData sitdata = sittingPlayers.get(player);
+        final SitData sitdata = sittingPlayers.get(player);
         sitdata.sitting = false;
-        Entity oldentity = sitdata.entity;
-        Entity chairentity = plugin.getSitUtils().spawnChairEntity(oldentity.getLocation());
+        final Entity oldentity = sitdata.entity;
+        final Entity chairentity = plugin.getSitUtils().spawnChairEntity(oldentity.getLocation());
         chairentity.addPassenger(player);
         sitdata.entity = chairentity;
         oldentity.remove();
         sitdata.sitting = true;
     }
 
-    public boolean unsitPlayer(Player player) {
+    public boolean unsitPlayer(final Player player) {
         return unsitPlayer(player, true, true);
     }
 
-    public void unsitPlayerForce(Player player, boolean teleport) {
+    public void unsitPlayerForce(final Player player, final boolean teleport) {
         unsitPlayer(player, false, teleport);
     }
 
-    private boolean unsitPlayer(final Player player, boolean canCancel, boolean teleport) {
-        SitData sitdata = sittingPlayers.get(player);
+    private boolean unsitPlayer(final Player player, final boolean canCancel, final boolean teleport) {
+        final SitData sitdata = sittingPlayers.get(player);
         final PlayerChairUnsitEvent playerunsitevent = new PlayerChairUnsitEvent(player, sitdata.teleportBackLocation.clone(), canCancel);
         Bukkit.getPluginManager().callEvent(playerunsitevent);
         if (playerunsitevent.isCancelled() && playerunsitevent.canBeCancelled()) {
@@ -140,7 +140,7 @@ public class PlayerSitData {
         protected boolean sitting;
         protected Entity entity;
 
-        public SitData(Entity arrow, Location teleportLocation, Block block, int resitTaskId) {
+        public SitData(final Entity arrow, final Location teleportLocation, final Block block, final int resitTaskId) {
             this.entity = arrow;
             this.teleportBackLocation = teleportLocation;
             this.occupiedBlock = block;

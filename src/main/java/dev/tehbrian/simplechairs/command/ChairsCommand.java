@@ -16,14 +16,14 @@ public class ChairsCommand implements CommandExecutor {
     protected final ChairsConfig config;
     protected final PlayerSitData sitdata;
 
-    public ChairsCommand(SimpleChairs plugin) {
+    public ChairsCommand(final SimpleChairs plugin) {
         this.plugin = plugin;
         this.config = plugin.getChairsConfig();
         this.sitdata = plugin.getPlayerSitData();
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (args.length == 0) {
             return false;
         }
@@ -36,7 +36,7 @@ public class ChairsCommand implements CommandExecutor {
             }
         }
         if (sender instanceof Player) {
-            Player player = (Player) sender;
+            final Player player = (Player) sender;
             if (args[0].equalsIgnoreCase("off")) {
                 sitdata.disableSitting(player);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.msgSitDisabled));

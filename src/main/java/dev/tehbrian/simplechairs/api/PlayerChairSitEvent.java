@@ -13,7 +13,7 @@ public class PlayerChairSitEvent extends PlayerEvent implements Cancellable {
 
     private Location sitLocation;
 
-    public PlayerChairSitEvent(Player who, Location sitLocation) {
+    public PlayerChairSitEvent(final Player who, final Location sitLocation) {
         super(who);
         this.sitLocation = sitLocation;
     }
@@ -22,7 +22,7 @@ public class PlayerChairSitEvent extends PlayerEvent implements Cancellable {
         return sitLocation.clone();
     }
 
-    public void setSitLocation(Location location) {
+    public void setSitLocation(final Location location) {
         sitLocation = location.clone();
     }
 
@@ -41,7 +41,7 @@ public class PlayerChairSitEvent extends PlayerEvent implements Cancellable {
     }
 
     @Override
-    public void setCancelled(boolean cancelled) {
+    public void setCancelled(final boolean cancelled) {
         this.cancelled = cancelled;
     }
 

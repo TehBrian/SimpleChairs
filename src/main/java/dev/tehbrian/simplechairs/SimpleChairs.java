@@ -59,14 +59,14 @@ public class SimpleChairs extends JavaPlugin {
     public void onEnable() {
         try {
             getClass().getClassLoader().loadClass(EntityDismountEvent.class.getName());
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             getLogger().log(Level.SEVERE, "Missing EntityDismountEvent", t);
             setEnabled(false);
             return;
         }
         try {
             Files.copy(getClass().getClassLoader().getResourceAsStream("config_help.txt"), new File(getDataFolder(), "config_help.txt").toPath(), StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
+        } catch (final IOException e) {
         }
         reloadConfig();
         getServer().getPluginManager().registerEvents(new InvalidPositionLoginListener(), this);
@@ -78,7 +78,7 @@ public class SimpleChairs extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
+        for (final Player player : Bukkit.getOnlinePlayers()) {
             if (psitdata.isSitting(player)) {
                 psitdata.unsitPlayerForce(player, true);
             }

@@ -22,19 +22,19 @@ import org.spigotmc.event.entity.EntityDismountEvent;
 public class TryUnsitEventListener implements Listener {
 
     protected final SimpleChairs plugin;
-    public TryUnsitEventListener(SimpleChairs plugin) {
+    public TryUnsitEventListener(final SimpleChairs plugin) {
         this.plugin = plugin;
     }
 
     protected Map<UUID, Location> dismountTeleport = new HashMap<>();
 
     @EventHandler(priority=EventPriority.LOWEST)
-    public void onPlayerTeleport(PlayerTeleportEvent event) {
+    public void onPlayerTeleport(final PlayerTeleportEvent event) {
         final Player player = event.getPlayer();
         if (plugin.getPlayerSitData().isSitting(player)) {
             plugin.getPlayerSitData().unsitPlayerForce(player, false);
         } else if (event.getCause() == TeleportCause.UNKNOWN) {
-            Location preDismountLocation = dismountTeleport.remove(player.getUniqueId());
+            final Location preDismountLocation = dismountTeleport.remove(player.getUniqueId());
             if (preDismountLocation != null) {
                 event.setCancelled(true);
             }
@@ -42,40 +42,40 @@ public class TryUnsitEventListener implements Listener {
     }
 
     @EventHandler(priority=EventPriority.LOWEST)
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
+    public void onPlayerQuit(final PlayerQuitEvent event) {
+        final Player player = event.getPlayer();
         if (plugin.getPlayerSitData().isSitting(player)) {
             plugin.getPlayerSitData().unsitPlayerForce(player, true);
         }
     }
 
     @EventHandler(priority=EventPriority.LOWEST)
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
+    public void onPlayerDeath(final PlayerDeathEvent event) {
+        final Player player = event.getEntity();
         if (plugin.getPlayerSitData().isSitting(player)) {
             plugin.getPlayerSitData().unsitPlayerForce(player, false);
         }
     }
 
     @EventHandler(priority=EventPriority.HIGHEST, ignoreCancelled=true)
-    public void onBlockBreak(BlockBreakEvent event) {
-        Block b = event.getBlock();
+    public void onBlockBreak(final BlockBreakEvent event) {
+        final Block b = event.getBlock();
         if (plugin.getPlayerSitData().isBlockOccupied(b)) {
-            Player player = plugin.getPlayerSitData().getPlayerOnChair(b);
+            final Player player = plugin.getPlayerSitData().getPlayerOnChair(b);
             plugin.getPlayerSitData().unsitPlayerForce(player, true);
         }
     }
 
     @EventHandler(priority=EventPriority.LOWEST)
-    public void onExitVehicle(EntityDismountEvent e) {
+    public void onExitVehicle(final EntityDismountEvent e) {
         if (e.getEntity() instanceof Player) {
-            Player player = (Player) e.getEntity();
+            final Player player = (Player) e.getEntity();
             if (plugin.getPlayerSitData().isSitting(player)) {
-                Location preDismountLocation = player.getLocation();
+                final Location preDismountLocation = player.getLocation();
                 if (!plugin.getPlayerSitData().unsitPlayer(player)) {
                     e.setCancelled(true);
                 } else {
-                    UUID playerUUID = player.getUniqueId();
+                    final UUID playerUUID = player.getUniqueId();
                     dismountTeleport.put(playerUUID, preDismountLocation);
                     Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> dismountTeleport.remove(playerUUID));
                 }
