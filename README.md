@@ -1,3 +1,5 @@
-Chairs
-======
-Bukkit plugin that allows players to sit in chairs. A chair can be any block but is typically a step or slab.
+# SimpleChairs
+Allows players to sit on chairs, such as stairs or slabs.
+
+This plugin is a fork of [Shevchik/Chairs](https://github.com/Shevchik/Chairs)
+with some of its less important features plucked out.
