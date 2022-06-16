@@ -44,6 +44,7 @@ public final class ChairsCommand implements CommandExecutor {
             } else {
                 sender.sendMessage(LegacyFormatting.on("&cYou do not have permission to do this!"));
             }
+            return true;
         }
 
         if (sender instanceof final Player player) {
