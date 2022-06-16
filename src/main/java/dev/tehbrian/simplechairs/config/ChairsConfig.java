@@ -67,8 +67,17 @@ public final class ChairsConfig {
         this.plugin = plugin;
     }
 
+    private File getConfigFile() {
+        return new File(this.plugin.getDataFolder(), "config.yml");
+    }
+
     public void reloadConfig() {
-        final File file = new File(this.plugin.getDataFolder(), "config.yml");
+        this.loadFromConfig();
+        this.saveToConfig();
+    }
+
+    public void loadFromConfig() {
+        final File file = this.getConfigFile();
 
         {
             final FileConfiguration config = YamlConfiguration.loadConfiguration(file);
@@ -133,6 +142,10 @@ public final class ChairsConfig {
                 }
             }
         }
+    }
+
+    public void saveToConfig() {
+        final File file = this.getConfigFile();
 
         {
             final FileConfiguration config = new YamlConfiguration();
