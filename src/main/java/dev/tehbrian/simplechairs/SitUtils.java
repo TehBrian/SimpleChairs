@@ -58,19 +58,19 @@ public class SitUtils {
 
     protected static BlockFace rotL(final BlockFace face) {
         switch (face) {
-            case NORTH: {
+            case NORTH -> {
                 return BlockFace.WEST;
             }
-            case WEST: {
+            case WEST -> {
                 return BlockFace.SOUTH;
             }
-            case SOUTH: {
+            case SOUTH -> {
                 return BlockFace.EAST;
             }
-            case EAST: {
+            case EAST -> {
                 return BlockFace.NORTH;
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException(MessageFormat.format("Cant rotate blockface {0}", face));
             }
         }
@@ -78,34 +78,32 @@ public class SitUtils {
 
     protected static BlockFace rotR(final BlockFace face) {
         switch (face) {
-            case NORTH: {
+            case NORTH -> {
                 return BlockFace.EAST;
             }
-            case EAST: {
+            case EAST -> {
                 return BlockFace.SOUTH;
             }
-            case SOUTH: {
+            case SOUTH -> {
                 return BlockFace.WEST;
             }
-            case WEST: {
+            case WEST -> {
                 return BlockFace.NORTH;
             }
-            default: {
-                throw new IllegalArgumentException(MessageFormat.format("Cant rotate blockface {0}", face));
-            }
+            default -> throw new IllegalArgumentException(MessageFormat.format("Cant rotate blockface {0}", face));
         }
     }
 
     public Entity spawnChairEntity(Location location) {
         switch (this.config.sitChairEntityType) {
-            case ARROW: {
+            case ARROW -> {
                 final Arrow arrow = location.getWorld().spawnArrow(location, new Vector(0, 1, 0), 0, 0);
                 arrow.setGravity(false);
                 arrow.setInvulnerable(true);
                 arrow.setPickupStatus(PickupStatus.DISALLOWED);
                 return arrow;
             }
-            case ARMOR_STAND: {
+            case ARMOR_STAND -> {
                 location = location.clone().add(0, 0.4, 0);
                 return location.getWorld().spawn(
                         location, ArmorStand.class, armorstand -> {
@@ -116,9 +114,7 @@ public class SitUtils {
                         }
                 );
             }
-            default: {
-                throw new IllegalArgumentException("Unknown sit chair entity type " + this.config.sitChairEntityType);
-            }
+            default -> throw new IllegalArgumentException("Unknown sit chair entity type " + this.config.sitChairEntityType);
         }
     }
 
@@ -174,23 +170,11 @@ public class SitUtils {
             final BlockFace ascendingFacing = stairs.getFacing();
             if (this.config.stairsAutoRotate) {
                 switch (ascendingFacing.getOppositeFace()) {
-                    case NORTH: {
-                        yaw = 180;
-                        break;
-                    }
-                    case EAST: {
-                        yaw = -90;
-                        break;
-                    }
-                    case SOUTH: {
-                        yaw = 0;
-                        break;
-                    }
-                    case WEST: {
-                        yaw = 90;
-                        break;
-                    }
-                    default: {
+                    case NORTH -> yaw = 180;
+                    case EAST -> yaw = -90;
+                    case SOUTH -> yaw = 0;
+                    case WEST -> yaw = 90;
+                    default -> {
                     }
                 }
             }

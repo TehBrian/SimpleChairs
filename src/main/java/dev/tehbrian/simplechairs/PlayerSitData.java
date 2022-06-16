@@ -69,7 +69,7 @@ public class PlayerSitData {
         final Entity chairentity = this.plugin.getSitUtils().spawnChairEntity(sitlocation);
         SitData sitData = null;
         switch (this.plugin.getChairsConfig().sitChairEntityType) {
-            case ARROW: {
+            case ARROW -> {
                 final int arrowresitinterval = this.plugin.getChairsConfig().sitArrowResitInterval;
                 sitData = new SitData(
                         chairentity, player.getLocation(), blocktooccupy,
@@ -82,12 +82,8 @@ public class PlayerSitData {
                                         arrowresitinterval
                                 )
                 );
-                break;
             }
-            case ARMOR_STAND: {
-                sitData = new SitData(chairentity, player.getLocation(), blocktooccupy, -1);
-                break;
-            }
+            case ARMOR_STAND -> sitData = new SitData(chairentity, player.getLocation(), blocktooccupy, -1);
         }
         player.teleport(sitlocation);
         chairentity.addPassenger(player);
