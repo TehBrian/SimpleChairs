@@ -37,10 +37,10 @@ public final class ChairsCommand implements CommandExecutor {
         if (sender instanceof final Player player) {
             if (args[0].equalsIgnoreCase("off")) {
                 this.sitData.disableSitting(player);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.config.msgSitDisabled));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.config.msgSitDisabled()));
             } else if (args[0].equalsIgnoreCase("on")) {
                 this.sitData.enableSitting(player);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.config.msgSitEnabled));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.config.msgSitEnabled()));
             }
         }
         return true;

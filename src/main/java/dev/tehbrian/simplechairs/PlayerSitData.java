@@ -63,14 +63,14 @@ public final class PlayerSitData {
             return false;
         }
         sitlocation = playersitevent.getSitLocation().clone();
-        if (this.plugin.getChairsConfig().msgEnabled) {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.getChairsConfig().msgSitEnter));
+        if (this.plugin.getChairsConfig().msgEnabled()) {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.getChairsConfig().msgSitEnter()));
         }
         final Entity chairentity = this.plugin.getSitUtils().spawnChairEntity(sitlocation);
         SitData sitData = null;
-        switch (this.plugin.getChairsConfig().sitChairEntityType) {
+        switch (this.plugin.getChairsConfig().sitChairEntityType()) {
             case ARROW -> {
-                final int arrowresitinterval = this.plugin.getChairsConfig().sitArrowResitInterval;
+                final int arrowresitinterval = this.plugin.getChairsConfig().sitArrowResitInterval();
                 sitData = new SitData(
                         chairentity, player.getLocation(), blocktooccupy,
                         Bukkit
@@ -131,8 +131,8 @@ public final class PlayerSitData {
         if (teleport) {
             player.teleport(playerunsitevent.getTeleportLocation().clone());
         }
-        if (this.plugin.getChairsConfig().msgEnabled) {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.getChairsConfig().msgSitLeave));
+        if (this.plugin.getChairsConfig().msgEnabled()) {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.plugin.getChairsConfig().msgSitLeave()));
         }
         return true;
     }
