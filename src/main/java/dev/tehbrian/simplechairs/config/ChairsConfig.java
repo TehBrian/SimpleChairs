@@ -17,21 +17,22 @@ import java.util.Set;
 
 public final class ChairsConfig {
 
-    private static final String sitConfigSectionPath = "sit-config";
-    private static final String sitConfigDisabledWorldsPath = "disabled-worlds";
-    private static final String sitConfigMaxDistancePath = "max-distance";
-    private static final String sitConfigRequireEmptyHandPath = "require-empty-hand";
-    private static final String sitConfigChairEntityType = "chair-entity-type";
-    private static final String sitConfigArrowResitInterval = "arrow-resit-interval";
-    private static final String sitConfigStairsSectionPath = "stairs";
-    private static final String sitConfigStairsEnabledPath = "enabled";
-    private static final String sitConfigStairsRotatePath = "rotate";
-    private static final String sitConfigStairsMaxWidthPath = "max-width";
-    private static final String sitConfigStairsSpecialEndPath = "special-end";
-    private static final String sitConfigStairsSpecialEndSignPath = "sign";
-    private static final String sitConfigStairsSpecialEndCornerStairsPath = "corner-stairs";
-    private static final String sitConfigStairsHeight = "height";
-    private static final String sitConfigAdditionalChairsPath = "additional-blocks";
+    private static final String sitSectionPath = "sit-config";
+    private static final String sitDisabledWorldsPath = "disabled-worlds";
+    private static final String sitMaxDistancePath = "max-distance";
+    private static final String sitRequireEmptyHandPath = "require-empty-hand";
+    private static final String sitChairEntityTypePath = "chair-entity-type";
+    private static final String sitArrowResitIntervalPath = "arrow-resit-interval";
+    private static final String sitStairsSectionPath = "stairs";
+    private static final String sitStairsEnabledPath = "enabled";
+    private static final String sitStairsRotatePath = "rotate";
+    private static final String sitStairsMaxWidthPath = "max-width";
+    private static final String sitStairsSpecialEndPath = "special-end";
+    private static final String sitStairsSpecialEndSignPath = "sign";
+    private static final String sitStairsSpecialEndCornerStairsPath = "corner-stairs";
+    private static final String sitStairsHeight = "height";
+    private static final String sitAdditionalChairsPath = "additional-blocks";
+
     private static final String msgSectionPath = "messages";
     private static final String msgEnabledPath = "enabled";
     private static final String msgSitSectionPath = "sit";
@@ -39,6 +40,7 @@ public final class ChairsConfig {
     private static final String msgSitLeavePath = "leave";
     private static final String msgSitEnabledPath = "enabled";
     private static final String msgSitDisabledPath = "disabled";
+
     public final Set<String> sitDisabledWorlds = new HashSet<>();
     public final Map<Material, Double> additionalChairs = new EnumMap<>(Material.class);
     private final SimpleChairs plugin;
@@ -69,44 +71,44 @@ public final class ChairsConfig {
         {
             final FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
-            final ConfigurationSection sitConfigSection = config.getConfigurationSection(sitConfigSectionPath);
+            final ConfigurationSection sitConfigSection = config.getConfigurationSection(sitSectionPath);
             if (sitConfigSection != null) {
                 this.sitDisabledWorlds.clear();
-                this.sitDisabledWorlds.addAll(sitConfigSection.getStringList(sitConfigDisabledWorldsPath));
-                this.sitRequireEmptyHand = sitConfigSection.getBoolean(sitConfigRequireEmptyHandPath, this.sitRequireEmptyHand);
-                this.sitMaxDistance = sitConfigSection.getDouble(sitConfigMaxDistancePath, this.sitMaxDistance);
+                this.sitDisabledWorlds.addAll(sitConfigSection.getStringList(sitDisabledWorldsPath));
+                this.sitRequireEmptyHand = sitConfigSection.getBoolean(sitRequireEmptyHandPath, this.sitRequireEmptyHand);
+                this.sitMaxDistance = sitConfigSection.getDouble(sitMaxDistancePath, this.sitMaxDistance);
                 this.sitChairEntityType = ChairEntityType.fromString(sitConfigSection.getString(
-                        sitConfigChairEntityType,
+                        sitChairEntityTypePath,
                         this.sitChairEntityType.name()
                 ));
-                this.sitArrowResitInterval = sitConfigSection.getInt(sitConfigArrowResitInterval, this.sitArrowResitInterval);
+                this.sitArrowResitInterval = sitConfigSection.getInt(sitArrowResitIntervalPath, this.sitArrowResitInterval);
                 if (this.sitArrowResitInterval > 1000) {
                     this.sitArrowResitInterval = 1000;
                 }
 
-                final ConfigurationSection sitConfigStairsSection = sitConfigSection.getConfigurationSection(sitConfigStairsSectionPath);
+                final ConfigurationSection sitConfigStairsSection = sitConfigSection.getConfigurationSection(sitStairsSectionPath);
                 if (sitConfigStairsSection != null) {
-                    this.stairsEnabled = sitConfigStairsSection.getBoolean(sitConfigStairsEnabledPath, this.stairsEnabled);
-                    this.stairsAutoRotate = sitConfigStairsSection.getBoolean(sitConfigStairsRotatePath, this.stairsAutoRotate);
-                    this.stairsMaxWidth = sitConfigStairsSection.getInt(sitConfigStairsMaxWidthPath, this.stairsMaxWidth);
+                    this.stairsEnabled = sitConfigStairsSection.getBoolean(sitStairsEnabledPath, this.stairsEnabled);
+                    this.stairsAutoRotate = sitConfigStairsSection.getBoolean(sitStairsRotatePath, this.stairsAutoRotate);
+                    this.stairsMaxWidth = sitConfigStairsSection.getInt(sitStairsMaxWidthPath, this.stairsMaxWidth);
                     final ConfigurationSection sitConfigStairsSpecialEndSection = sitConfigStairsSection.getConfigurationSection(
-                            sitConfigStairsSpecialEndPath);
+                            sitStairsSpecialEndPath);
                     if (sitConfigStairsSpecialEndSection != null) {
                         this.stairsSpecialEndSign = sitConfigStairsSpecialEndSection.getBoolean(
-                                sitConfigStairsSpecialEndSignPath,
+                                sitStairsSpecialEndSignPath,
                                 this.stairsSpecialEndSign
                         );
                         this.stairsSpecialEndCornerStairs = sitConfigStairsSpecialEndSection.getBoolean(
-                                sitConfigStairsSpecialEndCornerStairsPath,
+                                sitStairsSpecialEndCornerStairsPath,
                                 this.stairsSpecialEndCornerStairs
                         );
                         this.stairsSpecialEndEnabled = this.stairsSpecialEndSign || this.stairsSpecialEndCornerStairs;
                     }
-                    this.stairsHeight = sitConfigStairsSection.getDouble(sitConfigStairsHeight, this.stairsHeight);
+                    this.stairsHeight = sitConfigStairsSection.getDouble(sitStairsHeight, this.stairsHeight);
                 }
 
                 final ConfigurationSection sitConfigAdditionalBlocksSection = sitConfigSection.getConfigurationSection(
-                        sitConfigAdditionalChairsPath);
+                        sitAdditionalChairsPath);
                 if (sitConfigAdditionalBlocksSection != null) {
                     for (final String materialName : sitConfigAdditionalBlocksSection.getKeys(false)) {
                         final Material material = Material.getMaterial(materialName);
@@ -133,29 +135,29 @@ public final class ChairsConfig {
         {
             final FileConfiguration config = new YamlConfiguration();
 
-            final ConfigurationSection sitConfigSection = config.createSection(sitConfigSectionPath);
+            final ConfigurationSection sitConfigSection = config.createSection(sitSectionPath);
             {
-                sitConfigSection.set(sitConfigDisabledWorldsPath, new ArrayList<>(this.sitDisabledWorlds));
-                sitConfigSection.set(sitConfigRequireEmptyHandPath, this.sitRequireEmptyHand);
-                sitConfigSection.set(sitConfigMaxDistancePath, this.sitMaxDistance);
-                sitConfigSection.set(sitConfigChairEntityType, this.sitChairEntityType.name());
-                sitConfigSection.set(sitConfigArrowResitInterval, this.sitArrowResitInterval);
+                sitConfigSection.set(sitDisabledWorldsPath, new ArrayList<>(this.sitDisabledWorlds));
+                sitConfigSection.set(sitRequireEmptyHandPath, this.sitRequireEmptyHand);
+                sitConfigSection.set(sitMaxDistancePath, this.sitMaxDistance);
+                sitConfigSection.set(sitChairEntityTypePath, this.sitChairEntityType.name());
+                sitConfigSection.set(sitArrowResitIntervalPath, this.sitArrowResitInterval);
 
-                final ConfigurationSection sitConfigStairsSection = sitConfigSection.createSection(sitConfigStairsSectionPath);
+                final ConfigurationSection sitConfigStairsSection = sitConfigSection.createSection(sitStairsSectionPath);
                 {
-                    sitConfigStairsSection.set(sitConfigStairsEnabledPath, this.stairsEnabled);
-                    sitConfigStairsSection.set(sitConfigStairsRotatePath, this.stairsAutoRotate);
-                    sitConfigStairsSection.set(sitConfigStairsMaxWidthPath, this.stairsMaxWidth);
+                    sitConfigStairsSection.set(sitStairsEnabledPath, this.stairsEnabled);
+                    sitConfigStairsSection.set(sitStairsRotatePath, this.stairsAutoRotate);
+                    sitConfigStairsSection.set(sitStairsMaxWidthPath, this.stairsMaxWidth);
                     final ConfigurationSection sitConfigStairsSpecialEndSection = sitConfigStairsSection.createSection(
-                            sitConfigStairsSpecialEndPath);
+                            sitStairsSpecialEndPath);
                     {
-                        sitConfigStairsSpecialEndSection.set(sitConfigStairsSpecialEndSignPath, this.stairsSpecialEndSign);
-                        sitConfigStairsSpecialEndSection.set(sitConfigStairsSpecialEndCornerStairsPath, this.stairsSpecialEndCornerStairs);
+                        sitConfigStairsSpecialEndSection.set(sitStairsSpecialEndSignPath, this.stairsSpecialEndSign);
+                        sitConfigStairsSpecialEndSection.set(sitStairsSpecialEndCornerStairsPath, this.stairsSpecialEndCornerStairs);
                     }
-                    sitConfigStairsSection.set(sitConfigStairsHeight, this.stairsHeight);
+                    sitConfigStairsSection.set(sitStairsHeight, this.stairsHeight);
                 }
 
-                final ConfigurationSection sitConfigAdditionalBlocksSection = sitConfigSection.createSection(sitConfigAdditionalChairsPath);
+                final ConfigurationSection sitConfigAdditionalBlocksSection = sitConfigSection.createSection(sitAdditionalChairsPath);
                 {
                     for (final Entry<Material, Double> entry : this.additionalChairs.entrySet()) {
                         sitConfigAdditionalBlocksSection.set(entry.getKey().toString(), entry.getValue());
