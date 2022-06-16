@@ -10,7 +10,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
-public class CommandRestrict implements Listener {
+public final class CommandRestrict implements Listener {
 
     protected final SimpleChairs plugin;
     protected final ChairsConfig config;

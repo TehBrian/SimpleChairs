@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class ChairsConfig {
+public final class ChairsConfig {
 
     protected static final String sitConfigSectionPath = "sit-config";
     protected static final String sitConfigDisabledWorldsPath = "disabled-worlds";

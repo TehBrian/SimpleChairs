@@ -9,7 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ChairsCommand implements CommandExecutor {
+public final class ChairsCommand implements CommandExecutor {
 
     protected final SimpleChairs plugin;
     protected final ChairsConfig config;

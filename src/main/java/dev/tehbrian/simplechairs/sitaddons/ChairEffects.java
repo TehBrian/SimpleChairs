@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 
-public class ChairEffects {
+public final class ChairEffects {
 
     protected final SimpleChairs plugin;
     protected final ChairsConfig config;

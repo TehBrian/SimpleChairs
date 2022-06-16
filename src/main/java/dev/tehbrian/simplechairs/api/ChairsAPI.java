@@ -6,7 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-public class ChairsAPI {
+public final class ChairsAPI {
 
     private static PlayerSitData getPlayerSitData() {
         return SimpleChairs.getInstance().getPlayerSitData();

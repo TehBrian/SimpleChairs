@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class TryUnsitEventListener implements Listener {
+public final class TryUnsitEventListener implements Listener {
 
     protected final SimpleChairs plugin;
     protected Map<UUID, Location> dismountTeleport = new HashMap<>();
