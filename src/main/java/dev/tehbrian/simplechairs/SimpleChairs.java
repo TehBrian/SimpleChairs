@@ -18,7 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 
-public class SimpleChairs extends JavaPlugin {
+public final class SimpleChairs extends JavaPlugin {
 
     private static SimpleChairs instance;
     private final ChairsConfig config = new ChairsConfig(this);

@@ -20,7 +20,7 @@ import org.bukkit.util.Vector;
 
 import java.text.MessageFormat;
 
-public class SitUtils {
+public final class SitUtils {
 
     protected final SimpleChairs plugin;
     protected final ChairsConfig config;

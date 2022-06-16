@@ -14,7 +14,7 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlayerSitData {
+public final class PlayerSitData {
 
     protected final SimpleChairs plugin;
 
