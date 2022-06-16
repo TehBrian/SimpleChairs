@@ -55,6 +55,11 @@ public final class SimpleChairs extends JavaPlugin {
         }
 
         try {
+            // data folder may not exist on first start-up
+            if (Files.notExists(this.getDataFolder().toPath())) {
+                Files.createDirectory(this.getDataFolder().toPath());
+            }
+
             Files.copy(
                     Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("config_help.txt")),
                     new File(this.getDataFolder(), "config_help.txt").toPath(),
