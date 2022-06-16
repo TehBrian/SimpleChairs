@@ -14,11 +14,11 @@ import org.bukkit.event.player.PlayerLevelChangeEvent;
 
 public final class ChairEffects {
 
-    protected final SimpleChairs plugin;
-    protected final ChairsConfig config;
-    protected final PlayerSitData sitData;
-    protected int healTaskID = -1;
-    protected int pickupTaskID = -1;
+    private final SimpleChairs plugin;
+    private final ChairsConfig config;
+    private final PlayerSitData sitData;
+    private int healTaskID = -1;
+    private int pickupTaskID = -1;
 
     public ChairEffects(final SimpleChairs plugin) {
         this.plugin = plugin;
@@ -26,7 +26,7 @@ public final class ChairEffects {
         this.sitData = plugin.getPlayerSitData();
     }
 
-    protected void startHealing() {
+    private void startHealing() {
         this.healTaskID = this.plugin.getServer().getScheduler().scheduleSyncRepeatingTask(
                 this.plugin,
                 () ->
@@ -60,7 +60,7 @@ public final class ChairEffects {
         this.startHealing();
     }
 
-    protected void startPickup() {
+    private void startPickup() {
         this.pickupTaskID = this.plugin.getServer().getScheduler().scheduleSyncRepeatingTask(
                 this.plugin,
                 () ->

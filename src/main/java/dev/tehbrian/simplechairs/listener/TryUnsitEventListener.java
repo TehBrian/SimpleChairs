@@ -21,8 +21,8 @@ import java.util.UUID;
 
 public final class TryUnsitEventListener implements Listener {
 
-    protected final SimpleChairs plugin;
-    protected Map<UUID, Location> dismountTeleport = new HashMap<>();
+    private final SimpleChairs plugin;
+    private Map<UUID, Location> dismountTeleport = new HashMap<>();
 
     public TryUnsitEventListener(final SimpleChairs plugin) {
         this.plugin = plugin;

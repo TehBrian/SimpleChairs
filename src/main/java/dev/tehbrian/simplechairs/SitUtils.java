@@ -22,9 +22,9 @@ import java.text.MessageFormat;
 
 public final class SitUtils {
 
-    protected final SimpleChairs plugin;
-    protected final ChairsConfig config;
-    protected final PlayerSitData sitData;
+    private final SimpleChairs plugin;
+    private final ChairsConfig config;
+    private final PlayerSitData sitData;
 
     public SitUtils(final SimpleChairs plugin) {
         this.plugin = plugin;
@@ -32,11 +32,11 @@ public final class SitUtils {
         this.sitData = plugin.getPlayerSitData();
     }
 
-    protected static boolean isStairsSittable(final Stairs stairs) {
+    private static boolean isStairsSittable(final Stairs stairs) {
         return (stairs.getHalf() == Half.BOTTOM) && (stairs.getShape() == Shape.STRAIGHT);
     }
 
-    protected static boolean isStairsEndingSign(final BlockFace expectedFacing, final Block block) {
+    private static boolean isStairsEndingSign(final BlockFace expectedFacing, final Block block) {
         final BlockData blockdata = block.getBlockData();
         if (blockdata instanceof WallSign) {
             return expectedFacing == ((WallSign) blockdata).getFacing();
@@ -44,7 +44,7 @@ public final class SitUtils {
         return false;
     }
 
-    protected static boolean isStairsEndingCornerStairs(
+    private static boolean isStairsEndingCornerStairs(
             final BlockFace expectedFacing,
             final Stairs.Shape expectedShape,
             final Block block
@@ -56,7 +56,7 @@ public final class SitUtils {
         return false;
     }
 
-    protected static BlockFace rotL(final BlockFace face) {
+    private static BlockFace rotL(final BlockFace face) {
         switch (face) {
             case NORTH -> {
                 return BlockFace.WEST;
@@ -76,7 +76,7 @@ public final class SitUtils {
         }
     }
 
-    protected static BlockFace rotR(final BlockFace face) {
+    private static BlockFace rotR(final BlockFace face) {
         switch (face) {
             case NORTH -> {
                 return BlockFace.EAST;
@@ -118,7 +118,7 @@ public final class SitUtils {
         }
     }
 
-    protected boolean canSitGeneric(final Player player, final Block block) {
+    private boolean canSitGeneric(final Player player, final Block block) {
 
         if (player.isSneaking()) {
             return false;
@@ -228,7 +228,7 @@ public final class SitUtils {
         return plocation;
     }
 
-    protected int calculateStairsWidth(final BlockFace expectedFace, Block block, final BlockFace searchFace, final int limit) {
+    private int calculateStairsWidth(final BlockFace expectedFace, Block block, final BlockFace searchFace, final int limit) {
         for (int i = 0; i < limit; i++) {
             block = block.getRelative(searchFace);
             final BlockData blockdata = block.getBlockData();
