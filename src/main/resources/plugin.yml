@@ -4,7 +4,7 @@ authors: [ spoothie, cnaude, _Shevchik_, Pugabyte, TehBrian ]
 website: https://github.com/TehBrian/SimpleChairs
 
 version: ${version}
-main: dev.tehbrian.simplechairs.Chairs
+main: dev.tehbrian.simplechairs.SimpleChairs
 api-version: 1.18
 
 commands:

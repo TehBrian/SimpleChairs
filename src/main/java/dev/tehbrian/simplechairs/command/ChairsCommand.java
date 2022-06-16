@@ -1,6 +1,6 @@
 package dev.tehbrian.simplechairs.command;
 
-import dev.tehbrian.simplechairs.Chairs;
+import dev.tehbrian.simplechairs.SimpleChairs;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,11 +12,11 @@ import dev.tehbrian.simplechairs.PlayerSitData;
 
 public class ChairsCommand implements CommandExecutor {
 
-	protected final Chairs plugin;
+	protected final SimpleChairs plugin;
 	protected final ChairsConfig config;
 	protected final PlayerSitData sitdata;
 
-	public ChairsCommand(Chairs plugin) {
+	public ChairsCommand(SimpleChairs plugin) {
 		this.plugin = plugin;
 		this.config = plugin.getChairsConfig();
 		this.sitdata = plugin.getPlayerSitData();

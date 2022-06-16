@@ -22,11 +22,11 @@ import org.bukkit.util.Vector;
 
 public class SitUtils {
 
-	protected final Chairs plugin;
+	protected final SimpleChairs plugin;
 	protected final ChairsConfig config;
 	protected final PlayerSitData sitdata;
 
-	public SitUtils(Chairs plugin) {
+	public SitUtils(SimpleChairs plugin) {
 		this.plugin = plugin;
 		this.config = plugin.getChairsConfig();
 		this.sitdata = plugin.getPlayerSitData();

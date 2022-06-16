@@ -16,14 +16,14 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class PlayerSitData {
 
-	protected final Chairs plugin;
+	protected final SimpleChairs plugin;
 
 	protected final NamespacedKey sitDisabledKey;
 
 	protected final Map<Player, SitData> sittingPlayers = new HashMap<>();
 	protected final Map<Block, Player> occupiedBlocks = new HashMap<>();
 
-	public PlayerSitData(Chairs plugin) {
+	public PlayerSitData(SimpleChairs plugin) {
 		this.plugin = plugin;
 		this.sitDisabledKey = new NamespacedKey(plugin, "SitDisabled");
 	}

@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import dev.tehbrian.simplechairs.Chairs;
+import dev.tehbrian.simplechairs.SimpleChairs;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -17,9 +17,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ChairsConfig {
 
-	protected final Chairs plugin;
+	protected final SimpleChairs plugin;
 
-	public ChairsConfig(Chairs plugin) {
+	public ChairsConfig(SimpleChairs plugin) {
 		this.plugin = plugin;
 	}
 

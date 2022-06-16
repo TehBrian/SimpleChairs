@@ -1,6 +1,6 @@
 package dev.tehbrian.simplechairs.sitaddons;
 
-import dev.tehbrian.simplechairs.Chairs;
+import dev.tehbrian.simplechairs.SimpleChairs;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
@@ -15,13 +15,13 @@ import dev.tehbrian.simplechairs.PlayerSitData;
 
 public class ChairEffects {
 
-	protected final Chairs plugin;
+	protected final SimpleChairs plugin;
 	protected final ChairsConfig config;
 	protected final PlayerSitData sitdata;
 	protected int healTaskID = -1;
 	protected int pickupTaskID = -1;
 
-	public ChairEffects(Chairs plugin) {
+	public ChairEffects(SimpleChairs plugin) {
 		this.plugin = plugin;
 		this.config = plugin.getChairsConfig();
 		this.sitdata = plugin.getPlayerSitData();
