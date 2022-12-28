@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public final class PlayerChairUnsitEvent extends PlayerEvent implements Cancellable {
 
@@ -38,7 +38,7 @@ public final class PlayerChairUnsitEvent extends PlayerEvent implements Cancella
   }
 
   @Override
-  public @NonNull HandlerList getHandlers() {
+  public @NotNull HandlerList getHandlers() {
     return HANDLERS;
   }
 

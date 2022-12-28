@@ -8,7 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
@@ -26,9 +26,9 @@ public final class ChairsCommand implements CommandExecutor {
 
   @Override
   public boolean onCommand(
-      final @NonNull CommandSender sender,
-      final @NonNull Command command,
-      final @NonNull String label,
+      final @NotNull CommandSender sender,
+      final @NotNull Command command,
+      final @NotNull String label,
       final String[] args
   ) {
     if (args.length == 0) {
