@@ -1,6 +1,6 @@
 package dev.tehbrian.simplechairs.listener;
 
-import dev.tehbrian.simplechairs.SimpleChairs;
+import dev.tehbrian.simplechairs.SimpleChairsPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -12,7 +12,7 @@ public final class InvalidPositionLoginListener implements Listener {
 
   private final Logger logger;
 
-  public InvalidPositionLoginListener(final SimpleChairs plugin) {
+  public InvalidPositionLoginListener(final SimpleChairsPlugin plugin) {
     this.logger = plugin.getSLF4JLogger();
   }
 

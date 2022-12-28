@@ -2,7 +2,7 @@ package dev.tehbrian.simplechairs.command;
 
 import dev.tehbrian.simplechairs.LegacyFormatting;
 import dev.tehbrian.simplechairs.PlayerSitData;
-import dev.tehbrian.simplechairs.SimpleChairs;
+import dev.tehbrian.simplechairs.SimpleChairsPlugin;
 import dev.tehbrian.simplechairs.config.ChairsConfig;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,11 +14,11 @@ import java.util.Locale;
 
 public final class ChairsCommand implements CommandExecutor {
 
-  private final SimpleChairs plugin;
+  private final SimpleChairsPlugin plugin;
   private final ChairsConfig config;
   private final PlayerSitData sitData;
 
-  public ChairsCommand(final SimpleChairs plugin) {
+  public ChairsCommand(final SimpleChairsPlugin plugin) {
     this.plugin = plugin;
     this.config = plugin.getChairsConfig();
     this.sitData = plugin.getPlayerSitData();

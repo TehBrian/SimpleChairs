@@ -15,14 +15,14 @@ import java.util.Map;
 
 public final class PlayerSitData {
 
-  private final SimpleChairs plugin;
+  private final SimpleChairsPlugin plugin;
 
   private final NamespacedKey sitDisabledKey;
 
   private final Map<Player, SitData> sittingPlayers = new HashMap<>();
   private final Map<Block, Player> occupiedBlocks = new HashMap<>();
 
-  public PlayerSitData(final SimpleChairs plugin) {
+  public PlayerSitData(final SimpleChairsPlugin plugin) {
     this.plugin = plugin;
     this.sitDisabledKey = new NamespacedKey(plugin, "SitDisabled");
   }

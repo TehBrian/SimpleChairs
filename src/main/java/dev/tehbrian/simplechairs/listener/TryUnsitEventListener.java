@@ -1,6 +1,6 @@
 package dev.tehbrian.simplechairs.listener;
 
-import dev.tehbrian.simplechairs.SimpleChairs;
+import dev.tehbrian.simplechairs.SimpleChairsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -21,10 +21,10 @@ import java.util.UUID;
 
 public final class TryUnsitEventListener implements Listener {
 
-  private final SimpleChairs plugin;
+  private final SimpleChairsPlugin plugin;
   private final Map<UUID, Location> dismountTeleport = new HashMap<>();
 
-  public TryUnsitEventListener(final SimpleChairs plugin) {
+  public TryUnsitEventListener(final SimpleChairsPlugin plugin) {
     this.plugin = plugin;
   }
 

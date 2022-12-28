@@ -1,6 +1,6 @@
 package dev.tehbrian.simplechairs.listener;
 
-import dev.tehbrian.simplechairs.SimpleChairs;
+import dev.tehbrian.simplechairs.SimpleChairsPlugin;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -13,9 +13,9 @@ import org.bukkit.inventory.EquipmentSlot;
 
 public final class TrySitEventListener implements Listener {
 
-  private final SimpleChairs plugin;
+  private final SimpleChairsPlugin plugin;
 
-  public TrySitEventListener(final SimpleChairs plugin) {
+  public TrySitEventListener(final SimpleChairsPlugin plugin) {
     this.plugin = plugin;
   }
 

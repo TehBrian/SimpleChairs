@@ -4,7 +4,7 @@ authors: [ TehBrian, Shevchik, cnaude, spoothie ]
 website: https://github.com/TehBrian/SimpleChairs
 
 version: ${version}
-main: dev.tehbrian.simplechairs.SimpleChairs
+main: dev.tehbrian.simplechairs.SimpleChairsPlugin
 api-version: 1.19
 
 commands:

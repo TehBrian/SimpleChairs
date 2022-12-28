@@ -25,7 +25,7 @@ public final class SitUtils {
   private final ChairsConfig config;
   private final PlayerSitData sitData;
 
-  public SitUtils(final SimpleChairs plugin) {
+  public SitUtils(final SimpleChairsPlugin plugin) {
     this.config = plugin.getChairsConfig();
     this.sitData = plugin.getPlayerSitData();
   }

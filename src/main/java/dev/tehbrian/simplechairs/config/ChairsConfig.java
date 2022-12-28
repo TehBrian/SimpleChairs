@@ -1,6 +1,6 @@
 package dev.tehbrian.simplechairs.config;
 
-import dev.tehbrian.simplechairs.SimpleChairs;
+import dev.tehbrian.simplechairs.SimpleChairsPlugin;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -41,7 +41,7 @@ public final class ChairsConfig {
   private static final String MSG_SIT_ENABLED_PATH = "enabled";
   private static final String MSG_SIT_DISABLED_PATH = "disabled";
 
-  private final SimpleChairs plugin;
+  private final SimpleChairsPlugin plugin;
 
   private final Set<String> sitDisabledWorlds = new HashSet<>();
   private final Map<Material, Double> sitAdditionalBlocks = new EnumMap<>(Material.class);
@@ -63,7 +63,7 @@ public final class ChairsConfig {
   private String msgSitDisabled = "&7You have disabled chairs for yourself.";
   private String msgSitEnabled = "&7You have enabled chairs for yourself.";
 
-  public ChairsConfig(final SimpleChairs plugin) {
+  public ChairsConfig(final SimpleChairsPlugin plugin) {
     this.plugin = plugin;
   }
 

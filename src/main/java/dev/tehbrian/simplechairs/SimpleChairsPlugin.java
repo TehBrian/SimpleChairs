@@ -1,11 +1,14 @@
 package dev.tehbrian.simplechairs;
 
+import dev.tehbrian.simplechairs.api.SimpleChairs;
 import dev.tehbrian.simplechairs.command.ChairsCommand;
 import dev.tehbrian.simplechairs.config.ChairsConfig;
 import dev.tehbrian.simplechairs.listener.InvalidPositionLoginListener;
 import dev.tehbrian.simplechairs.listener.TrySitEventListener;
 import dev.tehbrian.simplechairs.listener.TryUnsitEventListener;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.spigotmc.event.entity.EntityDismountEvent;
@@ -16,19 +19,19 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
-public final class SimpleChairs extends JavaPlugin {
+public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs {
 
-  private static SimpleChairs instance;
+  private static SimpleChairsPlugin instance;
 
   private final ChairsConfig config = new ChairsConfig(this);
   private final PlayerSitData sitData = new PlayerSitData(this);
   private final SitUtils utils = new SitUtils(this);
 
-  public SimpleChairs() {
+  public SimpleChairsPlugin() {
     instance = this;
   }
 
-  public static SimpleChairs getInstance() {
+  public static SimpleChairsPlugin getInstance() {
     return instance;
   }
 
@@ -96,6 +99,34 @@ public final class SimpleChairs extends JavaPlugin {
   @Override
   public void reloadConfig() {
     this.config.loadFromConfig();
+  }
+
+  public boolean isSitting(final Player player) {
+    return getPlayerSitData().isSitting(player);
+  }
+
+  public boolean isBlockOccupied(final Block block) {
+    return getPlayerSitData().isBlockOccupied(block);
+  }
+
+  public Player getBlockOccupiedBy(final Block block) {
+    return getPlayerSitData().getPlayerOnChair(block);
+  }
+
+  public boolean sit(final Player player, final Block blockToOccupy, final Location sitLocation) {
+    return getPlayerSitData().sitPlayer(player, blockToOccupy, sitLocation);
+  }
+
+  public void unsit(final Player player) {
+    getPlayerSitData().unsitPlayerForce(player, true);
+  }
+
+  public void setSittingDisabled(final Player player, final boolean bool) {
+    getPlayerSitData().setSittingDisabled(player, bool);
+  }
+
+  public boolean isSittingDisabled(final Player player) {
+    return getPlayerSitData().isSittingDisabled(player);
   }
 
 }
