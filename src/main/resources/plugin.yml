@@ -17,8 +17,8 @@ commands:
 
 permissions:
   chairs.reload:
-    description: Allows you to reload the plugin configuration.
+    description: Permission to reload the plugin configuration.
     default: op
   chairs.sit:
-    description: Allows you to sit on a chair.
+    description: Permission to sit on a chair.
     default: true
