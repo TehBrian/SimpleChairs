@@ -1,6 +1,6 @@
 name: SimpleChairs
 description: ${description}
-authors: [ spoothie, cnaude, _Shevchik_, Pugabyte, TehBrian ]
+authors: [ TehBrian, Shevchik, cnaude, spoothie ]
 website: https://github.com/TehBrian/SimpleChairs
 
 version: ${version}
