@@ -6,11 +6,11 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public final class LegacyFormatting {
 
-    private LegacyFormatting() {
-    }
+  private LegacyFormatting() {
+  }
 
-    public static @NonNull Component on(final String s) {
-        return LegacyComponentSerializer.legacyAmpersand().deserialize(s);
-    }
+  public static @NonNull Component on(final String s) {
+    return LegacyComponentSerializer.legacyAmpersand().deserialize(s);
+  }
 
 }

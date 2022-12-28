@@ -9,41 +9,41 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public final class PlayerChairSitEvent extends PlayerEvent implements Cancellable {
 
-    private static final HandlerList HANDLERS = new HandlerList();
+  private static final HandlerList HANDLERS = new HandlerList();
 
-    private boolean cancelled = false;
-    private Location sitLocation;
+  private boolean cancelled = false;
+  private Location sitLocation;
 
-    public PlayerChairSitEvent(final Player who, final Location sitLocation) {
-        super(who);
-        this.sitLocation = sitLocation;
-    }
+  public PlayerChairSitEvent(final Player who, final Location sitLocation) {
+    super(who);
+    this.sitLocation = sitLocation;
+  }
 
-    public static HandlerList getHandlerList() {
-        return HANDLERS;
-    }
+  public static HandlerList getHandlerList() {
+    return HANDLERS;
+  }
 
-    public Location getSitLocation() {
-        return this.sitLocation.clone();
-    }
+  public Location getSitLocation() {
+    return this.sitLocation.clone();
+  }
 
-    public void setSitLocation(final Location location) {
-        this.sitLocation = location.clone();
-    }
+  public void setSitLocation(final Location location) {
+    this.sitLocation = location.clone();
+  }
 
-    @Override
-    public @NonNull HandlerList getHandlers() {
-        return HANDLERS;
-    }
+  @Override
+  public @NonNull HandlerList getHandlers() {
+    return HANDLERS;
+  }
 
-    @Override
-    public boolean isCancelled() {
-        return this.cancelled;
-    }
+  @Override
+  public boolean isCancelled() {
+    return this.cancelled;
+  }
 
-    @Override
-    public void setCancelled(final boolean cancelled) {
-        this.cancelled = cancelled;
-    }
+  @Override
+  public void setCancelled(final boolean cancelled) {
+    this.cancelled = cancelled;
+  }
 
 }

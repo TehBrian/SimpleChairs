@@ -14,56 +14,56 @@ import java.util.Locale;
 
 public final class ChairsCommand implements CommandExecutor {
 
-    private final SimpleChairs plugin;
-    private final ChairsConfig config;
-    private final PlayerSitData sitData;
+  private final SimpleChairs plugin;
+  private final ChairsConfig config;
+  private final PlayerSitData sitData;
 
-    public ChairsCommand(final SimpleChairs plugin) {
-        this.plugin = plugin;
-        this.config = plugin.getChairsConfig();
-        this.sitData = plugin.getPlayerSitData();
+  public ChairsCommand(final SimpleChairs plugin) {
+    this.plugin = plugin;
+    this.config = plugin.getChairsConfig();
+    this.sitData = plugin.getPlayerSitData();
+  }
+
+  @Override
+  public boolean onCommand(
+      final @NonNull CommandSender sender,
+      final @NonNull Command command,
+      final @NonNull String label,
+      final String[] args
+  ) {
+    if (args.length == 0) {
+      return false;
     }
 
-    @Override
-    public boolean onCommand(
-            final @NonNull CommandSender sender,
-            final @NonNull Command command,
-            final @NonNull String label,
-            final String[] args
-    ) {
-        if (args.length == 0) {
-            return false;
-        }
+    final var lowercaseArg = args[0].toLowerCase(Locale.ROOT);
 
-        final var lowercaseArg = args[0].toLowerCase(Locale.ROOT);
-
-        if (lowercaseArg.equals("reload")) {
-            if (sender.hasPermission("chairs.reload")) {
-                this.plugin.reloadConfig();
-                sender.sendMessage(LegacyFormatting.on("&aChairs configuration reloaded."));
-            } else {
-                sender.sendMessage(LegacyFormatting.on("&cYou don't have permission to do this."));
-            }
-            return true;
-        }
-
-        if (sender instanceof final Player player) {
-            switch (lowercaseArg) {
-                case "on" -> {
-                    this.sitData.setSittingDisabled(player, false);
-                    player.sendMessage(LegacyFormatting.on(this.config.msgSitEnabled()));
-                }
-                case "off" -> {
-                    this.sitData.setSittingDisabled(player, true);
-                    player.sendMessage(LegacyFormatting.on(this.config.msgSitDisabled()));
-                }
-                default -> {
-                    return false;
-                }
-            }
-        }
-
-        return true;
+    if (lowercaseArg.equals("reload")) {
+      if (sender.hasPermission("chairs.reload")) {
+        this.plugin.reloadConfig();
+        sender.sendMessage(LegacyFormatting.on("&aChairs configuration reloaded."));
+      } else {
+        sender.sendMessage(LegacyFormatting.on("&cYou don't have permission to do this."));
+      }
+      return true;
     }
+
+    if (sender instanceof final Player player) {
+      switch (lowercaseArg) {
+        case "on" -> {
+          this.sitData.setSittingDisabled(player, false);
+          player.sendMessage(LegacyFormatting.on(this.config.msgSitEnabled()));
+        }
+        case "off" -> {
+          this.sitData.setSittingDisabled(player, true);
+          player.sendMessage(LegacyFormatting.on(this.config.msgSitDisabled()));
+        }
+        default -> {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
 
 }

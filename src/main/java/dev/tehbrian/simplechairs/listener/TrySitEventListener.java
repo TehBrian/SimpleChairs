@@ -14,23 +14,23 @@ import org.bukkit.inventory.EquipmentSlot;
 @SuppressWarnings("ClassCanBeRecord")
 public final class TrySitEventListener implements Listener {
 
-    private final SimpleChairs plugin;
+  private final SimpleChairs plugin;
 
-    public TrySitEventListener(final SimpleChairs plugin) {
-        this.plugin = plugin;
+  public TrySitEventListener(final SimpleChairs plugin) {
+    this.plugin = plugin;
+  }
+
+  @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+  public void onPlayerInteract(final PlayerInteractEvent event) {
+    if ((event.getAction() == Action.RIGHT_CLICK_BLOCK) && (event.getHand() == EquipmentSlot.HAND)) {
+      final Player player = event.getPlayer();
+      final Block block = event.getClickedBlock();
+
+      final Location sitLocation = this.plugin.getSitUtils().calculateSitLocation(player, block);
+      if ((sitLocation != null) && this.plugin.getPlayerSitData().sitPlayer(player, block, sitLocation)) {
+        event.setCancelled(true);
+      }
     }
-
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onPlayerInteract(final PlayerInteractEvent event) {
-        if ((event.getAction() == Action.RIGHT_CLICK_BLOCK) && (event.getHand() == EquipmentSlot.HAND)) {
-            final Player player = event.getPlayer();
-            final Block block = event.getClickedBlock();
-
-            final Location sitLocation = this.plugin.getSitUtils().calculateSitLocation(player, block);
-            if ((sitLocation != null) && this.plugin.getPlayerSitData().sitPlayer(player, block, sitLocation)) {
-                event.setCancelled(true);
-            }
-        }
-    }
+  }
 
 }
