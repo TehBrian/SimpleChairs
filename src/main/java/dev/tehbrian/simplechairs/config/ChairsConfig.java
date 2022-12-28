@@ -51,7 +51,7 @@ public final class ChairsConfig {
   private int sitArrowResitInterval = 1000;
   private boolean sitStairsEnabled = true;
   private boolean sitStairsRotatePlayer = true;
-  private int sitStairsMaxWidth = 16;
+  private int sitStairsMaxWidth = 0;
   private boolean sitStairsSpecialEndEnabled = false;
   private boolean sitStairsSpecialEndSign = false;
   private boolean sitStairsSpecialEndCornerStairs = false;
