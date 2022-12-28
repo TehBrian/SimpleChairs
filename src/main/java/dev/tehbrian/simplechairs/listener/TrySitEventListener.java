@@ -11,7 +11,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
-@SuppressWarnings("ClassCanBeRecord")
 public final class TrySitEventListener implements Listener {
 
   private final SimpleChairs plugin;
