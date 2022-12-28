@@ -253,34 +253,4 @@ public final class SitUtils {
     }
     return limit;
   }
-
-//    private boolean checkFrame(Block block, BlockFace face, Player player) {
-//        // Go through the blocks next to the clicked block and check if are signs on the end.
-//
-//        for (int i = 1; i <= plugin.maxChairWidth + 2; i++) {
-//            Block relative = block.getRelative(face, i);
-//            if (checkDirection(block, relative)) {
-//                continue;
-//            }
-//            if (relative.getType().equals(Material.AIR)) {
-//                int x = relative.getLocation().getBlockX();
-//                int y = relative.getLocation().getBlockY();
-//                int z = relative.getLocation().getBlockZ();
-//                for (Entity e : player.getNearbyEntities(plugin.maxDistance, plugin.maxDistance, plugin.maxDistance)) {
-//                    if (e instanceof ItemFrame && plugin.validSigns.contains(Material.ITEM_FRAME)) {
-//                        int x2 = e.getLocation().getBlockX();
-//                        int y2 = e.getLocation().getBlockY();
-//                        int z2 = e.getLocation().getBlockZ();
-//                        if (x == x2 && y == y2 && z == z2) {
-//                            return true;
-//                        }
-//                    }
-//                }
-//                return false;
-//            } else {
-//                return false;
-//            }
-//        }
-//        return false;
-//    }
 }
