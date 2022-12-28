@@ -121,7 +121,7 @@ public final class SitUtils {
     if (player.isSneaking()) {
       return false;
     }
-    if (!player.hasPermission("chairs.sit")) {
+    if (!player.hasPermission(Permissions.SIT)) {
       return false;
     }
 
@@ -253,4 +253,5 @@ public final class SitUtils {
     }
     return limit;
   }
+
 }

@@ -1,16 +1,19 @@
 package dev.tehbrian.simplechairs.command;
 
 import dev.tehbrian.simplechairs.LegacyFormatting;
+import dev.tehbrian.simplechairs.Permissions;
 import dev.tehbrian.simplechairs.SimpleChairsPlugin;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
-public final class ChairsCommand implements CommandExecutor {
+public final class ChairsCommand implements TabExecutor {
 
   private final SimpleChairsPlugin plugin;
 
@@ -23,7 +26,7 @@ public final class ChairsCommand implements CommandExecutor {
       final @NotNull CommandSender sender,
       final @NotNull Command command,
       final @NotNull String label,
-      final String[] args
+      final @NotNull String[] args
   ) {
     if (args.length == 0) {
       return false;
@@ -32,7 +35,7 @@ public final class ChairsCommand implements CommandExecutor {
     final var lowerArg = args[0].toLowerCase(Locale.ROOT);
 
     if (lowerArg.equals("reload")) {
-      if (sender.hasPermission("chairs.reload")) {
+      if (sender.hasPermission(Permissions.RELOAD)) {
         this.plugin.reloadConfig();
         sender.sendMessage(LegacyFormatting.on("&aChairs configuration reloaded."));
       } else {
@@ -58,6 +61,27 @@ public final class ChairsCommand implements CommandExecutor {
     }
 
     return true;
+  }
+
+  @Override
+  public @NotNull List<String> onTabComplete(
+      final @NotNull CommandSender sender,
+      final @NotNull Command command,
+      final @NotNull String label,
+      final @NotNull String[] args
+  ) {
+    final List<String> suggestions = new ArrayList<>();
+
+    if (sender.hasPermission(Permissions.RELOAD)) {
+      suggestions.add("reload");
+    }
+
+    if (sender instanceof Player) {
+      suggestions.add("on");
+      suggestions.add("off");
+    }
+
+    return suggestions;
   }
 
 }
