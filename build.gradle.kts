@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "xyz.tehbrian"
-version = "0.2.0-SNAPSHOT"
+version = "0.2.0"
 description = "Allows players to sit on chairs, such as stairs or slabs."
 
 java {
