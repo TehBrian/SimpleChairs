@@ -21,19 +21,9 @@ import java.util.Objects;
 
 public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs {
 
-  private static SimpleChairsPlugin instance;
-
   private final ChairsConfig config = new ChairsConfig(this);
   private final PlayerSitData sitData = new PlayerSitData(this);
   private final SitUtils utils = new SitUtils(this);
-
-  public SimpleChairsPlugin() {
-    instance = this;
-  }
-
-  public static SimpleChairsPlugin getInstance() {
-    return instance;
-  }
 
   public ChairsConfig getChairsConfig() {
     return this.config;
@@ -58,7 +48,7 @@ public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs
     }
 
     try {
-      // data folder may not exist on first start-up
+      // data folder may not exist on first start-up.
       if (Files.notExists(this.getDataFolder().toPath())) {
         Files.createDirectory(this.getDataFolder().toPath());
       }
@@ -102,31 +92,31 @@ public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs
   }
 
   public boolean isSitting(final Player player) {
-    return getPlayerSitData().isSitting(player);
+    return this.getPlayerSitData().isSitting(player);
   }
 
   public boolean isBlockOccupied(final Block block) {
-    return getPlayerSitData().isBlockOccupied(block);
+    return this.getPlayerSitData().isBlockOccupied(block);
   }
 
   public Player getBlockOccupiedBy(final Block block) {
-    return getPlayerSitData().getPlayerOnChair(block);
+    return this.getPlayerSitData().getPlayerOnChair(block);
   }
 
   public boolean sit(final Player player, final Block blockToOccupy, final Location sitLocation) {
-    return getPlayerSitData().sitPlayer(player, blockToOccupy, sitLocation);
+    return this.getPlayerSitData().sitPlayer(player, blockToOccupy, sitLocation);
   }
 
   public void unsit(final Player player) {
-    getPlayerSitData().unsitPlayerForce(player, true);
+    this.getPlayerSitData().unsitPlayerForce(player, true);
   }
 
   public void setSittingDisabled(final Player player, final boolean bool) {
-    getPlayerSitData().setSittingDisabled(player, bool);
+    this.getPlayerSitData().setSittingDisabled(player, bool);
   }
 
   public boolean isSittingDisabled(final Player player) {
-    return getPlayerSitData().isSittingDisabled(player);
+    return this.getPlayerSitData().isSittingDisabled(player);
   }
 
 }

@@ -22,12 +22,12 @@ import java.text.MessageFormat;
 
 public final class SitUtils {
 
+  private final SimpleChairsPlugin plugin;
   private final ChairsConfig config;
-  private final PlayerSitData sitData;
 
   public SitUtils(final SimpleChairsPlugin plugin) {
+    this.plugin = plugin;
     this.config = plugin.getChairsConfig();
-    this.sitData = plugin.getPlayerSitData();
   }
 
   private static boolean isStairsSittable(final Stairs stairs) {
@@ -140,13 +140,14 @@ public final class SitUtils {
       return false;
     }
 
-    if (this.sitData.isSittingDisabled(player)) {
+    final PlayerSitData sitData = this.plugin.getPlayerSitData();
+    if (sitData.isSittingDisabled(player)) {
       return false;
     }
-    if (this.sitData.isSitting(player)) {
+    if (sitData.isSitting(player)) {
       return false;
     }
-    return !this.sitData.isBlockOccupied(block);
+    return !sitData.isBlockOccupied(block);
   }
 
   public Location calculateSitLocation(final Player player, final Block block) {
