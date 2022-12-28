@@ -1,8 +1,9 @@
 plugins {
     id("java")
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("xyz.jpenilla.run-paper") version "1.0.6"
-    id("net.kyori.indra.checkstyle") version "2.1.1"
+    id("xyz.jpenilla.run-paper") version "2.0.1"
+    id("net.kyori.indra.checkstyle") version "3.0.1"
+    id("com.github.ben-manes.versions") version "0.44.0"
 }
 
 group = "xyz.tehbrian"
@@ -15,13 +16,11 @@ java {
 
 repositories {
     mavenCentral()
-    maven("https://papermc.io/repo/repository/maven-public/") {
-        name = "papermc"
-    }
+    maven("https://papermc.io/repo/repository/maven-public/")
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT")
 }
 
 tasks {
@@ -33,12 +32,15 @@ tasks {
         expand("version" to project.version, "description" to project.description)
     }
 
+    base {
+        archivesName.set("SimpleChairs")
+    }
+
     shadowJar {
-        archiveBaseName.set("SimpleChairs")
         archiveClassifier.set("")
     }
 
     runServer {
-        minecraftVersion("1.19")
+        minecraftVersion("1.19.3")
     }
 }
