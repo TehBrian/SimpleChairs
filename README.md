@@ -8,7 +8,7 @@ Allows players to sit on chairs, such as stairs or slabs.
 ---
 
 ## About
-This plugin is a fork of [Shevchik's ChairsReloaded](shevchik-cr)
+This plugin is a fork of [Shevchik's ChairsReloaded][shevchik-cr]
 with its less important features plucked out and an improved codebase.
 
 Although there are some neat configuration options to mess with, this plugin
