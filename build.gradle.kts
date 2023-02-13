@@ -1,12 +1,12 @@
 plugins {
   id("java")
-  id("com.github.johnrengelman.shadow") version "7.1.2"
-  id("xyz.jpenilla.run-paper") version "2.0.1"
-  id("net.kyori.indra.checkstyle") version "3.0.1"
-  id("com.github.ben-manes.versions") version "0.44.0"
+  id("com.github.johnrengelman.shadow") version "8.1.1"
+  id("xyz.jpenilla.run-paper") version "2.2.0"
+  id("net.kyori.indra.checkstyle") version "3.1.3"
+  id("com.github.ben-manes.versions") version "0.49.0"
 }
 
-group = "xyz.tehbrian"
+group = "dev.tehbrian"
 version = "0.2.0"
 description = "Allows players to sit on chairs, such as stairs or slabs."
 
@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-  compileOnly("io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT")
+  compileOnly("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT")
 }
 
 tasks {
@@ -41,6 +41,6 @@ tasks {
   }
 
   runServer {
-    minecraftVersion("1.19.3")
+    minecraftVersion("1.20.2")
   }
 }

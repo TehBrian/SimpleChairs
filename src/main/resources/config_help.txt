@@ -1,5 +1,5 @@
 # ------
-# A list of all material names: https://jd.papermc.io/paper/1.19/org/bukkit/Material.html
+# A list of all material names: https://jd.papermc.io/paper/1.20/org/bukkit/Material.html
 # ------
 # sit-config:
 #   disabled-worlds:      list of worlds in which sitting is disabled.
