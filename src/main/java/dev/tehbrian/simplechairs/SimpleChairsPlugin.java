@@ -10,8 +10,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDismountEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.spigotmc.event.entity.EntityDismountEvent;
 
 import java.io.File;
 import java.io.IOException;
