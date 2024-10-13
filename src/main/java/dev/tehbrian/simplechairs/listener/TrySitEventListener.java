@@ -13,23 +13,23 @@ import org.bukkit.inventory.EquipmentSlot;
 
 public final class TrySitEventListener implements Listener {
 
-  private final SimpleChairsPlugin plugin;
+	private final SimpleChairsPlugin plugin;
 
-  public TrySitEventListener(final SimpleChairsPlugin plugin) {
-    this.plugin = plugin;
-  }
+	public TrySitEventListener(final SimpleChairsPlugin plugin) {
+		this.plugin = plugin;
+	}
 
-  @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-  public void onPlayerInteract(final PlayerInteractEvent event) {
-    if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getHand() == EquipmentSlot.HAND) {
-      final Player player = event.getPlayer();
-      final Block block = event.getClickedBlock();
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	public void onPlayerInteract(final PlayerInteractEvent event) {
+		if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getHand() == EquipmentSlot.HAND) {
+			final Player player = event.getPlayer();
+			final Block block = event.getClickedBlock();
 
-      final Location perch = this.plugin.getSitUtils().calculatePerch(player, block);
-      if (perch != null && this.plugin.getSitService().sit(player, block, perch)) {
-        event.setCancelled(true);
-      }
-    }
-  }
+			final Location perch = this.plugin.getSitUtils().calculatePerch(player, block);
+			if (perch != null && this.plugin.getSitService().sit(player, block, perch)) {
+				event.setCancelled(true);
+			}
+		}
+	}
 
 }

@@ -5,11 +5,11 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 public final class Formatting {
 
-  private Formatting() {
-  }
+	private Formatting() {
+	}
 
-  public static Component legacy(final String s) {
-    return LegacyComponentSerializer.legacyAmpersand().deserialize(s);
-  }
+	public static Component legacy(final String s) {
+		return LegacyComponentSerializer.legacyAmpersand().deserialize(s);
+	}
 
 }

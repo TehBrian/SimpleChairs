@@ -1,4 +1,5 @@
 # SimpleChairs
+
 Allows players to sit on chairs, such as stairs or slabs.
 
 * [Download](https://modrinth.com/plugin/simplechairs)
@@ -8,6 +9,7 @@ Allows players to sit on chairs, such as stairs or slabs.
 ---
 
 ## About
+
 This plugin is a fork of [Shevchik's ChairsReloaded][shevchik-cr]
 with its less important features plucked out and an improved codebase.
 
@@ -17,5 +19,6 @@ is as straightforward as clicking on a chair to sit on it. Simple, right?
 [shevchik-cr]: https://dev.bukkit.org/projects/chairsreloaded
 
 ## Usage
+
 ![usage](assets/usage.gif)
 

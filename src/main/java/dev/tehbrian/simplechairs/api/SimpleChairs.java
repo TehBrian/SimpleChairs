@@ -7,18 +7,18 @@ import org.jspecify.annotations.Nullable;
 
 public interface SimpleChairs {
 
-  boolean isSitting(Player player);
+	boolean isSitting(Player player);
 
-  boolean sit(Player player, Block blockToOccupy, Location perch);
+	boolean sit(Player player, Block blockToOccupy, Location perch);
 
-  void unsit(Player player);
+	void unsit(Player player);
 
-  boolean isBlockOccupied(Block block);
+	boolean isBlockOccupied(Block block);
 
-  @Nullable Player getBlockOccupant(Block block);
+	@Nullable Player getBlockOccupant(Block block);
 
-  boolean isSittingDisabled(Player player);
+	boolean isSittingDisabled(Player player);
 
-  void setSittingDisabled(Player player, boolean sittingDisabled);
+	void setSittingDisabled(Player player, boolean sittingDisabled);
 
 }
