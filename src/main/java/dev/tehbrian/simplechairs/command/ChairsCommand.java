@@ -1,6 +1,5 @@
 package dev.tehbrian.simplechairs.command;
 
-import dev.tehbrian.simplechairs.LegacyFormatting;
 import dev.tehbrian.simplechairs.Permissions;
 import dev.tehbrian.simplechairs.SimpleChairsPlugin;
 import org.bukkit.command.Command;
@@ -12,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import static dev.tehbrian.simplechairs.Formatting.legacy;
 
 public final class ChairsCommand implements TabExecutor {
 
@@ -37,9 +38,9 @@ public final class ChairsCommand implements TabExecutor {
     if (lowerArg.equals("reload")) {
       if (sender.hasPermission(Permissions.RELOAD)) {
         this.plugin.reloadConfig();
-        sender.sendMessage(LegacyFormatting.on("&aChairs configuration reloaded."));
+        sender.sendMessage(legacy("&aChairs configuration reloaded."));
       } else {
-        sender.sendMessage(LegacyFormatting.on("&cYou don't have permission to do this."));
+        sender.sendMessage(legacy("&cYou don't have permission to do this."));
       }
       return true;
     }
@@ -47,12 +48,12 @@ public final class ChairsCommand implements TabExecutor {
     if (sender instanceof final Player player) {
       switch (lowerArg) {
         case "on" -> {
-          this.plugin.getPlayerSitData().setSittingDisabled(player, false);
-          player.sendMessage(LegacyFormatting.on(this.plugin.getChairsConfig().msgSitEnabled()));
+          this.plugin.getSitService().setSittingDisabled(player, false);
+          player.sendMessage(legacy(this.plugin.getChairsConfig().msgSitEnabled()));
         }
         case "off" -> {
-          this.plugin.getPlayerSitData().setSittingDisabled(player, true);
-          player.sendMessage(LegacyFormatting.on(this.plugin.getChairsConfig().msgSitDisabled()));
+          this.plugin.getSitService().setSittingDisabled(player, true);
+          player.sendMessage(legacy(this.plugin.getChairsConfig().msgSitDisabled()));
         }
         default -> {
           return false;

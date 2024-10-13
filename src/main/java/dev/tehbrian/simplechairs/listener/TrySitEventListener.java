@@ -26,7 +26,7 @@ public final class TrySitEventListener implements Listener {
       final Block block = event.getClickedBlock();
 
       final Location sitLocation = this.plugin.getSitUtils().calculateSitLocation(player, block);
-      if (sitLocation != null && this.plugin.getPlayerSitData().sitPlayer(player, block, sitLocation)) {
+      if (sitLocation != null && this.plugin.getSitService().sitPlayer(player, block, sitLocation)) {
         event.setCancelled(true);
       }
     }

@@ -1,6 +1,6 @@
 package dev.tehbrian.simplechairs.listener;
 
-import dev.tehbrian.simplechairs.PlayerSitData;
+import dev.tehbrian.simplechairs.PlayerSitService;
 import dev.tehbrian.simplechairs.SimpleChairsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -32,9 +32,9 @@ public final class TryUnsitEventListener implements Listener {
   @EventHandler(priority = EventPriority.LOWEST)
   public void onPlayerTeleport(final PlayerTeleportEvent event) {
     final Player player = event.getPlayer();
-    final PlayerSitData sitData = this.plugin.getPlayerSitData();
-    if (sitData.isSitting(player)) {
-      sitData.unsitPlayerForce(player, false);
+    final PlayerSitService sitService = this.plugin.getSitService();
+    if (sitService.isSitting(player)) {
+      sitService.unsitPlayerForce(player, false);
     } else if (event.getCause() == TeleportCause.UNKNOWN) {
       final Location preDismountLocation = this.dismountTeleport.remove(player.getUniqueId());
       if (preDismountLocation != null) {
@@ -46,38 +46,38 @@ public final class TryUnsitEventListener implements Listener {
   @EventHandler(priority = EventPriority.LOWEST)
   public void onPlayerQuit(final PlayerQuitEvent event) {
     final Player player = event.getPlayer();
-    final PlayerSitData sitData = this.plugin.getPlayerSitData();
-    if (sitData.isSitting(player)) {
-      sitData.unsitPlayerForce(player, true);
+    final PlayerSitService sitService = this.plugin.getSitService();
+    if (sitService.isSitting(player)) {
+      sitService.unsitPlayerForce(player, true);
     }
   }
 
   @EventHandler(priority = EventPriority.LOWEST)
   public void onPlayerDeath(final PlayerDeathEvent event) {
     final Player player = event.getEntity();
-    final PlayerSitData sitData = this.plugin.getPlayerSitData();
-    if (sitData.isSitting(player)) {
-      sitData.unsitPlayerForce(player, false);
+    final PlayerSitService sitService = this.plugin.getSitService();
+    if (sitService.isSitting(player)) {
+      sitService.unsitPlayerForce(player, false);
     }
   }
 
   @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
   public void onBlockBreak(final BlockBreakEvent event) {
     final Block b = event.getBlock();
-    final PlayerSitData sitData = this.plugin.getPlayerSitData();
-    if (sitData.isBlockOccupied(b)) {
-      final Player player = sitData.getPlayerOnChair(b);
-      sitData.unsitPlayerForce(player, true);
+    final PlayerSitService sitService = this.plugin.getSitService();
+    if (sitService.isBlockOccupied(b)) {
+      final Player player = sitService.getPlayerOnChair(b);
+      sitService.unsitPlayerForce(player, true);
     }
   }
 
   @EventHandler(priority = EventPriority.LOWEST)
   public void onExitVehicle(final EntityDismountEvent e) {
     if (e.getEntity() instanceof final Player player) {
-      final PlayerSitData sitData = this.plugin.getPlayerSitData();
-      if (sitData.isSitting(player)) {
+      final PlayerSitService sitService = this.plugin.getSitService();
+      if (sitService.isSitting(player)) {
         final Location preDismountLocation = player.getLocation();
-        if (!sitData.unsitPlayer(player)) {
+        if (!sitService.unsitPlayer(player)) {
           e.setCancelled(true);
         } else {
           final UUID playerUuid = player.getUniqueId();

@@ -5,8 +5,6 @@
 #   disabled-worlds:      list of worlds in which sitting is disabled.
 #   require-empty-hand:   whether to require that players have an empty hand to sit.
 #   max-distance:         the maximum distance between the chair (center of the block) and the player for them to be able to sit. lower values may prevent glitching through walls.
-#   chair-entity-type:    entity type to sit players on. allowed values are ARROW or ARMOR_STAND.
-#   arrow-resit-interval: how often to resit player in ticks. value cannot be more than 1000 due to client-side prediction arrow removal delay.
 #   stairs:               configuration specific to stairs.
 #     enabled:            enables all stairs to function as chairs.
 #     rotate-player:      whether to rotate player to face the descending side of the stairs when they sit.

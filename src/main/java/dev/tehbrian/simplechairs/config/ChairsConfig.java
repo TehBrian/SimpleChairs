@@ -21,8 +21,6 @@ public final class ChairsConfig {
   private static final String SIT_DISABLED_WORLDS_PATH = "disabled-worlds";
   private static final String SIT_MAX_DISTANCE_PATH = "max-distance";
   private static final String SIT_REQUIRE_EMPTY_HAND_PATH = "require-empty-hand";
-  private static final String SIT_CHAIR_ENTITY_TYPE_PATH = "chair-entity-type";
-  private static final String SIT_ARROW_RESIT_INTERVAL_PATH = "arrow-resit-interval";
   private static final String SIT_STAIRS_SECTION_PATH = "stairs";
   private static final String SIT_STAIRS_ENABLED_PATH = "enabled";
   private static final String SIT_STAIRS_ROTATE_PLAYER_PATH = "rotate-player";
@@ -47,8 +45,6 @@ public final class ChairsConfig {
   private final Map<Material, Double> sitAdditionalBlocks = new EnumMap<>(Material.class);
   private boolean sitRequireEmptyHand = false;
   private double sitMaxDistance = 3;
-  private ChairEntityType sitChairEntityType = ChairEntityType.ARROW;
-  private int sitArrowResitInterval = 1000;
   private boolean sitStairsEnabled = true;
   private boolean sitStairsRotatePlayer = true;
   private int sitStairsMaxWidth = 0;
@@ -86,14 +82,6 @@ public final class ChairsConfig {
       this.sitDisabledWorlds.addAll(sitSection.getStringList(SIT_DISABLED_WORLDS_PATH));
       this.sitRequireEmptyHand = sitSection.getBoolean(SIT_REQUIRE_EMPTY_HAND_PATH, this.sitRequireEmptyHand());
       this.sitMaxDistance = sitSection.getDouble(SIT_MAX_DISTANCE_PATH, this.sitMaxDistance());
-      this.sitChairEntityType = ChairEntityType.fromString(sitSection.getString(
-          SIT_CHAIR_ENTITY_TYPE_PATH,
-          this.sitChairEntityType().name()
-      ));
-      this.sitArrowResitInterval = sitSection.getInt(SIT_ARROW_RESIT_INTERVAL_PATH, this.sitArrowResitInterval());
-      if (this.sitArrowResitInterval() > 1000) {
-        this.sitArrowResitInterval = 1000;
-      }
 
       final var sitStairsSection = sitSection.getConfigurationSection(SIT_STAIRS_SECTION_PATH);
       if (sitStairsSection != null) {
@@ -154,8 +142,6 @@ public final class ChairsConfig {
     sitSection.set(SIT_DISABLED_WORLDS_PATH, new ArrayList<>(this.sitDisabledWorlds()));
     sitSection.set(SIT_REQUIRE_EMPTY_HAND_PATH, this.sitRequireEmptyHand());
     sitSection.set(SIT_MAX_DISTANCE_PATH, this.sitMaxDistance());
-    sitSection.set(SIT_CHAIR_ENTITY_TYPE_PATH, this.sitChairEntityType().name());
-    sitSection.set(SIT_ARROW_RESIT_INTERVAL_PATH, this.sitArrowResitInterval());
 
     final ConfigurationSection sitStairsSection = sitSection.createSection(SIT_STAIRS_SECTION_PATH);
     sitStairsSection.set(SIT_STAIRS_ENABLED_PATH, this.sitStairsEnabled());
@@ -205,14 +191,6 @@ public final class ChairsConfig {
     return this.sitMaxDistance;
   }
 
-  public ChairEntityType sitChairEntityType() {
-    return this.sitChairEntityType;
-  }
-
-  public int sitArrowResitInterval() {
-    return this.sitArrowResitInterval;
-  }
-
   public boolean sitStairsEnabled() {
     return this.sitStairsEnabled;
   }
@@ -259,19 +237,6 @@ public final class ChairsConfig {
 
   public String msgSitEnabled() {
     return this.msgSitEnabled;
-  }
-
-  public enum ChairEntityType {
-    ARROW,
-    ARMOR_STAND;
-
-    public static ChairEntityType fromString(final String string) {
-      try {
-        return ChairEntityType.valueOf(string);
-      } catch (final IllegalArgumentException e) {
-        return ChairEntityType.ARMOR_STAND;
-      }
-    }
   }
 
 }

@@ -3,12 +3,12 @@ package dev.tehbrian.simplechairs;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
-public final class LegacyFormatting {
+public final class Formatting {
 
-  private LegacyFormatting() {
+  private Formatting() {
   }
 
-  public static Component on(final String s) {
+  public static Component legacy(final String s) {
     return LegacyComponentSerializer.legacyAmpersand().deserialize(s);
   }
 

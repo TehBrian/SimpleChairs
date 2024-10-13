@@ -11,12 +11,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.Stairs.Shape;
 import org.bukkit.block.data.type.WallSign;
-import org.bukkit.entity.AbstractArrow.PickupStatus;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 import java.text.MessageFormat;
 
@@ -92,31 +87,6 @@ public final class SitUtils {
     }
   }
 
-  public Entity spawnChairEntity(final Location location) {
-    switch (this.config.sitChairEntityType()) {
-      case ARROW -> {
-        final Arrow arrow = location.getWorld().spawnArrow(location, new Vector(0, 1, 0), 0, 0);
-        arrow.setGravity(false);
-        arrow.setInvulnerable(true);
-        arrow.setPickupStatus(PickupStatus.DISALLOWED);
-        return arrow;
-      }
-      case ARMOR_STAND -> {
-        final Location adjustedLoc = location.clone().add(0, 0.4, 0);
-        return adjustedLoc.getWorld().spawn(
-            adjustedLoc, ArmorStand.class, armorStand -> {
-              armorStand.setGravity(false);
-              armorStand.setInvulnerable(true);
-              armorStand.setMarker(true);
-              armorStand.setVisible(false);
-            }
-        );
-      }
-      default ->
-          throw new IllegalArgumentException("Unknown sit chair entity type " + this.config.sitChairEntityType());
-    }
-  }
-
   private boolean canSitGeneric(final Player player, final Block block) {
     if (player.isSneaking()) {
       return false;
@@ -140,14 +110,14 @@ public final class SitUtils {
       return false;
     }
 
-    final PlayerSitData sitData = this.plugin.getPlayerSitData();
-    if (sitData.isSittingDisabled(player)) {
+    final PlayerSitService sitService = this.plugin.getSitService();
+    if (sitService.isSittingDisabled(player)) {
       return false;
     }
-    if (sitData.isSitting(player)) {
+    if (sitService.isSitting(player)) {
       return false;
     }
-    return !sitData.isBlockOccupied(block);
+    return !sitService.isBlockOccupied(block);
   }
 
   public Location calculateSitLocation(final Player player, final Block block) {
@@ -230,7 +200,7 @@ public final class SitUtils {
 
     final Location pLocation = block.getLocation();
     pLocation.setYaw(yaw);
-    pLocation.add(0.5D, (sitHeight - 0.5D), 0.5D);
+    pLocation.add(0.5D, sitHeight, 0.5D);
     return pLocation;
   }
 

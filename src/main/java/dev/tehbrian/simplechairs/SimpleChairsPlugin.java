@@ -22,15 +22,15 @@ import java.util.Objects;
 public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs {
 
   private final ChairsConfig config = new ChairsConfig(this);
-  private final PlayerSitData sitData = new PlayerSitData(this);
+  private final PlayerSitService sitService = new PlayerSitService(this);
   private final SitUtils utils = new SitUtils(this);
 
   public ChairsConfig getChairsConfig() {
     return this.config;
   }
 
-  public PlayerSitData getPlayerSitData() {
-    return this.sitData;
+  public PlayerSitService getSitService() {
+    return this.sitService;
   }
 
   public SitUtils getSitUtils() {
@@ -78,8 +78,8 @@ public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs
   @Override
   public void onDisable() {
     for (final Player player : Bukkit.getOnlinePlayers()) {
-      if (this.sitData.isSitting(player)) {
-        this.sitData.unsitPlayerForce(player, true);
+      if (this.sitService.isSitting(player)) {
+        this.sitService.unsitPlayerForce(player, true);
       }
     }
 
@@ -92,31 +92,31 @@ public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs
   }
 
   public boolean isSitting(final Player player) {
-    return this.getPlayerSitData().isSitting(player);
+    return this.getSitService().isSitting(player);
   }
 
   public boolean isBlockOccupied(final Block block) {
-    return this.getPlayerSitData().isBlockOccupied(block);
+    return this.getSitService().isBlockOccupied(block);
   }
 
   public Player getBlockOccupiedBy(final Block block) {
-    return this.getPlayerSitData().getPlayerOnChair(block);
+    return this.getSitService().getPlayerOnChair(block);
   }
 
   public boolean sit(final Player player, final Block blockToOccupy, final Location sitLocation) {
-    return this.getPlayerSitData().sitPlayer(player, blockToOccupy, sitLocation);
+    return this.getSitService().sitPlayer(player, blockToOccupy, sitLocation);
   }
 
   public void unsit(final Player player) {
-    this.getPlayerSitData().unsitPlayerForce(player, true);
+    this.getSitService().unsitPlayerForce(player, true);
   }
 
   public void setSittingDisabled(final Player player, final boolean bool) {
-    this.getPlayerSitData().setSittingDisabled(player, bool);
+    this.getSitService().setSittingDisabled(player, bool);
   }
 
   public boolean isSittingDisabled(final Player player) {
-    return this.getPlayerSitData().isSittingDisabled(player);
+    return this.getSitService().isSittingDisabled(player);
   }
 
 }
