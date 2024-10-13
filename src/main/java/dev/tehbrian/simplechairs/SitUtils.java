@@ -114,6 +114,7 @@ public final class SitUtils {
 
 		final BlockData blockData = block.getBlockData();
 		float yaw = player.getLocation().getYaw();
+		float pitch = player.getLocation().getPitch();
 		Double sitHeight = null;
 
 		if ((blockData instanceof final Stairs stairs) && this.config.sitStairsEnabled()) {
@@ -131,6 +132,7 @@ public final class SitUtils {
 					case WEST -> 90;
 					default -> yaw;
 				};
+				pitch = 0;
 			}
 
 			if (this.config.sitStairsMaxWidth() > 0) {
@@ -187,6 +189,7 @@ public final class SitUtils {
 
 		final Location perch = block.getLocation();
 		perch.setYaw(yaw);
+		perch.setPitch(pitch);
 		perch.add(0.5D, sitHeight, 0.5D);
 		return perch;
 	}
