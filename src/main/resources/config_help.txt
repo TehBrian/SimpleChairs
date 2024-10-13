@@ -11,7 +11,7 @@
 #     enabled:            enables all stairs to function as chairs.
 #     rotate-player:      whether to rotate player to face the descending side of the stairs when they sit.
 #     max-width:          max width of the stair line for it to count as a chair. set to 0 to disable the check.
-#     special-end:        set any sub options to true to require special block at the end of the stair line. this only works if max-width is enabled.
+#     special-end:        enable any option below to require special block at the end of the stair line. these only work if max-width is enabled.
 #       sign:             require sign.
 #       corner-stairs:    require corner stairs.
 #     height:             sitting height on stairs.
