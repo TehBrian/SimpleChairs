@@ -6,7 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +24,10 @@ public final class ChairsCommand implements TabExecutor {
 
   @Override
   public boolean onCommand(
-      final @NotNull CommandSender sender,
-      final @NotNull Command command,
-      final @NotNull String label,
-      final @NotNull String[] args
+      final @NonNull CommandSender sender,
+      final @NonNull Command command,
+      final @NonNull String label,
+      final @NonNull String[] args
   ) {
     if (args.length == 0) {
       return false;
@@ -65,11 +65,11 @@ public final class ChairsCommand implements TabExecutor {
   }
 
   @Override
-  public @NotNull List<String> onTabComplete(
-      final @NotNull CommandSender sender,
-      final @NotNull Command command,
-      final @NotNull String label,
-      final @NotNull String[] args
+  public @NonNull List<String> onTabComplete(
+      final @NonNull CommandSender sender,
+      final @NonNull Command command,
+      final @NonNull String label,
+      final @NonNull String[] args
   ) {
     final List<String> suggestions = new ArrayList<>();
 

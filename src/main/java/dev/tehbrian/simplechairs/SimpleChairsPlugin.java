@@ -6,16 +6,15 @@ import dev.tehbrian.simplechairs.config.ChairsConfig;
 import dev.tehbrian.simplechairs.listener.InvalidPositionLoginListener;
 import dev.tehbrian.simplechairs.listener.TrySitEventListener;
 import dev.tehbrian.simplechairs.listener.TryUnsitEventListener;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDismountEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
@@ -39,15 +38,16 @@ public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs
 
   @Override
   public void onEnable() {
+    final Path dataFolderPath = this.getDataFolder().toPath();
     try {
-      // data folder may not exist on first start-up.
-      if (Files.notExists(this.getDataFolder().toPath())) {
-        Files.createDirectory(this.getDataFolder().toPath());
+      // data folder may not exist.
+      if (Files.notExists(dataFolderPath)) {
+        Files.createDirectory(dataFolderPath);
       }
 
       Files.copy(
           Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("config_help.txt")),
-          new File(this.getDataFolder(), "config_help.txt").toPath(),
+          dataFolderPath.resolve("config_help.txt"),
           StandardCopyOption.REPLACE_EXISTING
       );
     } catch (final IOException | NullPointerException e) {
@@ -69,9 +69,9 @@ public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs
 
   @Override
   public void onDisable() {
-    for (final Player player : Bukkit.getOnlinePlayers()) {
+    for (final Player player : this.getServer().getOnlinePlayers()) {
       if (this.sitService.isSitting(player)) {
-        this.sitService.unsitPlayerForce(player, true);
+        this.sitService.unsitForce(player, true);
       }
     }
 
@@ -87,28 +87,28 @@ public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs
     return this.getSitService().isSitting(player);
   }
 
+  public boolean sit(final Player player, final Block blockToOccupy, final Location perch) {
+    return this.getSitService().sit(player, blockToOccupy, perch);
+  }
+
+  public void unsit(final Player player) {
+    this.getSitService().unsitForce(player, true);
+  }
+
   public boolean isBlockOccupied(final Block block) {
     return this.getSitService().isBlockOccupied(block);
   }
 
-  public Player getBlockOccupiedBy(final Block block) {
-    return this.getSitService().getPlayerOnChair(block);
-  }
-
-  public boolean sit(final Player player, final Block blockToOccupy, final Location sitLocation) {
-    return this.getSitService().sitPlayer(player, blockToOccupy, sitLocation);
-  }
-
-  public void unsit(final Player player) {
-    this.getSitService().unsitPlayerForce(player, true);
-  }
-
-  public void setSittingDisabled(final Player player, final boolean bool) {
-    this.getSitService().setSittingDisabled(player, bool);
+  public @Nullable Player getBlockOccupant(final Block block) {
+    return this.getSitService().getBlockOccupant(block);
   }
 
   public boolean isSittingDisabled(final Player player) {
     return this.getSitService().isSittingDisabled(player);
+  }
+
+  public void setSittingDisabled(final Player player, final boolean sittingDisabled) {
+    this.getSitService().setSittingDisabled(player, sittingDisabled);
   }
 
 }

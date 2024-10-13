@@ -2,19 +2,17 @@ package dev.tehbrian.simplechairs.api;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.jetbrains.annotations.NotNull;
 
-public final class PlayerChairUnsitEvent extends PlayerEvent implements Cancellable {
+public final class PlayerChairUnsitForceEvent extends PlayerEvent {
 
   private static final HandlerList HANDLERS = new HandlerList();
 
-  private boolean cancelled = false;
   private Location retreat;
 
-  public PlayerChairUnsitEvent(final Player who, final Location retreat) {
+  public PlayerChairUnsitForceEvent(final Player who, final Location retreat) {
     super(who);
     this.retreat = retreat;
   }
@@ -34,16 +32,6 @@ public final class PlayerChairUnsitEvent extends PlayerEvent implements Cancella
   @Override
   public @NotNull HandlerList getHandlers() {
     return HANDLERS;
-  }
-
-  @Override
-  public boolean isCancelled() {
-    return this.cancelled;
-  }
-
-  @Override
-  public void setCancelled(final boolean cancelled) {
-    this.cancelled = cancelled;
   }
 
 }

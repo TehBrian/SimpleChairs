@@ -2,7 +2,6 @@ package dev.tehbrian.simplechairs.listener;
 
 import dev.tehbrian.simplechairs.PlayerSitService;
 import dev.tehbrian.simplechairs.SimpleChairsPlugin;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -34,7 +33,7 @@ public final class TryUnsitEventListener implements Listener {
     final Player player = event.getPlayer();
     final PlayerSitService sitService = this.plugin.getSitService();
     if (sitService.isSitting(player)) {
-      sitService.unsitPlayerForce(player, false);
+      sitService.unsitForce(player, false);
     } else if (event.getCause() == TeleportCause.UNKNOWN) {
       final Location preDismountLocation = this.dismountTeleport.remove(player.getUniqueId());
       if (preDismountLocation != null) {
@@ -48,7 +47,7 @@ public final class TryUnsitEventListener implements Listener {
     final Player player = event.getPlayer();
     final PlayerSitService sitService = this.plugin.getSitService();
     if (sitService.isSitting(player)) {
-      sitService.unsitPlayerForce(player, true);
+      sitService.unsitForce(player, true);
     }
   }
 
@@ -57,17 +56,17 @@ public final class TryUnsitEventListener implements Listener {
     final Player player = event.getEntity();
     final PlayerSitService sitService = this.plugin.getSitService();
     if (sitService.isSitting(player)) {
-      sitService.unsitPlayerForce(player, false);
+      sitService.unsitForce(player, false);
     }
   }
 
   @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
   public void onBlockBreak(final BlockBreakEvent event) {
-    final Block b = event.getBlock();
+    final Block block = event.getBlock();
     final PlayerSitService sitService = this.plugin.getSitService();
-    if (sitService.isBlockOccupied(b)) {
-      final Player player = sitService.getPlayerOnChair(b);
-      sitService.unsitPlayerForce(player, true);
+    if (sitService.isBlockOccupied(block)) {
+      final Player player = sitService.getBlockOccupant(block);
+      sitService.unsitForce(player, true);
     }
   }
 
@@ -77,12 +76,12 @@ public final class TryUnsitEventListener implements Listener {
       final PlayerSitService sitService = this.plugin.getSitService();
       if (sitService.isSitting(player)) {
         final Location preDismountLocation = player.getLocation();
-        if (!sitService.unsitPlayer(player)) {
+        if (!sitService.unsit(player)) {
           e.setCancelled(true);
         } else {
           final UUID playerUuid = player.getUniqueId();
           this.dismountTeleport.put(playerUuid, preDismountLocation);
-          Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, () -> this.dismountTeleport.remove(playerUuid));
+          player.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, () -> this.dismountTeleport.remove(playerUuid));
         }
       }
     }

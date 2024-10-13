@@ -12,8 +12,7 @@ import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.Stairs.Shape;
 import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Player;
-
-import java.text.MessageFormat;
+import org.jspecify.annotations.Nullable;
 
 public final class SitUtils {
 
@@ -29,21 +28,21 @@ public final class SitUtils {
     return (stairs.getHalf() == Half.BOTTOM) && (stairs.getShape() == Shape.STRAIGHT);
   }
 
-  private static boolean isStairsEndingSign(final BlockFace expectedFacing, final Block block) {
-    final BlockData blockdata = block.getBlockData();
-    if (blockdata instanceof WallSign) {
-      return expectedFacing == ((WallSign) blockdata).getFacing();
+  private static boolean isStairsEndingSign(final Block block, final BlockFace expectedFacing) {
+    final BlockData blockData = block.getBlockData();
+    if (blockData instanceof final WallSign wallSign) {
+      return expectedFacing == wallSign.getFacing();
     }
     return false;
   }
 
   private static boolean isStairsEndingCornerStairs(
+      final Block block,
       final BlockFace expectedFacing,
-      final Stairs.Shape expectedShape,
-      final Block block
+      final Shape expectedShape
   ) {
-    final BlockData blockdata = block.getBlockData();
-    if (blockdata instanceof final Stairs stairs) {
+    final BlockData blockData = block.getBlockData();
+    if (blockData instanceof final Stairs stairs) {
       return (stairs.getHalf() == Half.BOTTOM)
           && (stairs.getFacing() == expectedFacing)
           && (stairs.getShape() == expectedShape);
@@ -52,39 +51,23 @@ public final class SitUtils {
   }
 
   private static BlockFace rotL(final BlockFace face) {
-    switch (face) {
-      case NORTH -> {
-        return BlockFace.WEST;
-      }
-      case WEST -> {
-        return BlockFace.SOUTH;
-      }
-      case SOUTH -> {
-        return BlockFace.EAST;
-      }
-      case EAST -> {
-        return BlockFace.NORTH;
-      }
-      default -> throw new IllegalArgumentException(MessageFormat.format("Cant rotate block face {0}", face));
-    }
+    return switch (face) {
+      case NORTH -> BlockFace.WEST;
+      case WEST -> BlockFace.SOUTH;
+      case SOUTH -> BlockFace.EAST;
+      case EAST -> BlockFace.NORTH;
+      default -> throw new IllegalArgumentException("Can't rotate block face " + face);
+    };
   }
 
   private static BlockFace rotR(final BlockFace face) {
-    switch (face) {
-      case NORTH -> {
-        return BlockFace.EAST;
-      }
-      case EAST -> {
-        return BlockFace.SOUTH;
-      }
-      case SOUTH -> {
-        return BlockFace.WEST;
-      }
-      case WEST -> {
-        return BlockFace.NORTH;
-      }
-      default -> throw new IllegalArgumentException(MessageFormat.format("Cant rotate block face {0}", face));
-    }
+    return switch (face) {
+      case NORTH -> BlockFace.EAST;
+      case EAST -> BlockFace.SOUTH;
+      case SOUTH -> BlockFace.WEST;
+      case WEST -> BlockFace.NORTH;
+      default -> throw new IllegalArgumentException("Can't rotate block face " + face);
+    };
   }
 
   private boolean canSitGeneric(final Player player, final Block block) {
@@ -96,14 +79,14 @@ public final class SitUtils {
     }
 
     final World world = player.getWorld();
-    if (this.config.sitDisabledWorlds().contains(world.getName())) {
-      return false;
-    }
     if (!world.equals(block.getWorld())) {
       return false;
     }
+    if (this.config.sitDisabledWorlds().contains(world.getName())) {
+      return false;
+    }
     if ((this.config.sitMaxDistance() > 0)
-        && (player.getLocation().distance(block.getLocation().add(0.5, 0, 0.5)) > this.config.sitMaxDistance())) {
+        && (player.getLocation().distanceSquared(block.getLocation().add(0.5, 0, 0.5)) > this.config.sitMaxDistanceSquared())) {
       return false;
     }
     if (this.config.sitRequireEmptyHand() && (player.getInventory().getItemInMainHand().getType() != Material.AIR)) {
@@ -117,10 +100,14 @@ public final class SitUtils {
     if (sitService.isSitting(player)) {
       return false;
     }
-    return !sitService.isBlockOccupied(block);
+    if (sitService.isBlockOccupied(block)) {
+      return false;
+    }
+
+    return true;
   }
 
-  public Location calculateSitLocation(final Player player, final Block block) {
+  public @Nullable Location calculatePerch(final Player player, final Block block) {
     if (!this.canSitGeneric(player, block)) {
       return null;
     }
@@ -171,16 +158,16 @@ public final class SitUtils {
           final Block blockRight = block.getRelative(facingRight, widthRight + 1);
 
           if (this.config.sitStairsSpecialEndSign()
-              && isStairsEndingSign(facingLeft, blockLeft)
-              && isStairsEndingSign(facingRight, blockRight)) {
+              && isStairsEndingSign(blockLeft, facingLeft)
+              && isStairsEndingSign(blockRight, facingRight)) {
             specialEndCheckSuccess = true;
           }
 
           if (this.config.sitStairsSpecialEndCornerStairs()
-              && (isStairsEndingCornerStairs(facingLeft, Stairs.Shape.INNER_RIGHT, blockLeft)
-              || isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_LEFT, blockLeft))
-              && (isStairsEndingCornerStairs(facingRight, Stairs.Shape.INNER_LEFT, blockRight)
-              || isStairsEndingCornerStairs(ascendingFacing, Stairs.Shape.INNER_RIGHT, blockRight))) {
+              && (isStairsEndingCornerStairs(blockLeft, facingLeft, Stairs.Shape.INNER_RIGHT)
+              || isStairsEndingCornerStairs(blockLeft, ascendingFacing, Stairs.Shape.INNER_LEFT))
+              && (isStairsEndingCornerStairs(blockRight, facingRight, Stairs.Shape.INNER_LEFT)
+              || isStairsEndingCornerStairs(blockRight, ascendingFacing, Stairs.Shape.INNER_RIGHT))) {
             specialEndCheckSuccess = true;
           }
 
@@ -198,10 +185,10 @@ public final class SitUtils {
       }
     }
 
-    final Location pLocation = block.getLocation();
-    pLocation.setYaw(yaw);
-    pLocation.add(0.5D, sitHeight, 0.5D);
-    return pLocation;
+    final Location perch = block.getLocation();
+    perch.setYaw(yaw);
+    perch.add(0.5D, sitHeight, 0.5D);
+    return perch;
   }
 
   private int calculateStairsWidth(

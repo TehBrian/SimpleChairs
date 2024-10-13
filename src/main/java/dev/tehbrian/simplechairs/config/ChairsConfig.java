@@ -191,6 +191,10 @@ public final class ChairsConfig {
     return this.sitMaxDistance;
   }
 
+  public double sitMaxDistanceSquared() {
+    return Math.pow(this.sitMaxDistance, 2);
+  }
+
   public boolean sitStairsEnabled() {
     return this.sitStairsEnabled;
   }

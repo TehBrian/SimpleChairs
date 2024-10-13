@@ -12,23 +12,23 @@ public final class PlayerChairSitEvent extends PlayerEvent implements Cancellabl
   private static final HandlerList HANDLERS = new HandlerList();
 
   private boolean cancelled = false;
-  private Location sitLocation;
+  private Location perch;
 
-  public PlayerChairSitEvent(final Player who, final Location sitLocation) {
+  public PlayerChairSitEvent(final Player who, final Location perch) {
     super(who);
-    this.sitLocation = sitLocation;
+    this.perch = perch;
   }
 
   public static HandlerList getHandlerList() {
     return HANDLERS;
   }
 
-  public Location getSitLocation() {
-    return this.sitLocation.clone();
+  public Location getPerch() {
+    return this.perch.clone();
   }
 
-  public void setSitLocation(final Location location) {
-    this.sitLocation = location.clone();
+  public void setPerch(final Location location) {
+    this.perch = location.clone();
   }
 
   @Override
