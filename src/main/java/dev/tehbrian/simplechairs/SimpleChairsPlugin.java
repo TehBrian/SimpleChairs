@@ -40,14 +40,6 @@ public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs
   @Override
   public void onEnable() {
     try {
-      this.getClass().getClassLoader().loadClass(EntityDismountEvent.class.getName());
-    } catch (final ClassNotFoundException e) {
-      this.getSLF4JLogger().error("Missing EntityDismountEvent. Update your server to a newer version.", e);
-      this.setEnabled(false);
-      return;
-    }
-
-    try {
       // data folder may not exist on first start-up.
       if (Files.notExists(this.getDataFolder().toPath())) {
         Files.createDirectory(this.getDataFolder().toPath());
