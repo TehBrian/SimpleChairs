@@ -3,7 +3,7 @@
 Allows players to sit on chairs, such as stairs or slabs.
 
 * [Download](https://modrinth.com/plugin/simplechairs)
-* [Discord](https://thbn.me/discord)
+* [Discord](https://tehbrian.dev/discord)
 * [Donate](https://github.com/sponsors/TehBrian) <3
 
 ---
