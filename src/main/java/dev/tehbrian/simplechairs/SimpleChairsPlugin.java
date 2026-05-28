@@ -6,6 +6,7 @@ import dev.tehbrian.simplechairs.config.ChairsConfig;
 import dev.tehbrian.simplechairs.listener.InvalidPositionLoginListener;
 import dev.tehbrian.simplechairs.listener.TrySitEventListener;
 import dev.tehbrian.simplechairs.listener.TryUnsitEventListener;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -19,6 +20,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs {
+
+	private static final int BSTATS_PLUGIN_ID = 31641;
 
 	private final ChairsConfig config = new ChairsConfig(this);
 	private final PlayerSitService sitService = new PlayerSitService(this);
@@ -65,6 +68,9 @@ public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs
 		this.getServer().getPluginManager().registerEvents(new TryUnsitEventListener(this), this);
 
 		this.getCommand("chairs").setExecutor(new ChairsCommand(this));
+
+		// initialize bStats.
+		Metrics _ = new Metrics(this, BSTATS_PLUGIN_ID);
 	}
 
 	@Override

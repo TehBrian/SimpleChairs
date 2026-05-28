@@ -22,6 +22,7 @@ repositories {
 dependencies {
 	compileOnly("io.papermc.paper:paper-api:26.1.2.build.66-stable")
 	compileOnly("org.jspecify:jspecify:1.0.0")
+	implementation("org.bstats:bstats-bukkit:3.2.1")
 }
 
 tasks {
@@ -46,6 +47,17 @@ tasks {
 
 	shadowJar {
 		archiveClassifier.set("")
+
+		val libsPackage = "${project.group}.${project.name}.libs"
+		fun moveToLibs(vararg patterns: String) {
+			for (pattern in patterns) {
+				relocate(pattern, "$libsPackage.$pattern")
+			}
+		}
+
+		moveToLibs(
+				"org.bstats",
+		)
 	}
 
 	runServer {
