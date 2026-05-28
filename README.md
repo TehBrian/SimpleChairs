@@ -1,5 +1,8 @@
 # SimpleChairs
 
+[![License](https://img.shields.io/github/license/TehBrian/SimpleChairs)](LICENSE)
+[![Chat](https://img.shields.io/discord/791861916314239006)](https://tehbrian.dev/discord)
+
 Allows players to sit on chairs, such as stairs or slabs.
 
 * [Download](https://modrinth.com/plugin/simplechairs)
@@ -10,13 +13,11 @@ Allows players to sit on chairs, such as stairs or slabs.
 
 ## About
 
-This plugin is a fork of [Shevchik's ChairsReloaded][shevchik-cr]
+This plugin is a fork of [Shevchik's ChairsReloaded](https://dev.bukkit.org/projects/chairsreloaded)
 with its less important features plucked out and an improved codebase.
 
 Although there are some neat configuration options to mess with, this plugin
 is as straightforward as clicking on a chair to sit on it. Simple, right?
-
-[shevchik-cr]: https://dev.bukkit.org/projects/chairsreloaded
 
 ## Usage
 
