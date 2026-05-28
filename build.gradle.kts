@@ -1,9 +1,9 @@
 plugins {
 	id("java")
-	id("com.github.johnrengelman.shadow") version "8.1.1"
-	id("xyz.jpenilla.run-paper") version "2.3.1"
-	id("net.kyori.indra.checkstyle") version "3.1.3"
-	id("com.github.ben-manes.versions") version "0.51.0"
+	id("com.gradleup.shadow") version "9.4.2"
+	id("xyz.jpenilla.run-paper") version "3.0.2"
+	id("net.kyori.indra.checkstyle") version "4.0.0"
+	id("com.github.ben-manes.versions") version "0.54.0"
 }
 
 group = "dev.tehbrian"
@@ -11,16 +11,16 @@ version = "0.3.0"
 description = "Allows players to sit on chairs, such as stairs or slabs."
 
 java {
-	toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+	toolchain.languageVersion.set(JavaLanguageVersion.of(25))
 }
 
 repositories {
 	mavenCentral()
-	maven("https://papermc.io/repo/repository/maven-public/")
+	maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
-	compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+	compileOnly("io.papermc.paper:paper-api:26.1.2.build.66-stable")
 	compileOnly("org.jspecify:jspecify:1.0.0")
 }
 
@@ -32,8 +32,10 @@ tasks {
 	processResources {
 		filesMatching("plugin.yml") {
 			expand(
-					"version" to project.version,
-					"description" to project.description
+					mapOf(
+							"version" to project.version,
+							"description" to project.description
+					)
 			)
 		}
 	}
@@ -47,6 +49,6 @@ tasks {
 	}
 
 	runServer {
-		minecraftVersion("1.21.1")
+		minecraftVersion("26.1.2")
 	}
 }

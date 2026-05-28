@@ -69,7 +69,7 @@ public final class ChairsCommand implements TabExecutor {
 			final @NonNull CommandSender sender,
 			final @NonNull Command command,
 			final @NonNull String label,
-			final @NonNull String[] args
+			final String @NonNull [] args
 	) {
 		final List<String> suggestions = new ArrayList<>();
 

@@ -53,7 +53,7 @@ public final class PlayerSitService {
 		chairEntity.addPassenger(player);
 
 		this.sittingPlayers.put(player, sitData);
-    this.occupiedBlocks.put(blockToOccupy, player);
+		this.occupiedBlocks.put(blockToOccupy, player);
 
 		if (this.plugin.getChairsConfig().msgEnabled()) {
 			player.sendMessage(legacy(this.plugin.getChairsConfig().msgSitEnter()));
