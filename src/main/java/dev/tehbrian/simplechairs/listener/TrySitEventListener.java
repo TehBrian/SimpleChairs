@@ -21,15 +21,38 @@ public final class TrySitEventListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerInteract(final PlayerInteractEvent event) {
-		if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getHand() == EquipmentSlot.HAND) {
-			final Player player = event.getPlayer();
-			final Block block = event.getClickedBlock();
-
-			final Location perch = this.plugin.getSitUtils().calculatePerch(player, block);
-			if (perch != null && this.plugin.getSitService().sit(player, block, perch)) {
-				event.setCancelled(true);
-			}
+		if (event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getHand() != EquipmentSlot.HAND) {
+			return;
 		}
+
+		final Player player = event.getPlayer();
+		final Block block = event.getClickedBlock();
+
+		if (this.plugin.getSitUtils().calculatePerch(player, block) == null) {
+			return;
+		}
+
+		// now that we know that the chair is valid, cancel the event.
+		event.setCancelled(true);
+
+		// defer the teleport/mount until after Paper finishes this interact packet.
+		// fixes weird `Height limit for building is 319` message.
+		this.plugin.getServer().getScheduler().runTask(
+				this.plugin,
+				() -> {
+					if (!player.isOnline()) {
+						return;
+					}
+
+					// recalculate in case the player, chair, or occupancy changed during that tick.
+					final Location perch = this.plugin.getSitUtils().calculatePerch(player, block);
+					if (perch == null) {
+						return;
+					}
+
+					this.plugin.getSitService().sit(player, block, perch);
+				}
+		);
 	}
 
 }
