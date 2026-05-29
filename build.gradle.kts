@@ -17,11 +17,15 @@ java {
 repositories {
 	mavenCentral()
 	maven("https://repo.papermc.io/repository/maven-public/")
+	maven("https://repo.tehbrian.dev/releases/")
 }
 
 dependencies {
 	compileOnly("io.papermc.paper:paper-api:26.1.2.build.66-stable")
 	compileOnly("org.jspecify:jspecify:1.0.0")
+	implementation("dev.tehbrian:agna-paper:1.0.0") {
+		exclude(group = "org.spongepowered", module = "configurate-core")
+	}
 	implementation("org.bstats:bstats-bukkit:3.2.1")
 }
 
@@ -56,6 +60,7 @@ tasks {
 		}
 
 		moveToLibs(
+				"dev.tehbrian.agna",
 				"org.bstats",
 		)
 	}

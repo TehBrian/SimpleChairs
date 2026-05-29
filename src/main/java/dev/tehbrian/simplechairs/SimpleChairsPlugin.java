@@ -1,5 +1,6 @@
 package dev.tehbrian.simplechairs;
 
+import dev.tehbrian.agna.paper.UpdateChecker;
 import dev.tehbrian.simplechairs.api.SimpleChairs;
 import dev.tehbrian.simplechairs.command.ChairsCommand;
 import dev.tehbrian.simplechairs.config.ChairsConfig;
@@ -71,6 +72,8 @@ public final class SimpleChairsPlugin extends JavaPlugin implements SimpleChairs
 
 		// initialize bStats.
 		Metrics _ = new Metrics(this, BSTATS_PLUGIN_ID);
+
+		new UpdateChecker(this, "simplechairs").checkForUpdates();
 	}
 
 	@Override
