@@ -3,6 +3,7 @@ package dev.tehbrian.simplechairs;
 import dev.tehbrian.simplechairs.config.ChairsConfig;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -82,7 +83,10 @@ public final class SitUtils {
 		if (!world.equals(block.getWorld())) {
 			return false;
 		}
-		if (this.config.sitDisabledWorlds().contains(world.getName())) {
+		final NamespacedKey worldKey = world.getKey();
+		if (this.config.sitDisabledWorlds().contains(world.getName())
+				|| this.config.sitDisabledWorlds().contains(worldKey.asMinimalString())
+				|| this.config.sitDisabledWorlds().contains(worldKey.asString())) {
 			return false;
 		}
 		if ((this.config.sitMaxDistance() > 0)
