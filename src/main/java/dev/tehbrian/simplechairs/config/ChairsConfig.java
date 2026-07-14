@@ -28,7 +28,7 @@ public final class ChairsConfig {
 	private static final String SIT_STAIRS_SPECIAL_END_PATH = "special-end";
 	private static final String SIT_STAIRS_SPECIAL_END_SIGN_PATH = "sign";
 	private static final String SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH = "corner-stairs";
-	private static final String SIT_STAIRS_HEIGHT = "height";
+	private static final String SIT_STAIRS_HEIGHT_PATH = "height";
 	private static final String SIT_ADDITIONAL_BLOCKS_PATH = "additional-blocks";
 
 	private static final String MSG_SECTION_PATH = "messages";
@@ -105,7 +105,7 @@ public final class ChairsConfig {
 					this.sitStairsSpecialEndEnabled = this.sitStairsSpecialEndSign() || this.sitStairsSpecialEndCornerStairs();
 				}
 
-				this.sitStairsHeight = sitStairsSection.getDouble(SIT_STAIRS_HEIGHT, this.sitStairsHeight());
+				this.sitStairsHeight = sitStairsSection.getDouble(SIT_STAIRS_HEIGHT_PATH, this.sitStairsHeight());
 			}
 
 			final var sitAdditionalBlocksSection = sitSection.getConfigurationSection(SIT_ADDITIONAL_BLOCKS_PATH);
@@ -152,7 +152,7 @@ public final class ChairsConfig {
 		sitStairsSpecialEndSection.set(SIT_STAIRS_SPECIAL_END_SIGN_PATH, this.sitStairsSpecialEndSign());
 		sitStairsSpecialEndSection.set(SIT_STAIRS_SPECIAL_END_CORNER_STAIRS_PATH, this.sitStairsSpecialEndCornerStairs());
 
-		sitStairsSection.set(SIT_STAIRS_HEIGHT, this.sitStairsHeight());
+		sitStairsSection.set(SIT_STAIRS_HEIGHT_PATH, this.sitStairsHeight());
 
 		final ConfigurationSection sitAdditionalBlocksSection = sitSection.createSection(SIT_ADDITIONAL_BLOCKS_PATH);
 		for (final Entry<Material, Double> entry : this.sitAdditionalBlocks().entrySet()) {
