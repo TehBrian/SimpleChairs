@@ -5,7 +5,7 @@ website: https://github.com/TehBrian/SimpleChairs
 
 version: ${version}
 main: dev.tehbrian.simplechairs.SimpleChairsPlugin
-api-version: '26.1.2'
+api-version: '26.2'
 
 commands:
   chairs:
