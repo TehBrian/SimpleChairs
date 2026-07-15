@@ -23,9 +23,8 @@ repositories {
 dependencies {
 	compileOnly("io.papermc.paper:paper-api:26.2.build.+")
 	compileOnly("org.jspecify:jspecify:1.0.0")
-	implementation("dev.tehbrian:agna-paper:1.1.3") {
-		exclude(group = "org.spongepowered", module = "configurate-core")
-	}
+	implementation("dev.tehbrian:agna-paper:1.2.0")
+	implementation("dev.tehbrian:agna-configurate:1.2.0")
 	implementation("org.bstats:bstats-bukkit:3.2.1")
 }
 

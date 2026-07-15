@@ -1,0 +1,50 @@
+# SimpleChairs by TehBrian, Shevchik, cnaude, and spoothie
+# Hope you enjoy! :D
+#
+# Modrinth: https://modrinth.com/plugin/simplechairs
+# Discord: https://tehbrian.dev/discord
+# GitHub: https://github.com/TehBrian/SimpleChairs
+
+sit-config:
+  # List of worlds in which sitting is disabled.
+  disabled-worlds:
+    # - disabled_world
+
+  # Whether to require that players have an empty hand to sit.
+  require-empty-hand: false
+  # The maximum distance between the chair (center of the block) and the player for them to be able to sit.
+  # Lower values may prevent glitching through walls.
+  max-distance: 3.0
+
+  # Configuration specific to stairs.
+  stairs:
+    # Enables all stairs to function as chairs.
+    enabled: true
+    # Whether to rotate player to face the descending side of the stairs when they sit.
+    rotate-player: true
+    # Max width of the stair line for it to count as a chair.
+    # Set to 0 to disable the check.
+    max-width: 0
+    # Enable any option below to require a special block at the end of the stair line.
+    # These only work if max-width is enabled.
+    special-end:
+      # Require sign.
+      sign: false
+      # Require corner stairs.
+      corner-stairs: false
+    # Sitting height on stairs.
+    height: 0.5
+
+  # Additional blocks to allow sitting on. Set material name followed by sitting height.
+  # A list of all material names: https://jd.papermc.io/paper/26.2/org/bukkit/Material.html
+  additional-blocks:
+    # COBBLESTONE_SLAB: 0.7
+
+messages:
+  # Whether to send user messages.
+  enabled: true
+  sit:
+    enter: '&7You are now sitting.'
+    leave: '&7You are no longer sitting.'
+    enabled: '&7You have enabled chairs for yourself.'
+    disabled: '&7You have disabled chairs for yourself.'
